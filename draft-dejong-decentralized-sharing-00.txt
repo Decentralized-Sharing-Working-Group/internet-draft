@@ -1,0 +1,59 @@
+INTERNET DRAFT                                      Michiel B. de Jong
+Document: draft-dejong-decentralizedsharing-00           (independent)
+                                                         Paul Tran-Van
+Intended Status: Informational                            (Cozy Cloud)
+Expires: 18 December 2015                                  19 May 2015
+
+
+                         Decentralized Sharing
+
+Abstract
+
+s draft describes what are the steps and challenges to achieve an interoperable decentralized private sharing between users having a personal server. This sharing should be feasible no matter what is the platform running on the server, as long as it capable of storing and processing data and that the user has control on it.
+123456789012345678901234567890123456789012345678901234567890123456789012*****
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+de Jong                                                         [Page 1]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
