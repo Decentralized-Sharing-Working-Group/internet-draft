@@ -9,7 +9,11 @@ Expires: 18 December 2015                                  19 May 2015
 
 Abstract
 
-s draft describes what are the steps and challenges to achieve an interoperable decentralized private sharing between users having a personal server. This sharing should be feasible no matter what is the platform running on the server, as long as it capable of storing and processing data and that the user has control on it.
+s draft describes what are the steps and challenges to achieve an
+interoperable decentralized private sharing between users having a
+personal server. This sharing should be feasible no matter what is the
+platform running on the server, as long as it capable of storing and
+processing data and that the user has control on it.
 
 Status of this Memo
 
@@ -49,109 +53,217 @@ Table of Contents
 
 1.  Introduction
 
-There is no consensus yet on the internet to share documents privately on the internet. This leads to a dispersion of efforts between open and decentralized personal servers.
+There is no consensus yet on the internet to share documents privately
+on the internet. This leads to a dispersion of efforts between open and
+decentralized personal servers.
 A sharing specification is thus needed to make them interoperable.
 
   * Alice and Bob both have a personal server with a web interface
-  * Alice has documents "on there" that can be files, stream, raw data, etc.
-  * Alice decides to share one file with only Bob and keep it invisible for the others
+  * Alice has documents "on there" that can be files, stream, raw data,
+etc.
+  * Alice decides to share one file with only Bob and keep it invisible
+for the others
   * What are the steps?
 
 2. Initiate sharing process
 
 * Alice picks a resource (web interface)
-* Alice clicks or gestures 'Share' in some way (possibly specify MicroPub endpoint, see also SoliD : https://github.com/linkeddata/SoLiD, quite similar to Micropub - but doesn't seem to support notification)
+* Alice clicks or gestures 'Share' in some way (possibly specify
+MicroPub endpoint, see also SoliD : https://github.com/linkeddata/SoLiD,
+quite similar to Micropub - but doesn't seem to support notification)
 
 3. Recipient selection
 
-  * Her server might have an addressbook function, but that moves discovery problem to how she adds Bob to it in the first place. If Bob's not in there, she adds him just before selecting him.
+  * Her server might have an addressbook function, but that moves
+discovery problem to how she adds Bob to it in the first place. If Bob's
+not in there, she adds him just before selecting him.
   * What does she know about how to describe Bob?
     * friend of a friend
-    * Full name, location, occupation, hobbies -> web search -> Bob's homepage
+    * Full name, location, occupation, hobbies -> web search -> Bob's
+homepage
     * email address
     * phone number
     * ...
     * Alice needs to know the Bob's server address
-  * Roles (admin, contributor, read-only, etc.) may be used to invite different interactions with different recipients
+  * Roles (admin, contributor, read-only, etc.) may be used to invite
+different interactions with different recipients
     
 4. Recipient notification
  
- * Depends on contact method Alice knows for Bob (email, phone number, WebMention, irc, Twitter, WhatsApp, ...)
+ * Depends on contact method Alice knows for Bob (email, phone number,
+WebMention, irc, Twitter, WhatsApp, ...)
   * Notification should contain:
     * A URL where Bob can access the resource
     * Possibly a separate secret for access
-    * Possibly invite different types of feedbacks (comments, edits, additions, ...)
+    * Possibly invite different types of feedbacks (comments, edits,
+additions, ...)
     
     oEmbed?
-    Is it useful to use the JSON data snippets from the providers of existing services that use - http://www.oembed.com/#section7 in response to recipient notifications?
-    It could be really interesting, because in this case, the orginial server with the original content is taking care of publishing this piece of information.
-    In our case of Bob sharing a picture with Alice, when Alice loads the picture from her personal server, it will just load from Bob server.
-    When Bob edit the picture, it will appear edited in Alice personal server.
-    If Alice wants to edit the picture, she could do it though this interface also.
-    Bob is in control of his picture. If he unplug his personal picture, it is gone. Except if Alice develops a piece of software to keep a copy, but this is an other debate.
+    Is it useful to use the JSON data snippets from the providers of
+existing services that use - http://www.oembed.com/#section7 in response
+to recipient notifications?
+    It could be really interesting, because in this case, the orginial
+server with the original content is taking care of publishing this piece
+of information.
+    In our case of Bob sharing a picture with Alice, when Alice loads
+the picture from her personal server, it will just load from Bob server.
+    When Bob edit the picture, it will appear edited in Alice personal
+server.
+    If Alice wants to edit the picture, she could do it though this
+interface also.
+    Bob is in control of his picture. If he unplug his personal picture,
+it is gone. Except if Alice develops a piece of software to keep a copy,
+but this is an other debate.
  
 5. Human access
  
- * Bob should be able to open the URL with a browser to view and/or download the resource.
- * If a secret was included in the notification, he may be required to paste that into the web view
- * Bob may be able to authenticate with IndieAuth, IndieCert, Persona, OpenID, WebID-TLS, [WebID-RSA](https://github.com/linkeddata/SoLiD#webid-rsa ), SMS- or email verification, Twitter-, Facebook-, GitHub-, etc. Connect, or even a basic password, which is the secret from the notification.
- * Bob could be offered a variety of these choices, possibly biased towards the contact method used for the notification, or which information Alice has about Bob (e.g. if Alice has Bob's email and Twitter handle, then these two option could be at the top; if Alice has Bob's homepage, her server could already scan if Bob's homepage and /.well-known resources announce support for IndieAuth, IndieCert, OpenID, and/or Persona). It also depends on the Alice's server capabilities.
- * Alice's server may also automatically update the addressbook entry, based on what it discovered.
- She may give instructions like "please don't share publically", or "please share only within our Petanque team", or "Please destroy after reading, or after 30 days". How Bob enforces those rules and how Alice can trust him is probably not relevant here.
+ * Bob should be able to open the URL with a browser to view and/or
+download the resource.
+ * If a secret was included in the notification, he may be required to
+paste that into the web view
+ * Bob may be able to authenticate with
+IndieAuth, IndieCert, Persona, OpenID, WebID-TLS,
+[WebID-RSA](https://github.com/linkeddata/SoLiD#webid-rsa ), SMS- or
+email verification, Twitter-, Facebook-, GitHub-, etc. Connect, or even
+a basic password, which is the secret from the notification.
+ * Bob could be offered a variety of these choices, possibly biased
+towards the contact method used for the notification, or which
+information Alice has about Bob (e.g. if Alice has Bob's email and
+Twitter handle, then these two option could be at the top; if Alice
+has Bob's homepage, her server could already scan if Bob's homepage
+and /.well-known resources announce support for IndieAuth, IndieCert,
+OpenID, and/or Persona). It also depends on the Alice's server
+capabilities.
+ * Alice's server may also automatically update the addressbook entry,
+based on what it discovered.
+ She may give instructions like "please don't share publically", or
+"please share only within our Petanque team", or "Please destroy after
+reading, or after 30 days". How Bob enforces those rules and how Alice
+can trust him is probably not relevant here.
  
 6. Machine access 
  
- * Some servers are able to retrieve a resource with unattended IndieAuth in response to a WebMention
- * If the URL contains the secret [capabilities](http://www.w3.org/TR/capability-urls/ ) then the server can also access the resource without human intervention.
- * WebID-TLS and WebId-RSA could also be used server-to-server, in reaction to a WWW-Authenticate header
+ * Some servers are able to retrieve a resource with unattended
+IndieAuth in response to a WebMention
+ * If the URL contains the secret
+[capabilities](http://www.w3.org/TR/capability-urls/ ) then the server
+can also access the resource without human intervention.
+ * WebID-TLS and WebId-RSA could also be used server-to-server, in
+reaction to a WWW-Authenticate header
  
 7. Publishing edits
  
-  * Alice might publish an rss, atom, or CouchDB changes feed instead of a static document. 
+  * Alice might publish an rss, atom, or CouchDB changes feed instead of
+a static document.
   * The resource could have a link to a feed of its change history.
- * Bob's server could discover and keep polling the change feed each time Bob looks at the resource, and apply Alice's changes automatically.
-  * Alice could also notify Bob each time she has edited the document. Then Bob's server doesn't have to do polling.
-  * The change feeds could concern one document or aggregates all of them. An unique id for each document is then required, and a recipient access control.
-  * see http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
+ * Bob's server could discover and keep polling the change feed each
+time Bob looks at the resource, and apply Alice's changes automatically.
+  * Alice could also notify Bob each time she has edited the document.
+Then Bob's server doesn't have to do polling.
+  * The change feeds could concern one document or aggregates all of
+them. An unique id for each document is then required, and a recipient
+access control.
+  * see
+http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
 
  
 8. Comments and write access
  
- * If Bob has write access to the document, and Alice publishes a change feed, Bob could do the same. Then the document would be synchronized between Alice and Bob servers .
+ * If Bob has write access to the document, and Alice publishes a change
+feed, Bob could do the same. Then the document would be synchronized
+between Alice and Bob servers .
  
-   * It is up to Alice's server to  either display Bob's comments and  changes automatically, or for  instance only display additions and not  deletions. This should be  signalled in the notification (see above), so that Bob  knows whether he has write  access or not.
+   * It is up to Alice's server to either display Bob's comments and
+changes automatically, or for instance only display additions and not
+deletions. This should be signalled in the notification (see above), so
+that Bob knows whether he has write access or not.
    
-  * Alice's   server may automatically apply Bob's changes (depending possibly on  the  type of change) without Alice's intervention. If there were  multiple  recipients, then maybe some recipients have permission to  edit, and  others only to view.
+  * Alice's server may automatically apply Bob's changes (depending
+possibly on the type of change) without Alice's intervention. If there
+were multiple recipients, then maybe some recipients have permission to
+edit, and others only to view.
   
- This means that Alice can keep modifying the resource after sending it, and  Bob can also send modifications back to Alice. Bob's server will display  Alice's changes automatically, possibly with a way to browse the change  history. Alice's server may do the same, or display both the version  she shared and the modifications proposed by Bob side-by-side.
- * The change feed method has to be the same to guarantee the synchronization. So we need a way for Alice's feed to refer back to Bob's feed to signal which edit merges which pull request, so to speak.
- *  If Bob responds with a comment or an edit, he should somehow notify Alice's server of this. For comments, WebMention does this. If Bob has write access over http (read-write web, or create a CouchDB user for  Bob), he can simply send http requests which succeed or fail. Git pull requests are traditionally sent by pgp-signed email, with the patch in an attachment.
- * We could defne an 'edit' h-entry type in Micropub, for Bob to post an updated version and notify this to Alice. If the h-entry is of type photo-album, then a reply could be of type addition, and link to an photo to be added to the photo album. Same for adding events to a calendar or files in a directory.
+ This means that Alice can keep modifying the resource after sending it,
+and Bob can also send modifications back to Alice. Bob's server will
+display Alice's changes automatically, possibly with a way to browse
+the change history. Alice's server may do the same, or display both the
+version she shared and the modifications proposed by Bob side-by-side.
+ * The change feed method has to be the same to guarantee the
+synchronization. So we need a way for Alice's feed to refer back to
+Bob's feed to signal which edit merges which pull request, so to speak.
+ * If Bob responds with a comment or an edit, he should somehow notify
+Alice's server of this. For comments, WebMention does this. If Bob has
+write access over http (read-write web, or create a CouchDB user for
+Bob), he can simply send http requests which succeed or fail. Git pull
+requests are traditionally sent by pgp-signed email, with the patch in
+an attachment.
+ * We could defne an 'edit' h-entry type in Micropub, for Bob to post
+an updated version and notify this to Alice. If the h-entry is of
+type photo-album, then a reply could be of type addition, and link to
+an photo to be added to the photo album. Same for adding events to a
+calendar or files in a directory.
   
  * Bob can send edits, for instance with http PUT or PATCH
- * git don't seem so appropriate for this. CouchDB replication could be appropriate if it can be used without necessarly a CouchDB backend.
+ * git don't seem so appropriate for this. CouchDB replication could be
+appropriate if it can be used without necessarly a CouchDB backend.
 
- * The system should be able to detect the conflicts and perhaps solve  them automatically (see also Data Domains below), or notify Alice/Bob for manual resolution. A conflict occurs when Alice and Bob do some changes at the same time on the same document and receive a different new version. This is an optimistic lock vision from a database perspective : conflicts are tolerated but the versions should converge and reach consistency. A pessimitic lock would require to inform recipients before modifying anything.
+ * The system should be able to detect the conflicts and perhaps
+solve them automatically (see also Data Domains below), or notify
+Alice/Bob for manual resolution. A conflict occurs when Alice and Bob
+do some changes at the same time on the same document and receive a
+different new version. This is an optimistic lock vision from a database
+perspective : conflicts are tolerated but the versions should converge
+and reach consistency. A pessimitic lock would require to inform
+recipients before modifying anything.
 
  
 9. Real-time collaboration
  
-* A WebRTC session may be negotiated if Bob and Alice are both online. For instance, Alice might send Bob a "phone call", Bob's server sends a push notification to Bob's phone, and when Bob picks up the phone, his server responds to Alice's "phone call" with a WebRTC SessionDescriptionProtocol object.
+* A WebRTC session may be negotiated if Bob and Alice are both online.
+For instance, Alice might send Bob a "phone call", Bob's server
+sends a push notification to Bob's phone, and when Bob picks up the
+phone, his server responds to Alice's "phone call" with a WebRTC
+SessionDescriptionProtocol object.
  
 10. Listing and revoking access
  
- *  If Alice wants to share several documents with several people, she should be able to maintain a list to exaclty know who has access to what under which conditions.
- * The sharing history could show both what she shared in the past with whom (and whether or not she invited them to send modifications back), and whether the recipient has actually access or retrieved the resource. It could also give Alice the option to revoke access
- * Alice but also Bob should be able to stop their servers automatically applying edits whenever they want, After that, proposed edits from the other party may still be displayed in a sort of moderation queue, or the server could directy communicate failure/rejection of the edit/comment.
- * They should also be able to completely revoke the access and thus cancelling the sharing
+ * If Alice wants to share several documents with several people, she
+should be able to maintain a list to exaclty know who has access to what
+under which conditions.
+ * The sharing history could show both what she shared in the past with
+whom (and whether or not she invited them to send modifications back),
+and whether the recipient has actually access or retrieved the resource.
+It could also give Alice the option to revoke access
+ * Alice but also Bob should be able to stop their servers automatically
+applying edits whenever they want, After that, proposed edits from the
+other party may still be displayed in a sort of moderation queue, or the
+server could directy communicate failure/rejection of the edit/comment.
+ * They should also be able to completely revoke the access and thus
+cancelling the sharing
 
 11. data domains
  
- *  If Bob accesses the resource with his browser, the presentation can be  tailored to how Bob as a human wants to consume the data. For instance,  multiple download/export formats may be offered using a web view in a  natural language Bob understands.
- *  When Bob's server retrieves the resource, it may not be able to  discover its semantics, and therefore may not be able to add it to Bob's  server in a way that makes sense. For instance, if Bob's server  internally uses html documents, but Alice's server uses markdown  documents, a conversion may be necessary.
- *  Data format hints can be provided using Content-Type headers, or some  linked data notation (microformats, json-ld, rdf, turtle, rdfa). This  can then point to a unique data type in some vocabulary.
- * But apart from notation format, there are many vocabularies (indeed, see : https://www.w3.org/Social/track/issues/15 ).  Sending for instance a photo, a text document, a contact (description  of a person), an blog post or Activity, a comment, a git pull request,  etc., will only work in the desired way if both servers use the same  vocabulary.
- *  Our recommendation would be for the receiving server to support many  data format hint languages, as well as many vocabularies, as well as  many data formats and follow standards and w3c recommandations as much as possible
+ * If Bob accesses the resource with his browser, the presentation
+can be tailored to how Bob as a human wants to consume the data. For
+instance, multiple download/export formats may be offered using a web
+view in a natural language Bob understands.
+ * When Bob's server retrieves the resource, it may not be able to
+discover its semantics, and therefore may not be able to add it to
+Bob's server in a way that makes sense. For instance, if Bob's server
+internally uses html documents, but Alice's server uses markdown
+documents, a conversion may be necessary.
+ * Data format hints can be provided using Content-Type headers, or some
+linked data notation (microformats, json-ld, rdf, turtle, rdfa). This
+can then point to a unique data type in some vocabulary.
+ * But apart from notation format, there are many vocabularies (indeed,
+see : https://www.w3.org/Social/track/issues/15 ). Sending for instance
+a photo, a text document, a contact (description of a person), an blog
+post or Activity, a comment, a git pull request, etc., will only work in
+the desired way if both servers use the same vocabulary.
+ * Our recommendation would be for the receiving server to support many
+data format hint languages, as well as many vocabularies, as well as
+many data formats and follow standards and w3c recommandations as much
+as possible
 *  Data domains are also important for automatic conflict resolution.
 
 12. Security Considerations
