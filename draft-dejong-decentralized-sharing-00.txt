@@ -2,18 +2,39 @@ INTERNET DRAFT                                      Michiel B. de Jong
 Document: draft-dejong-decentralizedsharing-00           (independent)
                                                          Paul Tran-Van
 Intended Status: Informational                            (Cozy Cloud)
-Expires: 18 December 2015                                  19 May 2015
+Expires: ** December 2015                                  ** May 2015
 
 
                          Decentralized Sharing
 
 Abstract
 
-s draft describes what are the steps and challenges to achieve an
-interoperable decentralized private sharing between users having a
-personal server. This sharing should be feasible no matter what is the
-platform running on the server, as long as it capable of storing and
-processing data and that the user has control on it.
+This draft describes the steps and challenges of sharing documents
+between persons, using multiple internet-connected servers. We
+investigate the situation where a document exists on a server to which
+the sender has access through some software application, but the
+recipient(s) don't. All recipient(s) do,
+however, have access to software applications that run on least one
+other server. We discuss existing
+and proposed methods for the sender to initiate the communication, for
+each recipient to become aware of the sender's intent to share a
+document, for each recipient to access the document directly, for the
+document contents to be transmitted to server(s) to which the
+recipient(s) have
+access, for the sender to make and announce changes in the document
+after it was initially sent, and for the recipient(s) to communicate
+comments and proposed changes to the document back to the sender's
+server. We
+also discuss how semantics of the document may be communicated, and
+how versioning conflicts may
+in some cases be resolved programmatically, provided the semantics
+of the original document and of (proposed) changes can be agreed on.
+Given
+that users of personal servers don't all run the same compatible
+software on their server, the sending application needs to discover
+which
+application-level protocols are supported by the receiving application.
+
 
 Status of this Memo
 
@@ -27,10 +48,17 @@ Status of this Memo
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
+
+
+de Jong                                                         [Page 1]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 December 2015.
+   This Internet-Draft will expire on ** December 2015.
 
 Copyright Notice
 
@@ -48,31 +76,85 @@ Copyright Notice
    described in the Simplified BSD License.
 Table of Contents
 
-
-
-de Jong                                                         [Page 1]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
    1. Introduction...................................................2
 
 
 1.  Introduction
 
-There is no consensus yet on the internet to share documents privately
-on the internet. This leads to a dispersion of efforts between open and
-decentralized personal servers.
-A sharing specification is thus needed to make them interoperable.
+There are several protocols that allow sending a document from one
+server
+to another. For instance, the sender may use an email
+client to connect to her server via the [IMAP] protocol, or use a web
+browser to connect to her server via the [HTTPS] protocol, to instruct
+her server to forward an existing mail message from her server to one or
+more recipients, identified by their email addresses, after which the
+mailserver application running on her server can deliver the document to
+the recipient's server using the [SMTP] protocol. The recipient may then
+access the document from his server over the [POP], [IMAP], or [HTTPS]
+protocol.
+However, many recent software applications which people use to access
+their documents, do not implement the SMTP, IMAP, or POP protocol due
+to the complexity of dealing with email spam. Also, there is no common
+way for the sender to update documents once they have been sent over
+SMTP, nor for the recipient(s) to propose changes in a machine-readable
+way. Rather than proposing such a versioning protocol on top of SMTP,
 
-  * Alice and Bob both have a personal server with a web interface
-  * Alice has documents "on there" that can be files, stream, raw data,
+
+de Jong                                                         [Page 2]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+we investigate how currently existing software applications implement
+decentralized document sharing in practice, and where these common
+practices could be improved and extended.
+Some software applications allow sharing documents between users who
+have access to the same server (we could call this centralized sharing),
+and some also implement application-specific protocols that allow their
+users to share documents with other users of the same software. This
+leads to a dispersion of efforts between open and decentralized personal
+server applications.
+Many software applications also allow sharing documents publically, for
+instance by making them accessible over [HTTPS]. There are many ways to
+restrict access to documents that are published that way, but this does
+not solve the question of how recipient(s) get notified in the first
+place that (and how) they have access to such a document.
+
+There is no consensus yet on how to share documents privately on the
+internet, in such a way that recipient(s) are notified, but other people
+cannot retrieve the document, nor discover its existence.
+
+This draft does not propose one universal solution, but rather
+investigates what puzzle pieces we are aware of, and what options may
+exist to put them together. Although we are also interested in the case
+where there may be more than one recipient, and each recipient may have
+access to more than one server (but not to the sender's server), for
+clarity of discussion we will at this point look at the simpler case
+where Alice wants to share one document with Bob. Alice and Bob both
+have a personal server, which they access over a web interface, that's
+to say, using a web browser that connects to their server over HTTPS,
+displays information in a human-readable way, and allows humans to
+easily send commands using for instance point-and-click gestures.
+
+There are multiple documents on Alice's server, and the web interface
+visualizes these for her. We make no assumptions at this point about the
+semantics of these documents; they can text, hypertext, sound, image,
+or other media files, or contain some machine-readable data such as the
+contact information of a person, the details of a calendar event, or a
+move in a chess game.
 etc.
-  * Alice decides to share one file with only Bob and keep it invisible
-for the others
-  * What are the steps?
+
+Alice decides to share one file with only Bob and keep it invisible for
+the others. What are the steps?
 
 2. Initiate sharing process
+
+
+de Jong                                                         [Page 3]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 
 * Alice picks a resource (web interface)
 * Alice clicks or gestures 'Share' in some way (possibly specify
@@ -98,13 +180,6 @@ different interactions with different recipients
 4. Recipient notification
  
  * Depends on contact method Alice knows for Bob (email, phone number,
-
-
-de Jong                                                         [Page 2]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 WebMention, irc, Twitter, WhatsApp, ...)
   * Notification should contain:
     * A URL where Bob can access the resource
@@ -123,6 +198,13 @@ of information.
 the picture from her personal server, it will just load from Bob server.
     When Bob edit the picture, it will appear edited in Alice personal
 server.
+
+
+de Jong                                                         [Page 4]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
     If Alice wants to edit the picture, she could do it though this
 interface also.
     Bob is in control of his picture. If he unplug his personal picture,
@@ -148,13 +230,6 @@ has Bob's homepage, her server could already scan if Bob's homepage
 and /.well-known resources announce support for IndieAuth, IndieCert,
 OpenID, and/or Persona). It also depends on the Alice's server
 capabilities.
-
-
-de Jong                                                         [Page 3]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
  * Alice's server may also automatically update the addressbook entry,
 based on what it discovered.
  She may give instructions like "please don't share publically", or
@@ -173,6 +248,13 @@ can also access the resource without human intervention.
 reaction to a WWW-Authenticate header
  
 7. Publishing edits
+
+
+de Jong                                                         [Page 5]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
  
   * Alice might publish an rss, atom, or CouchDB changes feed instead of
 a static document.
@@ -198,13 +280,6 @@ between Alice and Bob servers .
 changes automatically, or for instance only display additions and not
 deletions. This should be signalled in the notification (see above), so
 that Bob knows whether he has write access or not.
-
-
-de Jong                                                         [Page 4]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
    
   * Alice's server may automatically apply Bob's changes (depending
 possibly on the type of change) without Alice's intervention. If there
@@ -223,6 +298,13 @@ Bob's feed to signal which edit merges which pull request, so to speak.
 Alice's server of this. For comments, WebMention does this. If Bob has
 write access over http (read-write web, or create a CouchDB user for
 Bob), he can simply send http requests which succeed or fail. Git pull
+
+
+de Jong                                                         [Page 6]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 requests are traditionally sent by pgp-signed email, with the patch in
 an attachment.
  * We could defne an 'edit' h-entry type in Micropub, for Bob to post
@@ -248,13 +330,6 @@ recipients before modifying anything.
 9. Real-time collaboration
  
 * A WebRTC session may be negotiated if Bob and Alice are both online.
-
-
-de Jong                                                         [Page 5]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 For instance, Alice might send Bob a "phone call", Bob's server
 sends a push notification to Bob's phone, and when Bob picks up the
 phone, his server responds to Alice's "phone call" with a WebRTC
@@ -273,6 +348,13 @@ It could also give Alice the option to revoke access
 applying edits whenever they want, After that, proposed edits from the
 other party may still be displayed in a sort of moderation queue, or the
 server could directy communicate failure/rejection of the edit/comment.
+
+
+de Jong                                                         [Page 7]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
  * They should also be able to completely revoke the access and thus
 cancelling the sharing
 
@@ -298,13 +380,6 @@ the desired way if both servers use the same vocabulary.
  * Our recommendation would be for the receiving server to support many
 data format hint languages, as well as many vocabularies, as well as
 many data formats and follow standards and w3c recommandations as much
-
-
-de Jong                                                         [Page 6]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 as possible
 *  Data domains are also important for automatic conflict resolution.
 
@@ -323,6 +398,13 @@ as possible
 14. Acknowledgements
 
     The authors would like to thank everybody who contributed to the
+
+
+de Jong                                                         [Page 8]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
     development of this protocol, including the IndieWeb and Social
     Web communities, the Decentralized Sharing Working Group, the
     participants in OuiShareLabsCamp 2015, as well as Alice and Bob
@@ -348,13 +430,6 @@ as possible
         "Section 4.2: Implicit Grant", in: Hardt, D. (ed), "The OAuth
         2.0 Authorization Framework", RFC6749, October 2012.
 
-
-
-de Jong                                                         [Page 7]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 17.2. Informative References
 
     [HTTPS]
@@ -373,6 +448,13 @@ Internet-Draft           Decentralized Sharing               May 2015
         Conditional Requests", RFC7233, June 2014.
 
     [SPDY]
+
+
+de Jong                                                         [Page 9]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
         Mark Belshe, Roberto Peon, "SPDY Protocol - Draft 3.1", http://
         www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3-1,
         September 2013.
@@ -398,13 +480,6 @@ Internet-Draft           Decentralized Sharing               May 2015
 
     [KERBEROS]
         C. Neuman et al., "The Kerberos Network Authentication Service
-
-
-de Jong                                                         [Page 8]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
         (V5)", RFC4120, July 2005.
 
     [BEARER]
@@ -422,6 +497,13 @@ Internet-Draft           Decentralized Sharing               May 2015
     (independent
 
     Email: michiel@michielbdejong.com
+
+
+
+de Jong                                                        [Page 10]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
 
 
     Paul Tran-Van
@@ -450,4 +532,22 @@ Internet-Draft           Decentralized Sharing               May 2015
 
 
 
-de Jong                                                         [Page 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+de Jong                                                        [Page 11]
