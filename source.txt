@@ -70,6 +70,23 @@ Copyright Notice
 Table of Contents
 
    1. Introduction...................................................2
+   2. Initiate sharing process.......................................2
+   3. Recipient selection............................................2
+   4. Recipient notification.........................................2
+   5. Human access...................................................2
+   6. Machine access ................................................2
+   7. Publishing edits...............................................2
+   8. Comments and write access......................................2
+   9. Real-time collaboration........................................2
+   10. Listing and revoking access...................................2
+   11. Data domains..................................................2
+   12. Security Considerations.......................................2
+   13. IANA Considerations...........................................2
+   14. Acknowledgements..............................................2
+   15. References....................................................2
+   15.1. Normative References........................................2
+   15.2. Informative References......................................2
+   16. Authors' addresses............................................2
 
 
 1.  Introduction
@@ -309,7 +326,7 @@ server could directy communicate failure/rejection of the edit/comment.
  * They should also be able to completely revoke the access and thus
 cancelling the sharing
 
-11. data domains
+11. Data domains
  
  * If Bob accesses the resource with his browser, the presentation
 can be tailored to how Bob as a human wants to consume the data. For
@@ -354,9 +371,9 @@ as possible
     participants in OuiShareLabsCamp 2015, as well as Alice and Bob
     themselves.
 
-17. References
+15. References
 
-17.1. Normative References
+15.1. Normative References
 
     [WORDS]
         Bradner, S., "Key words for use in RFCs to Indicate Requirement
@@ -374,7 +391,7 @@ as possible
         "Section 4.2: Implicit Grant", in: Hardt, D. (ed), "The OAuth
         2.0 Authorization Framework", RFC6749, October 2012.
 
-17.2. Informative References
+15.2. Informative References
 
     [HTTPS]
         Rescorla, E., "HTTP Over TLS", RFC2818, May 2000.
@@ -428,7 +445,7 @@ as possible
         September 2014. https://github.com/michielbdejong/resite/wiki
         /Using-remoteStorage-for-web-authoring
 
-18. Authors' addresses
+16. Authors' addresses
 
     Michiel B. de Jong
     (independent
