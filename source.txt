@@ -88,6 +88,15 @@ Table of Contents
 
 1.  Introduction
 
+When we say a sender 'shares' a document with some recipient(s),
+we primarily mean the sender makes that document available for the
+recipient(s) to consume, but not to others. Additionally, the sender
+may send updated versions of the document after it was sent, and
+recipient(s) may reply with comments and propose changes to the
+document. The sender may decide to make such updates accessible to all
+original recipient(s) or not. When we say 'document', we mean a string
+of data which encodes some human-readable content in some data format.
+
 There are several protocols for sending a document from one server to
 another. For instance, the sender may use an email client to connect
 to her server via the [IMAP] protocol, or use a web browser to connect
@@ -154,10 +163,16 @@ depending on the capabilities of her (the sender's) server and Bob's
 
 2. Initiate sharing process
 
-* Alice picks a resource (web interface)
-* Alice clicks or gestures 'Share' in some way (possibly specify
-MicroPub endpoint, see also SoliD : https://github.com/linkeddata/SoLiD,
-quite similar to Micropub - but doesn't seem to support notification)
+To initiate the process of sharing a document from her server with
+Bob, Alice connects to her server with her web browser, providing some
+credentials (how she provides these is out of scope). She navigates the
+web interface of her server to select the document she wants to send to
+Bob.
+
+Alice clicks or gestures her 'Share' intent for the document in some
+way. The software application may have the capacity to act as a
+[MICROPUB] client, in which case at this point Alice would also specify
+the MicroPub endpoint to use.
 
 3. Recipient selection
 
@@ -203,7 +218,10 @@ it is gone. Except if Alice develops a piece of software to keep a copy,
 but this is an other debate.
  
 5. Human access
- 
+
+, see also SoliD : https://github.com/linkeddata/SoLiD,
+quite similar to Micropub - but doesn't seem to support notification)
+
  * Bob should be able to open the URL with a browser to view and/or
 download the resource.
  * If a secret was included in the notification, he may be required to
