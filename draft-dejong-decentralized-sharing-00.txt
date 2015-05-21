@@ -467,37 +467,37 @@ stops publishing the document at its URL.
  
 8. Comments and write access
  
- * If Bob has write access to the document, and Alice publishes a change
-feed, Bob could do the same. Then the document would be synchronized
-between Alice and Bob servers .
+Regardless of whether or not Alice has invited him to do so in the
+notification or in the access page, Bob may send reactions, like
+comments, answers, additions, or proposed changes to Alice. He may send
+Alice a notification for each reaction, a reference to a change feed,
+for Alice's server application to poll.
  
-   * It is up to Alice's server to either display Bob's comments and
-changes automatically, or for instance only display additions and not
-deletions. This should be signalled in the notification (see above), so
-that Bob knows whether he has write access or not.
+It is up to Alice's application to either display all of Bob's comments
+and changes immediately, or for instance to only display additions and
+not deletions. This MAY be signalled in the notification and/or in the
+access page (see above), so that Bob knows whether he effectively has
+"write access" or "read-only access" to the document or not.
    
-  * Alice's server may automatically apply Bob's changes (depending
-possibly on the type of change) without Alice's intervention. If there
-were multiple recipients, then maybe some recipients have permission to
-edit, and others only to view.
+Alice's server may immediately apply Bob's changes (depending possibly
+on the type of change) without Alice's intervention. If there were
+multiple recipients, then maybe some recipients have permission to edit
+(i.e., changes they propose will always be applied), and others only to
+view (i.e., when they send a proposed change, it is not applied, or is
+only applied after Alice reviewed and approved it.
   
- This means that Alice can keep modifying the resource after sending it,
-and Bob can also send modifications back to Alice. Bob's server will
-display Alice's changes automatically, possibly with a way to browse
-the change history. Alice's server may do the same, or display both the
-version she shared and the modifications proposed by Bob side-by-side.
- * The change feed method has to be the same to guarantee the
-synchronization. So we need a way for Alice's feed to refer back to
-Bob's feed to signal which edit merges which pull request, so to speak.
- * If Bob responds with a comment or an edit, he should somehow notify
-Alice's server of this. For comments, WebMention does this. If Bob has
-write access over http (read-write web, or create a CouchDB user for
-Bob), he can simply send http requests which succeed or fail. Git pull
-requests are traditionally sent by pgp-signed email, with the patch in
-an attachment.
- * We could defne an 'edit' h-entry type in Micropub, for Bob to post
-an updated version and notify this to Alice. If the h-entry is of
-type photo-album, then a reply could be of type addition, and link to
+This means that Alice can keep modifying the resource after sending it,
+and Bob can also send modifications back to Alice. If Bob's application
+retrieved a copy of the document and becomes aware of changes to it made
+or approved by Alice, it SHOULD display such changes automatically,
+possibly with a way to browse the change history. Alice's application
+MAY display the document to Alice in its latest version with all its
+approved changes (regardless of who proposed those changes), or display
+both the version she shared and the modifications proposed by Bob
+side-by-side.
+
+["The change feed method has to be the same to guarantee the
+synchronization." -> why? -Michiel]
 
 
 de Jong                                                        [Page 10]
@@ -505,22 +505,65 @@ de Jong                                                        [Page 10]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-an photo to be added to the photo album. Same for adding events to a
-calendar or files in a directory.
-  
- * Bob can send edits, for instance with http PUT or PATCH
- * git don't seem so appropriate for this. CouchDB replication could be
-appropriate if it can be used without necessarly a CouchDB backend.
 
- * The system should be able to detect the conflicts and perhaps
-solve them automatically (see also Data Domains below), or notify
-Alice/Bob for manual resolution. A conflict occurs when Alice and Bob
-do some changes at the same time on the same document and receive a
-different new version. This is an optimistic lock vision from a database
-perspective : conflicts are tolerated but the versions should converge
-and reach consistency. A pessimitic lock would require to inform
-recipients before modifying anything.
+We will now consider the case where Alice sent the message to possibly
+more than one recipient, and the document may at any point contain
+changes proposed by any of these recipients (either accepted immediately
+by Alice's application, or reviewed and approved by Alice). When Alice's
+change feed contains changes initiated by one of the recipients, it
+SHOULD refer back to the URL where this change was originally proposed
+by the recipient in question. This will allow the application of a
+recipient to programmatically compare the "master" change feed published
+by Alice with the list of changes proposed by that recipient itself.
+This is a common pattern in [GIT] versioning, where branches can be
+merged into a master branch, retaining the information about the
+individual changes (commits).
 
+If Bob reacts with a comment or a change proposal, he should somehow
+notify Alice of this. WebMention was intended to do exactly this,
+for comments on a publically published document. It is common for
+applications to display (links to) all comments on a document on its
+public access page. This practice may lead to [LINK-SPAM] when applied
+to public documents, and when applied to privately shared documents, it
+may result in accidentally publishing a private comment to the other
+recipients of that shared document.
+
+Bob MAY also send proposed changes to Alice over http, using a verb
+like PUT or PATCH. This practice is used in [READ-WRITE-WEB] and
+[COUCHDB], among others. Such http requests SHOULD be responded to with
+a http response status that indicates whether the change request was
+successful, accepted to be reviewed, or rejected.
+
+A third practice for sending change proposals are git pull requests,
+which would traditionally be sent to Alice by pgp-signed email, with the
+patch in an attachment.
+
+The authors intend to research whether we could define a way to mark up
+change proposals in microformats, for Bob to post an updated version
+and notify this to Alice. For instance, if Alice published a document
+containing an h-entry of type photo-album, then a reaction to this could
+be of type addition, and refer to a photo which Bob wants to be added to
+that photo album. The same pattern could serve for adding events to a
+calendar, or adding files in a document which represents a file system
+directory.
+
+Alice's application MAY be able to interpret changes to a document and
+
+
+de Jong                                                        [Page 11]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+resolve the possible conflicts between them in certain cases (see also
+the Data domains section below), or notify Alice and/or Bob that more
+information is needed to resolve the conflict. A conflict occurs when
+Alice and Bob both make changes in the document and arrive at different
+new versions. In database theory this is called the optimistic lock
+pattern: conflicts are tolerated, but the versions should eventually
+converge and reach consistency. A pessimitic lock pattern would require
+notifying all other actors with access to the document before starting
+to make any changes to the current document version.
  
 9. Real-time collaboration
  
@@ -548,13 +591,6 @@ cancelling the sharing
 
 11. Data domains
  
-
-
-de Jong                                                        [Page 11]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
  * If Bob accesses the resource with his browser, the presentation
 can be tailored to how Bob as a human wants to consume the data. For
 instance, multiple download/export formats may be offered using a web
@@ -562,6 +598,13 @@ view in a natural language Bob understands.
  * When Bob's server retrieves the resource, it may not be able to
 discover its semantics, and therefore may not be able to add it to
 Bob's server in a way that makes sense. For instance, if Bob's server
+
+
+de Jong                                                        [Page 12]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 internally uses html documents, but Alice's server uses markdown
 documents, a conversion may be necessary.
  * Data format hints can be provided using Content-Type headers, or some
@@ -598,13 +641,6 @@ as possible
     participants in OuiShareLabsCamp 2015, as well as Alice and Bob
     themselves.
 
-
-
-de Jong                                                        [Page 12]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 15. References
 
 15.1. Normative References
@@ -612,6 +648,13 @@ Internet-Draft           Decentralized Sharing               May 2015
     [WORDS]
         Bradner, S., "Key words for use in RFCs to Indicate Requirement
         Levels", BCP 14, RFC 2119, March 1997.
+
+
+de Jong                                                        [Page 13]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 
     [IRI]
         Duerst, M., "Internationalized Resource Identifiers (IRIs)",
@@ -648,13 +691,6 @@ Internet-Draft           Decentralized Sharing               May 2015
         September 2013.
 
     [JSON-LD]
-
-
-de Jong                                                        [Page 13]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
         M. Sporny, G. Kellogg, M. Lanthaler, "JSON-LD 1.0", W3C
         Proposed Recommendation,
         http://www.w3.org/TR/2014/REC-json-ld-20140116/, January 2014.
@@ -662,6 +698,13 @@ Internet-Draft           Decentralized Sharing               May 2015
     [CORS]
         van Kesteren, Anne (ed), "Cross-Origin Resource Sharing --
         W3C Candidate Recommendation 29 January 2013",
+
+
+de Jong                                                        [Page 14]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
         http://www.w3.org/TR/cors/, January 2013.
 
     [MANIFEST]
@@ -698,49 +741,6 @@ Internet-Draft           Decentralized Sharing               May 2015
     (Cozy Cloud)
 
     Email: paul@cozycloud.cc
-
-
-de Jong                                                        [Page 14]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
