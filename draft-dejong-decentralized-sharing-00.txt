@@ -234,20 +234,20 @@ with him. She may for instance contact Bob by telephone or irc to ask
 him for his email address.
     
 4. Recipient notification
- 
- * Depends on contact method Alice knows for Bob (email, phone number,
-WebMention, irc, Twitter, WhatsApp, ...)
-  * Notification should contain:
-    * A URL where Bob can access the resource
-    * Possibly a separate secret for access
-    * Possibly invite different types of feedbacks (comments, edits,
-additions, ...)
-    
-    oEmbed?
-    Is it useful to use the JSON data snippets from the providers of
-existing services that use - http://www.oembed.com/#section7 in response
-to recipient notifications?
-    It could be really interesting, because in this case, the orginial
+
+Depending on the contact methods for which Alice has discovered Bob's
+identifier in the recipient selection step, she may complete the
+document sharing process by sending either the document data to Bob, or
+a notification which contains machine-readable and/or human-readable
+instructions for retrieving the document. For instance, she may send the
+document as an email attachment, or send an email message that contains
+a hyperlink or URL through which Bob may access the document.
+
+In the case of sending the entire document directly, it will be helpful
+to include some metadata about the document encoding. In the absence of
+this, the software application that Bob uses to visualize the received
+document may try to guess the encoding and media type of the document,
+for instance by analyzing its first few bytes of data.
 
 
 de Jong                                                         [Page 5]
@@ -255,20 +255,75 @@ de Jong                                                         [Page 5]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-server with the original content is taking care of publishing this piece
-of information.
-    In our case of Bob sharing a picture with Alice, when Alice loads
-the picture from her personal server, it will just load from Bob server.
-    When Bob edit the picture, it will appear edited in Alice personal
-server.
-    If Alice wants to edit the picture, she could do it though this
-interface also.
-    Bob is in control of his picture. If he unplug his personal picture,
-it is gone. Except if Alice develops a piece of software to keep a copy,
-but this is an other debate.
- 
-  * Roles (admin, contributor, read-only, etc.) may be used to invite
-different interactions with different recipients
+
+In the case of sending only the information needed to access the
+document, but not the document itself, the necessary identifiers and
+credentials for accessing the document may be given in natural language,
+accompanied by human-readable instructions like 'You can download the
+document at the following URL: ..., using the following password: ...'.
+
+The notification may also contain information about how Bob can comment
+on the document, or propose changes. Sometimes this information may be
+implied by the notification method, or become obvious when Bob access
+the document. For instance, Alice may send the URL of a web page which
+contains a 'Comment' or 'Edit' button, inviting Bob to comment or
+propose changes to the document using that web page. These comments
+proposed changes may then either be applied and displayed immediately,
+or the web application may allow Alice to review them before they are
+applied and displayed.
+
+One protocol for notifying recipients is [WEBMENTION]. This is a
+recent successor of the older [PINGBACK], [REFBACK], and [TRACKBACK]
+protocols. WebMention is primarily intended for sending comments
+on existing documents, and not for initially sharing a document in
+the first place, nor for proposing edits. But by "commenting" on a
+recipient's main identifying URL (home page), it could also be used to
+send a document that is not a comment on any existing document. Also, as
+WebMention comments are often formatted as machine-readable documents
+using [MICROFORMATS], a 'proposed-edit' comment type could be defined,
+by which Bob's server may communicate Bob's proposed edits to Alice's
+server in a machine-readable way. The authors intend to research both
+these possible extensions to the WebMention protocol.
+
+The software application may allow Alice to select the method by which
+to notify Bob, or select a reasonable default. Bob may also publish
+machine-readable preferences indicating how Bob prefers to receive
+documents that are shared with him.
+
+The notification may also include human-readable information about which
+types of feedback are invited from Bob. For instance, Alice may share a
+document which contains a collection of photos, and Bob may be invited
+to add photos to this collection, but not delete any of the existing
+ones. The authors intend to research ways of adding such feedback
+invitations in a machine-readable way, for instance to a WebMention
+notification.
+
+
+
+de Jong                                                         [Page 6]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+Note that inviting certain types of feedback does not necessarily imply
+that Alice's server will automatically accept, apply, and display such
+feedback. Alice may want to review all proposed changes before applying
+them, and review all comments before displaying them.
+
+The notification may include all necessary credentials for accessing
+the resource, in which case it is important for the software on Bob's
+server not to display such a notification publically, as this would
+lead to accidentally publishing a privately shared document publically.
+Alternatively, the authentication step may be delayed until Bob, or
+software running on Bob's server, actually accesses the document.
+    
+The software that Alice uses to send the notification to Bob may use
+a concept of roles, which summarize which types of feedback Bob will
+be invited to reply with. For instance, she may select a 'contributor'
+role to invite Bob to send back only comments and additions, or
+an 'admin' role inviting Bob to propose any kind of change to the
+document, including deletions. We consider such roles mainly a matter of
+interaction between Alice and the software she uses.
 
 5. Human access
 
@@ -293,18 +348,18 @@ and /.well-known resources announce support for IndieAuth, IndieCert,
 OpenID, and/or Persona). It also depends on the Alice's server
 capabilities.
  * Alice's server may also automatically update the addressbook entry,
+
+
+de Jong                                                         [Page 7]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 based on what it discovered.
  She may give instructions like "please don't share publically", or
 "please share only within our Petanque team", or "Please destroy after
 reading, or after 30 days". How Bob enforces those rules and how Alice
 can trust him is probably not relevant here.
-
-
-de Jong                                                         [Page 6]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
  
 6. Machine access 
  
@@ -331,6 +386,29 @@ access control.
   * see
 http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
 
+    oEmbed?
+    Is it useful to use the JSON data snippets from the providers of
+existing services that use - http://www.oembed.com/#section7 in response
+to recipient notifications?
+    It could be really interesting, because in this case, the orginial
+server with the original content is taking care of publishing this piece
+of information.
+    In our case of Bob sharing a picture with Alice, when Alice loads
+the picture from her personal server, it will just load from Bob server.
+    When Bob edit the picture, it will appear edited in Alice personal
+server.
+    If Alice wants to edit the picture, she could do it though this
+
+
+de Jong                                                         [Page 8]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+interface also.
+    Bob is in control of his picture. If he unplug his personal picture,
+it is gone. Except if Alice develops a piece of software to keep a copy,
+but this is an other debate.
  
 8. Comments and write access
  
@@ -348,13 +426,6 @@ possibly on the type of change) without Alice's intervention. If there
 were multiple recipients, then maybe some recipients have permission to
 edit, and others only to view.
   
-
-
-de Jong                                                         [Page 7]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
  This means that Alice can keep modifying the resource after sending it,
 and Bob can also send modifications back to Alice. Bob's server will
 display Alice's changes automatically, possibly with a way to browse
@@ -377,6 +448,13 @@ calendar or files in a directory.
   
  * Bob can send edits, for instance with http PUT or PATCH
  * git don't seem so appropriate for this. CouchDB replication could be
+
+
+de Jong                                                         [Page 9]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 appropriate if it can be used without necessarly a CouchDB backend.
 
  * The system should be able to detect the conflicts and perhaps
@@ -398,13 +476,6 @@ phone, his server responds to Alice's "phone call" with a WebRTC
 SessionDescriptionProtocol object.
  
 10. Listing and revoking access
-
-
-de Jong                                                         [Page 8]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
  
  * If Alice wants to share several documents with several people, she
 should be able to maintain a list to exaclty know who has access to what
@@ -427,6 +498,13 @@ can be tailored to how Bob as a human wants to consume the data. For
 instance, multiple download/export formats may be offered using a web
 view in a natural language Bob understands.
  * When Bob's server retrieves the resource, it may not be able to
+
+
+de Jong                                                        [Page 10]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 discover its semantics, and therefore may not be able to add it to
 Bob's server in a way that makes sense. For instance, if Bob's server
 internally uses html documents, but Alice's server uses markdown
@@ -449,13 +527,6 @@ as possible
 
 13. IANA Considerations
 
-
-de Jong                                                         [Page 9]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
-
     This document registers the 'remotestorage' link relation, as well
     as the following WebFinger properties:
       * "http://remotestorage.io/spec/version"
@@ -477,6 +548,13 @@ Internet-Draft           Decentralized Sharing               May 2015
 15.1. Normative References
 
     [WORDS]
+
+
+de Jong                                                        [Page 11]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
         Bradner, S., "Key words for use in RFCs to Indicate Requirement
         Levels", BCP 14, RFC 2119, March 1997.
 
@@ -498,13 +576,6 @@ Internet-Draft           Decentralized Sharing               May 2015
         Rescorla, E., "HTTP Over TLS", RFC2818, May 2000.
 
     [HTTP]
-
-
-de Jong                                                        [Page 10]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
         Fielding et al., "Hypertext Transfer Protocol (HTTP/1.1):
         Semantics and Content", RFC7231, June 2014.
 
@@ -527,6 +598,13 @@ Internet-Draft           Decentralized Sharing               May 2015
         http://www.w3.org/TR/2014/REC-json-ld-20140116/, January 2014.
 
     [CORS]
+
+
+de Jong                                                        [Page 12]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
         van Kesteren, Anne (ed), "Cross-Origin Resource Sharing --
         W3C Candidate Recommendation 29 January 2013",
         http://www.w3.org/TR/cors/, January 2013.
@@ -547,13 +625,6 @@ Internet-Draft           Decentralized Sharing               May 2015
     [BEARER]
         M. Jones, D. Hardt, "The OAuth 2.0 Authorization Framework:
         Bearer Token Usage", RFC6750, October 2012.
-
-
-
-de Jong                                                        [Page 11]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
 
     [AUTHORING]
         "Using remoteStorage for web authoring", reSite wiki, retrieved
@@ -579,25 +650,4 @@ Internet-Draft           Decentralized Sharing               May 2015
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-de Jong                                                        [Page 12]
+de Jong                                                        [Page 13]

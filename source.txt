@@ -206,34 +206,82 @@ with him. She may for instance contact Bob by telephone or irc to ask
 him for his email address.
     
 4. Recipient notification
- 
- * Depends on contact method Alice knows for Bob (email, phone number,
-WebMention, irc, Twitter, WhatsApp, ...)
-  * Notification should contain:
-    * A URL where Bob can access the resource
-    * Possibly a separate secret for access
-    * Possibly invite different types of feedbacks (comments, edits,
-additions, ...)
+
+Depending on the contact methods for which Alice has discovered Bob's
+identifier in the recipient selection step, she may complete the
+document sharing process by sending either the document data to Bob, or
+a notification which contains machine-readable and/or human-readable
+instructions for retrieving the document. For instance, she may send the
+document as an email attachment, or send an email message that contains
+a hyperlink or URL through which Bob may access the document.
+
+In the case of sending the entire document directly, it will be helpful
+to include some metadata about the document encoding. In the absence of
+this, the software application that Bob uses to visualize the received
+document may try to guess the encoding and media type of the document,
+for instance by analyzing its first few bytes of data.
+
+In the case of sending only the information needed to access the
+document, but not the document itself, the necessary identifiers and
+credentials for accessing the document may be given in natural language,
+accompanied by human-readable instructions like 'You can download the
+document at the following URL: ..., using the following password: ...'.
+
+The notification may also contain information about how Bob can comment
+on the document, or propose changes. Sometimes this information may be
+implied by the notification method, or become obvious when Bob access
+the document. For instance, Alice may send the URL of a web page which
+contains a 'Comment' or 'Edit' button, inviting Bob to comment or
+propose changes to the document using that web page. These comments
+proposed changes may then either be applied and displayed immediately,
+or the web application may allow Alice to review them before they are
+applied and displayed.
+
+One protocol for notifying recipients is [WEBMENTION]. This is a
+recent successor of the older [PINGBACK], [REFBACK], and [TRACKBACK]
+protocols. WebMention is primarily intended for sending comments
+on existing documents, and not for initially sharing a document in
+the first place, nor for proposing edits. But by "commenting" on a
+recipient's main identifying URL (home page), it could also be used to
+send a document that is not a comment on any existing document. Also, as
+WebMention comments are often formatted as machine-readable documents
+using [MICROFORMATS], a 'proposed-edit' comment type could be defined,
+by which Bob's server may communicate Bob's proposed edits to Alice's
+server in a machine-readable way. The authors intend to research both
+these possible extensions to the WebMention protocol.
+
+The software application may allow Alice to select the method by which
+to notify Bob, or select a reasonable default. Bob may also publish
+machine-readable preferences indicating how Bob prefers to receive
+documents that are shared with him.
+
+The notification may also include human-readable information about which
+types of feedback are invited from Bob. For instance, Alice may share a
+document which contains a collection of photos, and Bob may be invited
+to add photos to this collection, but not delete any of the existing
+ones. The authors intend to research ways of adding such feedback
+invitations in a machine-readable way, for instance to a WebMention
+notification.
+
+Note that inviting certain types of feedback does not necessarily imply
+that Alice's server will automatically accept, apply, and display such
+feedback. Alice may want to review all proposed changes before applying
+them, and review all comments before displaying them.
+
+The notification may include all necessary credentials for accessing
+the resource, in which case it is important for the software on Bob's
+server not to display such a notification publically, as this would
+lead to accidentally publishing a privately shared document publically.
+Alternatively, the authentication step may be delayed until Bob, or
+software running on Bob's server, actually accesses the document.
     
-    oEmbed?
-    Is it useful to use the JSON data snippets from the providers of
-existing services that use - http://www.oembed.com/#section7 in response
-to recipient notifications?
-    It could be really interesting, because in this case, the orginial
-server with the original content is taking care of publishing this piece
-of information.
-    In our case of Bob sharing a picture with Alice, when Alice loads
-the picture from her personal server, it will just load from Bob server.
-    When Bob edit the picture, it will appear edited in Alice personal
-server.
-    If Alice wants to edit the picture, she could do it though this
-interface also.
-    Bob is in control of his picture. If he unplug his personal picture,
-it is gone. Except if Alice develops a piece of software to keep a copy,
-but this is an other debate.
- 
-  * Roles (admin, contributor, read-only, etc.) may be used to invite
-different interactions with different recipients
+The software that Alice uses to send the notification to Bob may use
+a concept of roles, which summarize which types of feedback Bob will
+be invited to reply with. For instance, she may select a 'contributor'
+role to invite Bob to send back only comments and additions, or
+an 'admin' role inviting Bob to propose any kind of change to the
+document, including deletions. We consider such roles mainly a matter of
+interaction between Alice and the software she uses.
 
 5. Human access
 
@@ -289,6 +337,22 @@ access control.
   * see
 http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
 
+    oEmbed?
+    Is it useful to use the JSON data snippets from the providers of
+existing services that use - http://www.oembed.com/#section7 in response
+to recipient notifications?
+    It could be really interesting, because in this case, the orginial
+server with the original content is taking care of publishing this piece
+of information.
+    In our case of Bob sharing a picture with Alice, when Alice loads
+the picture from her personal server, it will just load from Bob server.
+    When Bob edit the picture, it will appear edited in Alice personal
+server.
+    If Alice wants to edit the picture, she could do it though this
+interface also.
+    Bob is in control of his picture. If he unplug his personal picture,
+it is gone. Except if Alice develops a piece of software to keep a copy,
+but this is an other debate.
  
 8. Comments and write access
  
