@@ -50,6 +50,7 @@ Status of this Memo
 
    This Internet-Draft will expire on ** December 2015.
 
+
 Copyright Notice
 
    Copyright (c) 2015 IETF Trust and the persons identified as the
@@ -64,26 +65,30 @@ Copyright Notice
    include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
+
+
 Table of Contents
 
-   1. Introduction...................................................2
-   2. Initiate sharing process.......................................2
-   3. Recipient selection............................................2
-   4. Recipient notification.........................................2
-   5. Human access...................................................2
-   6. Machine access ................................................2
-   7. Publishing edits...............................................2
-   8. Comments and write access......................................2
-   9. Real-time collaboration........................................2
-   10. Listing and revoking access...................................2
-   11. Data domains..................................................2
-   12. Security Considerations.......................................2
-   13. IANA Considerations...........................................2
-   14. Acknowledgements..............................................2
-   15. References....................................................2
-   15.1. Normative References........................................2
-   15.2. Informative References......................................2
-   16. Authors' addresses............................................2
+   1. Introduction...................................................3
+   2. Initiate sharing process.......................................4
+   3. Recipient selection............................................5
+   4. Recipient notification.........................................5
+   5. Human access...................................................7
+   6. Machine access ................................................*
+   7. Publishing edits...............................................*
+   8. Comments and write access......................................*
+   9. Real-time collaboration........................................*
+   10. Listing and revoking access...................................*
+   11. Data domains..................................................*
+   12. Security Considerations.......................................*
+   13. IANA Considerations...........................................*
+   14. Acknowledgements..............................................*
+   15. References....................................................*
+   15.1. Normative References........................................*
+   15.2. Informative References......................................*
+   16. Authors' addresses............................................*
+
+
 
 
 1.  Introduction

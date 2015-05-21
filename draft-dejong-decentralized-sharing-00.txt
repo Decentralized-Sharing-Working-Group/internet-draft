@@ -57,6 +57,7 @@ Internet-Draft           Decentralized Sharing               May 2015
 
    This Internet-Draft will expire on ** December 2015.
 
+
 Copyright Notice
 
    Copyright (c) 2015 IETF Trust and the persons identified as the
@@ -71,33 +72,32 @@ Copyright Notice
    include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
+
+
 Table of Contents
 
-   1. Introduction...................................................2
-   2. Initiate sharing process.......................................2
-   3. Recipient selection............................................2
-   4. Recipient notification.........................................2
-   5. Human access...................................................2
-   6. Machine access ................................................2
-   7. Publishing edits...............................................2
-   8. Comments and write access......................................2
-   9. Real-time collaboration........................................2
-   10. Listing and revoking access...................................2
-   11. Data domains..................................................2
-   12. Security Considerations.......................................2
-   13. IANA Considerations...........................................2
-   14. Acknowledgements..............................................2
-   15. References....................................................2
-   15.1. Normative References........................................2
-   15.2. Informative References......................................2
-   16. Authors' addresses............................................2
+   1. Introduction...................................................3
+   2. Initiate sharing process.......................................4
+   3. Recipient selection............................................5
+   4. Recipient notification.........................................5
+   5. Human access...................................................7
+   6. Machine access ................................................*
+   7. Publishing edits...............................................*
+   8. Comments and write access......................................*
+   9. Real-time collaboration........................................*
+   10. Listing and revoking access...................................*
+   11. Data domains..................................................*
+   12. Security Considerations.......................................*
+   13. IANA Considerations...........................................*
+   14. Acknowledgements..............................................*
+   15. References....................................................*
+   15.1. Normative References........................................*
+   15.2. Informative References......................................*
+   16. Authors' addresses............................................*
 
 
-1.  Introduction
 
-When we say a sender 'shares' a document with some recipient(s),
-we primarily mean the sender makes that document available for the
-recipient(s) to consume, but not to others. Additionally, the sender
+
 
 
 de Jong                                                         [Page 2]
@@ -105,6 +105,11 @@ de Jong                                                         [Page 2]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+1.  Introduction
+
+When we say a sender 'shares' a document with some recipient(s),
+we primarily mean the sender makes that document available for the
+recipient(s) to consume, but not to others. Additionally, the sender
 may send updated versions of the document after it was sent, and
 recipient(s) may reply with comments and propose changes to the
 document. The sender may decide to make such updates accessible to all
@@ -143,11 +148,6 @@ Many software applications do allow sharing documents publically, for
 instance by making them accessible over [HTTPS]. There are many ways to
 restrict access to documents that are published that way, but this does
 not solve the question of how recipient(s) get notified in the first
-place that (and how) they have access to such a document.
-
-There is no consensus yet on how to share documents privately over the
-internet, in such a way that recipient(s) are notified, but other people
-cannot retrieve the document, nor discover its existence.
 
 
 de Jong                                                         [Page 3]
@@ -155,6 +155,11 @@ de Jong                                                         [Page 3]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+place that (and how) they have access to such a document.
+
+There is no consensus yet on how to share documents privately over the
+internet, in such a way that recipient(s) are notified, but other people
+cannot retrieve the document, nor discover its existence.
 
 This draft does not propose one universal solution, but rather lists
 what puzzle pieces we are aware of, and what options may exist to put
@@ -193,11 +198,6 @@ Bob.
 Alice clicks or gestures her 'Share' intent for the document in some
 way. The software application may have the capacity to act as a
 [MICROPUB] client, in which case at this point Alice would also specify
-the MicroPub endpoint to use.
-
-3. Recipient selection
-
-Alice may have an addressbook on her server where she stores the
 
 
 de Jong                                                         [Page 4]
@@ -205,6 +205,11 @@ de Jong                                                         [Page 4]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+the MicroPub endpoint to use.
+
+3. Recipient selection
+
+Alice may have an addressbook on her server where she stores the
 identities and contact methods of people she knows. She may be able
 to select Bob from this addressbook using the same or another web
 interface. She may also have such an addressbook on her own client
@@ -243,11 +248,6 @@ instructions for retrieving the document. For instance, she may send the
 document as an email attachment, or send an email message that contains
 a hyperlink or URL through which Bob may access the document.
 
-In the case of sending the entire document directly, it will be helpful
-to include some metadata about the document encoding. In the absence of
-this, the software application that Bob uses to visualize the received
-document may try to guess the encoding and media type of the document,
-for instance by analyzing its first few bytes of data.
 
 
 de Jong                                                         [Page 5]
@@ -255,6 +255,11 @@ de Jong                                                         [Page 5]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+In the case of sending the entire document directly, it will be helpful
+to include some metadata about the document encoding. In the absence of
+this, the software application that Bob uses to visualize the received
+document may try to guess the encoding and media type of the document,
+for instance by analyzing its first few bytes of data.
 
 In the case of sending only the information needed to access the
 document, but not the document itself, the necessary identifiers and
@@ -293,17 +298,17 @@ documents that are shared with him.
 The notification may also include human-readable information about which
 types of feedback are invited from Bob. For instance, Alice may share a
 document which contains a collection of photos, and Bob may be invited
-to add photos to this collection, but not delete any of the existing
-ones. The authors intend to research ways of adding such feedback
-invitations in a machine-readable way, for instance to a WebMention
-notification.
-
 
 
 de Jong                                                         [Page 6]
 
 Internet-Draft           Decentralized Sharing               May 2015
 
+
+to add photos to this collection, but not delete any of the existing
+ones. The authors intend to research ways of adding such feedback
+invitations in a machine-readable way, for instance to a WebMention
+notification.
 
 Note that inviting certain types of feedback does not necessarily imply
 that Alice's server will automatically accept, apply, and display such
@@ -343,11 +348,6 @@ a basic password, which is the secret from the notification.
 towards the contact method used for the notification, or which
 information Alice has about Bob (e.g. if Alice has Bob's email and
 Twitter handle, then these two option could be at the top; if Alice
-has Bob's homepage, her server could already scan if Bob's homepage
-and /.well-known resources announce support for IndieAuth, IndieCert,
-OpenID, and/or Persona). It also depends on the Alice's server
-capabilities.
- * Alice's server may also automatically update the addressbook entry,
 
 
 de Jong                                                         [Page 7]
@@ -355,6 +355,11 @@ de Jong                                                         [Page 7]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+has Bob's homepage, her server could already scan if Bob's homepage
+and /.well-known resources announce support for IndieAuth, IndieCert,
+OpenID, and/or Persona). It also depends on the Alice's server
+capabilities.
+ * Alice's server may also automatically update the addressbook entry,
 based on what it discovered.
  She may give instructions like "please don't share publically", or
 "please share only within our Petanque team", or "Please destroy after
@@ -393,11 +398,6 @@ to recipient notifications?
     It could be really interesting, because in this case, the orginial
 server with the original content is taking care of publishing this piece
 of information.
-    In our case of Bob sharing a picture with Alice, when Alice loads
-the picture from her personal server, it will just load from Bob server.
-    When Bob edit the picture, it will appear edited in Alice personal
-server.
-    If Alice wants to edit the picture, she could do it though this
 
 
 de Jong                                                         [Page 8]
@@ -405,6 +405,11 @@ de Jong                                                         [Page 8]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+    In our case of Bob sharing a picture with Alice, when Alice loads
+the picture from her personal server, it will just load from Bob server.
+    When Bob edit the picture, it will appear edited in Alice personal
+server.
+    If Alice wants to edit the picture, she could do it though this
 interface also.
     Bob is in control of his picture. If he unplug his personal picture,
 it is gone. Except if Alice develops a piece of software to keep a copy,
@@ -443,11 +448,6 @@ an attachment.
  * We could defne an 'edit' h-entry type in Micropub, for Bob to post
 an updated version and notify this to Alice. If the h-entry is of
 type photo-album, then a reply could be of type addition, and link to
-an photo to be added to the photo album. Same for adding events to a
-calendar or files in a directory.
-  
- * Bob can send edits, for instance with http PUT or PATCH
- * git don't seem so appropriate for this. CouchDB replication could be
 
 
 de Jong                                                         [Page 9]
@@ -455,6 +455,11 @@ de Jong                                                         [Page 9]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+an photo to be added to the photo album. Same for adding events to a
+calendar or files in a directory.
+  
+ * Bob can send edits, for instance with http PUT or PATCH
+ * git don't seem so appropriate for this. CouchDB replication could be
 appropriate if it can be used without necessarly a CouchDB backend.
 
  * The system should be able to detect the conflicts and perhaps
@@ -493,11 +498,6 @@ cancelling the sharing
 
 11. Data domains
  
- * If Bob accesses the resource with his browser, the presentation
-can be tailored to how Bob as a human wants to consume the data. For
-instance, multiple download/export formats may be offered using a web
-view in a natural language Bob understands.
- * When Bob's server retrieves the resource, it may not be able to
 
 
 de Jong                                                        [Page 10]
@@ -505,6 +505,11 @@ de Jong                                                        [Page 10]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+ * If Bob accesses the resource with his browser, the presentation
+can be tailored to how Bob as a human wants to consume the data. For
+instance, multiple download/export formats may be offered using a web
+view in a natural language Bob understands.
+ * When Bob's server retrieves the resource, it may not be able to
 discover its semantics, and therefore may not be able to add it to
 Bob's server in a way that makes sense. For instance, if Bob's server
 internally uses html documents, but Alice's server uses markdown
@@ -543,11 +548,6 @@ as possible
     participants in OuiShareLabsCamp 2015, as well as Alice and Bob
     themselves.
 
-15. References
-
-15.1. Normative References
-
-    [WORDS]
 
 
 de Jong                                                        [Page 11]
@@ -555,6 +555,11 @@ de Jong                                                        [Page 11]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+15. References
+
+15.1. Normative References
+
+    [WORDS]
         Bradner, S., "Key words for use in RFCs to Indicate Requirement
         Levels", BCP 14, RFC 2119, March 1997.
 
@@ -593,11 +598,6 @@ Internet-Draft           Decentralized Sharing               May 2015
         September 2013.
 
     [JSON-LD]
-        M. Sporny, G. Kellogg, M. Lanthaler, "JSON-LD 1.0", W3C
-        Proposed Recommendation,
-        http://www.w3.org/TR/2014/REC-json-ld-20140116/, January 2014.
-
-    [CORS]
 
 
 de Jong                                                        [Page 12]
@@ -605,6 +605,11 @@ de Jong                                                        [Page 12]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+        M. Sporny, G. Kellogg, M. Lanthaler, "JSON-LD 1.0", W3C
+        Proposed Recommendation,
+        http://www.w3.org/TR/2014/REC-json-ld-20140116/, January 2014.
+
+    [CORS]
         van Kesteren, Anne (ed), "Cross-Origin Resource Sharing --
         W3C Candidate Recommendation 29 January 2013",
         http://www.w3.org/TR/cors/, January 2013.
@@ -645,9 +650,54 @@ Internet-Draft           Decentralized Sharing               May 2015
     Email: paul@cozycloud.cc
 
 
-
-
-
-
-
 de Jong                                                        [Page 13]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+de Jong                                                        [Page 14]
