@@ -10,7 +10,7 @@ Expires: ** December 2015                                  ** May 2015
 Abstract
 
 This draft describes the steps and challenges of sharing documents
-between persons, using multiple internet-connected servers. We
+between persons, using internet-connected servers. We
 investigate the situation where a document exists on a server to which
 the sender has access through some software application, but the
 recipient(s) don't. All recipient(s) do,
@@ -26,9 +26,8 @@ after it was initially sent, and for the recipient(s) to communicate
 comments and proposed changes to the document back to the sender's
 server. We
 also discuss how semantics of the document may be communicated, and
-how versioning conflicts may
-in some cases be resolved programmatically, provided the semantics
-of the original document and of (proposed) changes can be agreed on.
+how versioning conflicts may then
+in some cases be resolved programmatically.
 Given
 that users of personal servers don't all run the same compatible
 software on their server, the sending application needs to discover
@@ -91,64 +90,67 @@ Table of Contents
 
 1.  Introduction
 
-There are several protocols that allow sending a document from one
+There are several protocols for sending a document from one
 server
 to another. For instance, the sender may use an email
 client to connect to her server via the [IMAP] protocol, or use a web
-browser to connect to her server via the [HTTPS] protocol, to instruct
+browser to connect to her server via the [HTTPS] protocol ("webmail"), to instruct
 her server to forward an existing mail message from her server to one or
 more recipients, identified by their email addresses, after which the
 mailserver application running on her server can deliver the document to
 the recipient's server using the [SMTP] protocol. The recipient may then
 access the document from his server over the [POP], [IMAP], or [HTTPS]
 protocol.
-However, many recent software applications which people use to access
-their documents, do not implement the SMTP, IMAP, or POP protocol due
-to the complexity of dealing with email spam. Also, there is no common
-way for the sender to update documents once they have been sent over
-SMTP, nor for the recipient(s) to propose changes in a machine-readable
-way. Rather than proposing such a versioning protocol on top of SMTP,
+
+However, many software applications which people use nowadays to access
+their documents, do not implement the SMTP, IMAP, or POP protocol (often due
+to the complexity of dealing with email spam). Also, there is no commonly supported programmatic way
+for the sender to update documents after they have been sent over
+SMTP, nor for the recipient(s) to reply with proposed changes. Rather than proposing such a versioning protocol on top of SMTP,
 we investigate how currently existing software applications implement
 decentralized document sharing in practice, and where these common
 practices could be improved and extended.
+
 Some software applications allow sharing documents between users who
 have access to the same server (we could call this centralized sharing),
 and some also implement application-specific protocols that allow their
 users to share documents with other users of the same software. This
-leads to a dispersion of efforts between open and decentralized personal
-server applications.
-Many software applications also allow sharing documents publically, for
+leads to a dispersion of efforts between personal
+server software projects.
+
+Many software applications do allow sharing documents publically, for
 instance by making them accessible over [HTTPS]. There are many ways to
 restrict access to documents that are published that way, but this does
 not solve the question of how recipient(s) get notified in the first
 place that (and how) they have access to such a document.
 
-There is no consensus yet on how to share documents privately on the
+There is no consensus yet on how to share documents privately over the
 internet, in such a way that recipient(s) are notified, but other people
 cannot retrieve the document, nor discover its existence.
 
 This draft does not propose one universal solution, but rather
-investigates what puzzle pieces we are aware of, and what options may
-exist to put them together. Although we are also interested in the case
-where there may be more than one recipient, and each recipient may have
-access to more than one server (but not to the sender's server), for
-clarity of discussion we will at this point look at the simpler case
-where Alice wants to share one document with Bob. Alice and Bob both
-have a personal server, which they access over a web interface, that's
-to say, using a web browser that connects to their server over HTTPS,
-displays information in a human-readable way, and allows humans to
-easily send commands using for instance point-and-click gestures.
+lists what puzzle pieces we are aware of, and what options may
+exist to put them together. In general, we are interested in the case
+where there may be more than one recipient, and where each recipient may have
+access to more than one server (but not to the sender's server). But for
+clarity of discussion we will at this point look at a simpler case.
 
-There are multiple documents on Alice's server, and the web interface
+We introduce Alice, who wants to share one document with Bob. Alice and Bob both
+have a personal server, which they access to over a web interface, that's
+to say, using a web browser that connects to their server over HTTPS. This interface
+displays information in a human-readable way, and allows humans to
+easily send commands using for instance their web browser's point-and-click gestures.
+
+We assume there are multiple documents on Alice's server, and the web interface
 visualizes these for her. We make no assumptions at this point about the
-semantics of these documents; they can text, hypertext, sound, image,
+content of these documents; they can text, hypertext, sound, image,
 or other media files, or contain some machine-readable data such as the
 contact information of a person, the details of a calendar event, or a
-move in a chess game.
-etc.
+move in a chess game, etcetera.
 
-Alice decides to share one file with only Bob and keep it invisible for
-the others. What are the steps?
+Alice decides to share one file with only Bob, and keep it invisible for
+the others. What are the steps through which she can achieve this, depending on the
+capabilities of her (the sender's) server and Bob's (the recipient's) server?
 
 2. Initiate sharing process
 
