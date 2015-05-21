@@ -409,35 +409,61 @@ method.
  
 7. Publishing edits
  
-  * Alice might publish an rss, atom, or CouchDB changes feed instead of
-a static document.
-  * The resource could have a link to a feed of its change history.
- * Bob's server could discover and keep polling the change feed each
-time Bob looks at the resource, and apply Alice's changes automatically.
-  * Alice could also notify Bob each time she has edited the document.
-Then Bob's server doesn't have to do polling.
-  * The change feeds could concern one document or aggregates all of
-them. An unique id for each document is then required, and a recipient
-access control.
-  * see
-http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
+After Alice has shared a document with Bob, if she did not send it
+directly as for instance an email attachment, she may still edit its
+contents between the time of sending the notification, and the first
+time Bob access the document through the human-readable access page, or
+a software application access the document on Bob's behalf.
 
-    oEmbed?
-    Is it useful to use the JSON data snippets from the providers of
-existing services that use - http://www.oembed.com/#section7 in response
-to recipient notifications?
-    It could be really interesting, because in this case, the orginial
-server with the original content is taking care of publishing this piece
-of information.
-    In our case of Bob sharing a picture with Alice, when Alice loads
-the picture from her personal server, it will just load from Bob server.
-    When Bob edit the picture, it will appear edited in Alice personal
-server.
-    If Alice wants to edit the picture, she could do it though this
-interface also.
-    Bob is in control of his picture. If he unplug his personal picture,
-it is gone. Except if Alice develops a piece of software to keep a copy,
-but this is an other debate.
+But even once Bob, or software on his behalf, has accessed the document
+for the first time, Alice may want to change its contents. For instance,
+Alice may share her calendar with Bob, and keep editing her calendar
+afterwards.
+
+If she does this, she may send Bob a new notification, inviting him to
+access the document again, to see the changed version. Another way of
+publishing new versions of a same documents would be for Alice might
+publish an [RSS] feed, an [ATOM] feed, or a [COUCHDB] changes feed
+instead of the document itself.
+
+Alternatively, the document could contain a reference to a feed of
+its change history, for instance using a hyperlink in case of a HTML
+document. A software application accessing the document on Bob's behalf
+could discover this reference programmatically and keep polling the
+change feed each time Bob views the document, apply Alice's changes, and
+possibly provide a way for Bob to view its change history.
+
+The approach where Alice's application sends a new notification to Bob's
+application is more efficient if changes are rare, because it does
+not require Bob's application to retrieve the change feed many times
+(polling). The [PUBSUBHUBBUB] protocol could also be used as a way to
+avoid unnecessary polling of change feeds.
+
+The change feeds could concern one document, or aggregate changes in all
+changes Alice ever shared with Bob into one feed.
+The MicroPub protocol also supports updating
+documents that have already been published
+[MICROPUB-UPDATES](http://indiewebcamp.com/wiki/index.php?title=Micropub
+&oldid=19338#Update ), so the application Alice uses to update the
+document could send a MicroPub Update to the application which handles
+the sharing of the document.
+
+
+
+de Jong                                                         [Page 9]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+There are also situations where Bob can be expected not to make any
+copies of the original document version, retrieving it always directly
+from Alice's server when needed, and Bob may be more interested in
+always retrieving the latest version, instead of being notified about
+changes when they happen. An example could be when the document contains
+an [OEMBED](http://www.oembed.com/#section7) data snippet, which Bob
+embeds in another document by reference. This also means Bob will no
+longer to access the document if Alice revokes his access to it, or
+stops publishing the document at its URL.
  
 8. Comments and write access
  
@@ -448,13 +474,6 @@ between Alice and Bob servers .
    * It is up to Alice's server to either display Bob's comments and
 changes automatically, or for instance only display additions and not
 deletions. This should be signalled in the notification (see above), so
-
-
-de Jong                                                         [Page 9]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 that Bob knows whether he has write access or not.
    
   * Alice's server may automatically apply Bob's changes (depending
@@ -479,6 +498,13 @@ an attachment.
  * We could defne an 'edit' h-entry type in Micropub, for Bob to post
 an updated version and notify this to Alice. If the h-entry is of
 type photo-album, then a reply could be of type addition, and link to
+
+
+de Jong                                                        [Page 10]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 an photo to be added to the photo album. Same for adding events to a
 calendar or files in a directory.
   
@@ -498,13 +524,6 @@ recipients before modifying anything.
  
 9. Real-time collaboration
  
-
-
-de Jong                                                        [Page 10]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 * A WebRTC session may be negotiated if Bob and Alice are both online.
 For instance, Alice might send Bob a "phone call", Bob's server
 sends a push notification to Bob's phone, and when Bob picks up the
@@ -529,6 +548,13 @@ cancelling the sharing
 
 11. Data domains
  
+
+
+de Jong                                                        [Page 11]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
  * If Bob accesses the resource with his browser, the presentation
 can be tailored to how Bob as a human wants to consume the data. For
 instance, multiple download/export formats may be offered using a web
@@ -548,13 +574,6 @@ post or Activity, a comment, a git pull request, etc., will only work in
 the desired way if both servers use the same vocabulary.
  * Our recommendation would be for the receiving server to support many
 data format hint languages, as well as many vocabularies, as well as
-
-
-de Jong                                                        [Page 11]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 many data formats and follow standards and w3c recommandations as much
 as possible
 *  Data domains are also important for automatic conflict resolution.
@@ -579,6 +598,13 @@ as possible
     participants in OuiShareLabsCamp 2015, as well as Alice and Bob
     themselves.
 
+
+
+de Jong                                                        [Page 12]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 15. References
 
 15.1. Normative References
@@ -598,13 +624,6 @@ as possible
     [OAUTH]
         "Section 4.2: Implicit Grant", in: Hardt, D. (ed), "The OAuth
         2.0 Authorization Framework", RFC6749, October 2012.
-
-
-de Jong                                                        [Page 12]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 
 15.2. Informative References
 
@@ -629,6 +648,13 @@ Internet-Draft           Decentralized Sharing               May 2015
         September 2013.
 
     [JSON-LD]
+
+
+de Jong                                                        [Page 13]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
         M. Sporny, G. Kellogg, M. Lanthaler, "JSON-LD 1.0", W3C
         Proposed Recommendation,
         http://www.w3.org/TR/2014/REC-json-ld-20140116/, January 2014.
@@ -648,13 +674,6 @@ Internet-Draft           Decentralized Sharing               May 2015
         https://wiki.mozilla.org/WebAPI/DataStore#Manifest
 
     [KERBEROS]
-
-
-de Jong                                                        [Page 13]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
         C. Neuman et al., "The Kerberos Network Authentication Service
         (V5)", RFC4120, July 2005.
 
@@ -681,23 +700,54 @@ Internet-Draft           Decentralized Sharing               May 2015
     Email: paul@cozycloud.cc
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 de Jong                                                        [Page 14]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+de Jong                                                        [Page 15]

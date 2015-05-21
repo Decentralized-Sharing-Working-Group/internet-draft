@@ -353,35 +353,54 @@ method.
  
 7. Publishing edits
  
-  * Alice might publish an rss, atom, or CouchDB changes feed instead of
-a static document.
-  * The resource could have a link to a feed of its change history.
- * Bob's server could discover and keep polling the change feed each
-time Bob looks at the resource, and apply Alice's changes automatically.
-  * Alice could also notify Bob each time she has edited the document.
-Then Bob's server doesn't have to do polling.
-  * The change feeds could concern one document or aggregates all of
-them. An unique id for each document is then required, and a recipient
-access control.
-  * see
-http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
+After Alice has shared a document with Bob, if she did not send it
+directly as for instance an email attachment, she may still edit its
+contents between the time of sending the notification, and the first
+time Bob access the document through the human-readable access page, or
+a software application access the document on Bob's behalf.
 
-    oEmbed?
-    Is it useful to use the JSON data snippets from the providers of
-existing services that use - http://www.oembed.com/#section7 in response
-to recipient notifications?
-    It could be really interesting, because in this case, the orginial
-server with the original content is taking care of publishing this piece
-of information.
-    In our case of Bob sharing a picture with Alice, when Alice loads
-the picture from her personal server, it will just load from Bob server.
-    When Bob edit the picture, it will appear edited in Alice personal
-server.
-    If Alice wants to edit the picture, she could do it though this
-interface also.
-    Bob is in control of his picture. If he unplug his personal picture,
-it is gone. Except if Alice develops a piece of software to keep a copy,
-but this is an other debate.
+But even once Bob, or software on his behalf, has accessed the document
+for the first time, Alice may want to change its contents. For instance,
+Alice may share her calendar with Bob, and keep editing her calendar
+afterwards.
+
+If she does this, she may send Bob a new notification, inviting him to
+access the document again, to see the changed version. Another way of
+publishing new versions of a same documents would be for Alice might
+publish an [RSS] feed, an [ATOM] feed, or a [COUCHDB] changes feed
+instead of the document itself.
+
+Alternatively, the document could contain a reference to a feed of
+its change history, for instance using a hyperlink in case of a HTML
+document. A software application accessing the document on Bob's behalf
+could discover this reference programmatically and keep polling the
+change feed each time Bob views the document, apply Alice's changes, and
+possibly provide a way for Bob to view its change history.
+
+The approach where Alice's application sends a new notification to Bob's
+application is more efficient if changes are rare, because it does
+not require Bob's application to retrieve the change feed many times
+(polling). The [PUBSUBHUBBUB] protocol could also be used as a way to
+avoid unnecessary polling of change feeds.
+
+The change feeds could concern one document, or aggregate changes in all
+changes Alice ever shared with Bob into one feed.
+The MicroPub protocol also supports updating
+documents that have already been published
+[MICROPUB-UPDATES](http://indiewebcamp.com/wiki/index.php?title=Micropub
+&oldid=19338#Update ), so the application Alice uses to update the
+document could send a MicroPub Update to the application which handles
+the sharing of the document.
+
+There are also situations where Bob can be expected not to make any
+copies of the original document version, retrieving it always directly
+from Alice's server when needed, and Bob may be more interested in
+always retrieving the latest version, instead of being notified about
+changes when they happen. An example could be when the document contains
+an [OEMBED](http://www.oembed.com/#section7) data snippet, which Bob
+embeds in another document by reference. This also means Bob will no
+longer to access the document if Alice revokes his access to it, or
+stops publishing the document at its URL.
  
 8. Comments and write access
  
