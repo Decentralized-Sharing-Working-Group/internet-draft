@@ -176,19 +176,34 @@ the MicroPub endpoint to use.
 
 3. Recipient selection
 
-  * Her server might have an addressbook function, but that moves
-discovery problem to how she adds Bob to it in the first place. If Bob's
-not in there, she adds him just before selecting him.
-  * What does she know about how to describe Bob?
-    * friend of a friend
-    * Full name, location, occupation, hobbies -> web search -> Bob's
-homepage
-    * email address
-    * phone number
-    * ...
-    * Alice needs to know the Bob's server address
-  * Roles (admin, contributor, read-only, etc.) may be used to invite
-different interactions with different recipients
+Alice may have an addressbook on her server where she stores the
+identities and contact methods of people she knows. She may be able
+to select Bob from this addressbook using the same or another web
+interface. She may also have such an addressbook on her own client
+device, or for instance on paper. Or maybe she knows an identifier for
+Bob by heart. If Bob or someone else has published some of his contact
+information, she may use a search application to find out identifiers
+by which Bob can be contacted, which she can then use directly, and
+possibly also store in her addressbook for future reference.
+
+It is also possible that she remembers or looks up a web page describing
+how to contact Bob, and discovers a usable identifier this way. An
+addressbook application may also be able to infer identifiers for
+various contact methods from such a web page programmatically.
+
+Other methods for discovering a contact method and identifier for Bob
+may rely on Alice knowing that Bob is a friend of Cindy, and she may
+search a list of friends of Cindy named Bob, to confirm whether the
+intended Bob is listed there. Similarly, she may remember that Bob is
+for instance a member of her rowing club, and search a directory of
+members of that rowing club to locate contact information about him.
+Again, such an inference may be helped by a software application which
+is capable of infering such friend-of-a-friend relationships.
+
+Finally, Alice may have a contact identifier for Bob which she knows
+will allow her to communicate with him, but not to share the document
+with him. She may for instance contact Bob by telephone or irc to ask
+him for his email address.
     
 4. Recipient notification
  
@@ -217,6 +232,9 @@ interface also.
 it is gone. Except if Alice develops a piece of software to keep a copy,
 but this is an other debate.
  
+  * Roles (admin, contributor, read-only, etc.) may be used to invite
+different interactions with different recipients
+
 5. Human access
 
 , see also SoliD : https://github.com/linkeddata/SoLiD,
