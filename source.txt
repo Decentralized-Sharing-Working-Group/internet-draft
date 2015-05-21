@@ -290,42 +290,66 @@ interaction between Alice and the software she uses.
 
 5. Human access
 
-, see also SoliD : https://github.com/linkeddata/SoLiD,
-quite similar to Micropub - but doesn't seem to support notification)
+Whichever the way of sending the notification, it SHOULD contain a URL
+for Bob to open with a browser to view and/or download the document from
+what we call an access page.
 
- * Bob should be able to open the URL with a browser to view and/or
-download the resource.
- * If a secret was included in the notification, he may be required to
-paste that into the web view
- * Bob may be able to authenticate with
-IndieAuth, IndieCert, Persona, OpenID, WebID-TLS,
-[WebID-RSA](https://github.com/linkeddata/SoLiD#webid-rsa ), SMS- or
-email verification, Twitter-, Facebook-, GitHub-, etc. Connect, or even
-a basic password, which is the secret from the notification.
- * Bob could be offered a variety of these choices, possibly biased
-towards the contact method used for the notification, or which
-information Alice has about Bob (e.g. if Alice has Bob's email and
-Twitter handle, then these two option could be at the top; if Alice
-has Bob's homepage, her server could already scan if Bob's homepage
-and /.well-known resources announce support for IndieAuth, IndieCert,
-OpenID, and/or Persona). It also depends on the Alice's server
-capabilities.
- * Alice's server may also automatically update the addressbook entry,
-based on what it discovered.
- She may give instructions like "please don't share publically", or
-"please share only within our Petanque team", or "Please destroy after
-reading, or after 30 days". How Bob enforces those rules and how Alice
-can trust him is probably not relevant here.
+The notification MAY include a password or other type of secret
+which Bob needs to paste or type into the web page. The web page
+located at the URL from the notification MAY also allow Bob to
+authenticate with other methods if Alice can reasonably assume
+Bob will have the ability to use those. Examples of such methods
+are [OPENID], [INDIEAUTH], [INDIECERT], [PERSONA], [WEBID-TLS],
+[WEBID-RSA](https://github.com/linkeddata/SoLiD#webid-rsa). It MAY allow
+Bob to authenticate by proving he can receive a secret sent to him via
+mobile telephone short messaging service (SMS) or email. It MAY also
+allow Bob to authenticate using third-party identity providers like
+social network sites.
+
+Some of these methods of authentication rely on Alice to provide the
+correct identifier(s) for Bob in the recipient selection step. These
+identifier(s) are not necessarily equal to the identifier used for
+sending the notification. For instance, if Alice knows both Bob's
+WebMention end-point and his mobile phone number, she may send the
+notification to Bob's WebMention endpoint, but allow Bob to authenticate
+via SMS while accessing the document.
+
+The relationship between Bob's identifiers in different identity systems
+may in some cases be discovered programmatically, for instance with
+[REL-ME] links on the main (index) web page, or [WELL-KNOWN] resources,
+for Bob's personal DNS domain name.
+
+The list of authentication methods Bob is offered will be limited by
+the capabilities of the software that displays the access page for
+the document. If this software is integrated with Alice's addressbook
+software, then the addressbook entry for Bob may also be updated with
+the authentication methods for which Alice provided the identifier,
+those which were discovered programmatically during the process, and the
+one that Bob uiltimately used to authenticate.
+
+The access page MAY also give human-readable instructions to Bob, like
+"please don't share this document publically", "please don't share
+outside our Petanque team", or "please discard after reading, or after
+30 days". Whether or not Bob follows such instructions is out of scope.
  
 6. Machine access 
  
- * Some servers are able to retrieve a resource with unattended
-IndieAuth in response to a WebMention
- * If the URL contains the secret
-[capabilities](http://www.w3.org/TR/capability-urls/ ) then the server
-can also access the resource without human intervention.
- * WebID-TLS and WebId-RSA could also be used server-to-server, in
-reaction to a WWW-Authenticate header
+Some software applications are able to retrieve a document with
+[UNATTENDED-INDIEAUTH] in reaction to a WebMention notification.
+Although the [SoliD](https://github.com/linkeddata/SoLiD) platform does
+not describe how to send or receive a document sharing notification,
+it does describe how an application can use WebID-TLS or WebID-RSA to
+authenticate programmatically to retrieve a document of whose existence
+it is aware.
+
+If the URL of the access page contains the secret
+[capabilities](http://www.w3.org/TR/capability-urls/ ) then an
+application can also access the document without human intervention.
+
+If an application or human attempts to access the document without
+sufficient credentials, a 410 http response code can be sent, together
+with a WWW-Authenticate header hinting to a proposed authentication
+method.
  
 7. Publishing edits
  
