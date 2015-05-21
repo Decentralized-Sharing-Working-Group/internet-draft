@@ -95,9 +95,9 @@ Table of Contents
 
 1.  Introduction
 
-There are several protocols for sending a document from one server to
-another. For instance, the sender may use an email client to connect
-to her server via the [IMAP] protocol, or use a web browser to connect
+When we say a sender 'shares' a document with some recipient(s),
+we primarily mean the sender makes that document available for the
+recipient(s) to consume, but not to others. Additionally, the sender
 
 
 de Jong                                                         [Page 2]
@@ -105,6 +105,15 @@ de Jong                                                         [Page 2]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+may send updated versions of the document after it was sent, and
+recipient(s) may reply with comments and propose changes to the
+document. The sender may decide to make such updates accessible to all
+original recipient(s) or not. When we say 'document', we mean a string
+of data which encodes some human-readable content in some data format.
+
+There are several protocols for sending a document from one server to
+another. For instance, the sender may use an email client to connect
+to her server via the [IMAP] protocol, or use a web browser to connect
 to her server via the [HTTPS] protocol ("webmail"), to instruct her
 server to forward an existing mail message from her server to one or
 more recipients, identified by their email addresses, after which the
@@ -140,6 +149,13 @@ There is no consensus yet on how to share documents privately over the
 internet, in such a way that recipient(s) are notified, but other people
 cannot retrieve the document, nor discover its existence.
 
+
+de Jong                                                         [Page 3]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+
 This draft does not propose one universal solution, but rather lists
 what puzzle pieces we are aware of, and what options may exist to put
 them together. In general, we are interested in the case where there may
@@ -148,13 +164,6 @@ more than one server (but not to the sender's server). But for clarity
 of discussion we will at this point look at a simpler case.
 
 We introduce Alice, who wants to share one document with Bob. Alice
-
-
-de Jong                                                         [Page 3]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 and Bob both have a personal server, which they access to over a
 web interface, that's to say, using a web browser that connects to
 their server over HTTPS. This interface displays information in a
@@ -175,29 +184,20 @@ depending on the capabilities of her (the sender's) server and Bob's
 
 2. Initiate sharing process
 
-* Alice picks a resource (web interface)
-* Alice clicks or gestures 'Share' in some way (possibly specify
-MicroPub endpoint, see also SoliD : https://github.com/linkeddata/SoLiD,
-quite similar to Micropub - but doesn't seem to support notification)
+To initiate the process of sharing a document from her server with
+Bob, Alice connects to her server with her web browser, providing some
+credentials (how she provides these is out of scope). She navigates the
+web interface of her server to select the document she wants to send to
+Bob.
+
+Alice clicks or gestures her 'Share' intent for the document in some
+way. The software application may have the capacity to act as a
+[MICROPUB] client, in which case at this point Alice would also specify
+the MicroPub endpoint to use.
 
 3. Recipient selection
 
-  * Her server might have an addressbook function, but that moves
-discovery problem to how she adds Bob to it in the first place. If Bob's
-not in there, she adds him just before selecting him.
-  * What does she know about how to describe Bob?
-    * friend of a friend
-    * Full name, location, occupation, hobbies -> web search -> Bob's
-homepage
-    * email address
-    * phone number
-    * ...
-    * Alice needs to know the Bob's server address
-  * Roles (admin, contributor, read-only, etc.) may be used to invite
-different interactions with different recipients
-    
-4. Recipient notification
- 
+Alice may have an addressbook on her server where she stores the
 
 
 de Jong                                                         [Page 4]
@@ -205,6 +205,36 @@ de Jong                                                         [Page 4]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+identities and contact methods of people she knows. She may be able
+to select Bob from this addressbook using the same or another web
+interface. She may also have such an addressbook on her own client
+device, or for instance on paper. Or maybe she knows an identifier for
+Bob by heart. If Bob or someone else has published some of his contact
+information, she may use a search application to find out identifiers
+by which Bob can be contacted, which she can then use directly, and
+possibly also store in her addressbook for future reference.
+
+It is also possible that she remembers or looks up a web page describing
+how to contact Bob, and discovers a usable identifier this way. An
+addressbook application may also be able to infer identifiers for
+various contact methods from such a web page programmatically.
+
+Other methods for discovering a contact method and identifier for Bob
+may rely on Alice knowing that Bob is a friend of Cindy, and she may
+search a list of friends of Cindy named Bob, to confirm whether the
+intended Bob is listed there. Similarly, she may remember that Bob is
+for instance a member of her rowing club, and search a directory of
+members of that rowing club to locate contact information about him.
+Again, such an inference may be helped by a software application which
+is capable of infering such friend-of-a-friend relationships.
+
+Finally, Alice may have a contact identifier for Bob which she knows
+will allow her to communicate with him, but not to share the document
+with him. She may for instance contact Bob by telephone or irc to ask
+him for his email address.
+    
+4. Recipient notification
+ 
  * Depends on contact method Alice knows for Bob (email, phone number,
 WebMention, irc, Twitter, WhatsApp, ...)
   * Notification should contain:
@@ -218,6 +248,13 @@ additions, ...)
 existing services that use - http://www.oembed.com/#section7 in response
 to recipient notifications?
     It could be really interesting, because in this case, the orginial
+
+
+de Jong                                                         [Page 5]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 server with the original content is taking care of publishing this piece
 of information.
     In our case of Bob sharing a picture with Alice, when Alice loads
@@ -230,8 +267,14 @@ interface also.
 it is gone. Except if Alice develops a piece of software to keep a copy,
 but this is an other debate.
  
+  * Roles (admin, contributor, read-only, etc.) may be used to invite
+different interactions with different recipients
+
 5. Human access
- 
+
+, see also SoliD : https://github.com/linkeddata/SoLiD,
+quite similar to Micropub - but doesn't seem to support notification)
+
  * Bob should be able to open the URL with a browser to view and/or
 download the resource.
  * If a secret was included in the notification, he may be required to
@@ -248,13 +291,6 @@ Twitter handle, then these two option could be at the top; if Alice
 has Bob's homepage, her server could already scan if Bob's homepage
 and /.well-known resources announce support for IndieAuth, IndieCert,
 OpenID, and/or Persona). It also depends on the Alice's server
-
-
-de Jong                                                         [Page 5]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 capabilities.
  * Alice's server may also automatically update the addressbook entry,
 based on what it discovered.
@@ -262,6 +298,13 @@ based on what it discovered.
 "please share only within our Petanque team", or "Please destroy after
 reading, or after 30 days". How Bob enforces those rules and how Alice
 can trust him is probably not relevant here.
+
+
+de Jong                                                         [Page 6]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
  
 6. Machine access 
  
@@ -298,13 +341,6 @@ between Alice and Bob servers .
    * It is up to Alice's server to either display Bob's comments and
 changes automatically, or for instance only display additions and not
 deletions. This should be signalled in the notification (see above), so
-
-
-de Jong                                                         [Page 6]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 that Bob knows whether he has write access or not.
    
   * Alice's server may automatically apply Bob's changes (depending
@@ -312,6 +348,13 @@ possibly on the type of change) without Alice's intervention. If there
 were multiple recipients, then maybe some recipients have permission to
 edit, and others only to view.
   
+
+
+de Jong                                                         [Page 7]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
  This means that Alice can keep modifying the resource after sending it,
 and Bob can also send modifications back to Alice. Bob's server will
 display Alice's changes automatically, possibly with a way to browse
@@ -348,13 +391,6 @@ recipients before modifying anything.
  
 9. Real-time collaboration
  
-
-
-de Jong                                                         [Page 7]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 * A WebRTC session may be negotiated if Bob and Alice are both online.
 For instance, Alice might send Bob a "phone call", Bob's server
 sends a push notification to Bob's phone, and when Bob picks up the
@@ -362,6 +398,13 @@ phone, his server responds to Alice's "phone call" with a WebRTC
 SessionDescriptionProtocol object.
  
 10. Listing and revoking access
+
+
+de Jong                                                         [Page 8]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
  
  * If Alice wants to share several documents with several people, she
 should be able to maintain a list to exaclty know who has access to what
@@ -398,13 +441,6 @@ post or Activity, a comment, a git pull request, etc., will only work in
 the desired way if both servers use the same vocabulary.
  * Our recommendation would be for the receiving server to support many
 data format hint languages, as well as many vocabularies, as well as
-
-
-de Jong                                                         [Page 8]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 many data formats and follow standards and w3c recommandations as much
 as possible
 *  Data domains are also important for automatic conflict resolution.
@@ -412,6 +448,13 @@ as possible
 12. Security Considerations
 
 13. IANA Considerations
+
+
+de Jong                                                         [Page 9]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 
     This document registers the 'remotestorage' link relation, as well
     as the following WebFinger properties:
@@ -449,19 +492,19 @@ as possible
         "Section 4.2: Implicit Grant", in: Hardt, D. (ed), "The OAuth
         2.0 Authorization Framework", RFC6749, October 2012.
 
-
-de Jong                                                         [Page 9]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
-
 15.2. Informative References
 
     [HTTPS]
         Rescorla, E., "HTTP Over TLS", RFC2818, May 2000.
 
     [HTTP]
+
+
+de Jong                                                        [Page 10]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
         Fielding et al., "Hypertext Transfer Protocol (HTTP/1.1):
         Semantics and Content", RFC7231, June 2014.
 
@@ -498,19 +541,19 @@ Internet-Draft           Decentralized Sharing               May 2015
         https://wiki.mozilla.org/WebAPI/DataStore#Manifest
 
     [KERBEROS]
-
-
-de Jong                                                        [Page 10]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
         C. Neuman et al., "The Kerberos Network Authentication Service
         (V5)", RFC4120, July 2005.
 
     [BEARER]
         M. Jones, D. Hardt, "The OAuth 2.0 Authorization Framework:
         Bearer Token Usage", RFC6750, October 2012.
+
+
+
+de Jong                                                        [Page 11]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
 
     [AUTHORING]
         "Using remoteStorage for web authoring", reSite wiki, retrieved
@@ -550,4 +593,11 @@ Internet-Draft           Decentralized Sharing               May 2015
 
 
 
-de Jong                                                        [Page 11]
+
+
+
+
+
+
+
+de Jong                                                        [Page 12]
