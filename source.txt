@@ -555,7 +555,7 @@ as possible
 16. Authors' addresses
 
     Michiel B. de Jong
-    (independent
+    (independent)
 
     Email: michiel@michielbdejong.com
 
