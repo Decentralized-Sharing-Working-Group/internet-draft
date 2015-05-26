@@ -74,23 +74,21 @@ Table of Contents
    3. Recipient selection............................................5
    4. Recipient notification.........................................5
    5. Human access...................................................7
-   6. Machine access ................................................*
-   7. Publishing edits...............................................*
-   8. Comments and write access......................................*
-   9. Real-time collaboration........................................*
-   10. Listing and revoking access...................................*
-   11. Data domains..................................................*
-   11.1 Discovering the semantics of a document......................*
-   11.2 Programmatic conflict resolution.............................*
-   12. Security Considerations.......................................*
-   13. IANA Considerations...........................................*
-   14. Acknowledgements..............................................*
-   15. References....................................................*
-   15.1. Normative References........................................*
-   15.2. Informative References......................................*
-   16. Authors' addresses............................................*
-
-
+   6. Machine access ................................................8
+   7. Publishing edits...............................................9
+   8. Comments and write access.....................................10
+   9. Real-time collaboration.......................................12
+   10. Listing and revoking access..................................12
+   11. Data domains.................................................13
+   11.1 Discovering the semantics of a document.....................13
+   11.2 Programmatic conflict resolution............................15
+   12. Security Considerations......................................16
+   13. IANA Considerations..........................................16
+   14. Acknowledgements.............................................16
+   15. References...................................................16
+   15.1. Normative References.......................................16
+   15.2. Informative References.....................................17
+   16. Authors' addresses...........................................18
 
 
 1.  Introduction
@@ -678,7 +676,8 @@ or not.
 
 13. IANA Considerations
 
-This document does not propose any new entries in any IANA naming registry.
+This document does not propose any new entries in any IANA naming
+registry.
 
 14. Acknowledgements
 
