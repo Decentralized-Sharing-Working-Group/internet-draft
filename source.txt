@@ -156,10 +156,10 @@ instance their web browser's point-and-click gestures.
 
 We assume there are multiple documents on Alice's server, and the web
 interface visualizes these for her. We make no assumptions at this point
-about the content of these documents; they can text, hypertext, sound,
-image, or other media files, or contain some machine-readable data such
+about the content of these documents; they can be text, hypertext, sound,
+image, or other media files. They can contain some machine-readable data such
 as the contact information of a person, the details of a calendar event,
-or a move in a chess game, etcetera.
+a move in a chess game, etcetera.
 
 Alice decides to share one file with only Bob, and keep it invisible
 for the others. What are the steps through which she can achieve this,
@@ -650,7 +650,7 @@ as possible
 16. Authors' addresses
 
     Michiel B. de Jong
-    (independent
+    (independent)
 
     Email: michiel@michielbdejong.com
 
