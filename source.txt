@@ -661,6 +661,21 @@ proposed change to apply, and which one to discard.
 
 12. Security Considerations
 
+When Alice's application sends a notification about a document that was
+shared with a limited audience, it SHOULD NOT send this notification in
+such a way that Bob's application, or Bob himself, could interpret this
+notification as describing a publically published document.
+
+The access page through which Bob may view the document which Alice
+shared with him, SHOULD clearly display instructions for how Bob should
+treat the document's content, including if, how, and for how long, he
+may store a copy of the document on another medium, and if, how, and
+with whom, he may discuss or share the contents of the document.
+
+Furthermore, Alice's application SHOULD make it clear to Alice that she
+depends on Bob's cooperation and decision to follow these instructions
+or not.
+
 13. IANA Considerations
 
 This document does not propose any new entries in any IANA naming registry.
