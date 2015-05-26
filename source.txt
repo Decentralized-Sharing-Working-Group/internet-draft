@@ -80,6 +80,8 @@ Table of Contents
    9. Real-time collaboration........................................*
    10. Listing and revoking access...................................*
    11. Data domains..................................................*
+   11.1 Discovering the semantics of a document......................*
+   11.2 Programmatic conflict resolution.............................*
    12. Security Considerations.......................................*
    13. IANA Considerations...........................................*
    14. Acknowledgements..............................................*
@@ -549,49 +551,127 @@ Alice into her master version of the document.
 
 
 11. Data domains
+
+11.1 Discovering the semantics of a document
  
- * If Bob accesses the resource with his browser, the presentation
+If Bob accesses the access page with his browser, the presentation
 can be tailored to how Bob as a human wants to consume the data. For
 instance, multiple download/export formats may be offered using a web
 view in a natural language Bob understands.
- * When Bob's server retrieves the resource, it may not be able to
+
+When Bob's application retrieves the document, it may not be able to
 discover its semantics, and therefore may not be able to add it to
-Bob's server in a way that makes sense. For instance, if Bob's server
-internally uses html documents, but Alice's server uses markdown
-documents, a conversion may be necessary.
- * Data format hints can be provided using Content-Type headers, or some
-linked data notation (microformats, json-ld, rdf, turtle, rdfa). This
-can then point to a unique data type in some vocabulary.
- * But apart from notation format, there are many vocabularies (indeed,
-see : https://www.w3.org/Social/track/issues/15 ). Sending for instance
-a photo, a text document, a contact (description of a person), an blog
-post or Activity, a comment, a git pull request, etc., will only work in
-the desired way if both servers use the same vocabulary.
- * Our recommendation would be for the receiving server to support many
-data format hint languages, as well as many vocabularies, as well as
-many data formats and follow standards and w3c recommandations as much
-as possible
-*  Data domains are also important for automatic conflict resolution.
+existing document collections on Bob's server in a way that allows
+Bob to use the document in the way it was intended by Alice. For
+instance, if Bob's application stores hypertext documents as [HTML]
+documents, but Alice's server uses the [MARKDOWN] format for all
+hypertext documents, a conversion process may be necessary to translate
+documents shared by Alice to the format for which Bob's application can
+offer domain-specific features. His application may display the markdown
+document as just a string of data, or as if it were a plain text
+document, and not allow Bob to follow the hyperlinks from there.
+
+Data format hints can be provided using Content-Type headers, or some
+linked data notation [MICROFORMATS, JSON-LD, RDF, TURTLE, RDFa]. This
+can then point to a unique entry in some vocabulary of data formats.
+
+Even if Bob's application can programmatically discover the data format
+in which Alice intended the documented to be interpreted semantically,
+there are many vocabularies [VOCABULARIES
+https://www.w3.org/Social/track/issues/15]. To complicate things
+further, many data formats exist for the most common data domains.
+
+For instance, consider the case where Alice wants to share a description
+of a person's contact details with Bob. Let's assume Alice's application
+sends this document in the Turtle format, and Bob's application
+recognizes the Content-Type header, and is able to machine-read Turtle
+documents.
+
+Further assume that Alice's application uses the [DBPEDIA] vocabulary
+to link to the "person" concept. If Bob's application uses the
+[MICROFORMATS] vocabulary to interpret documents, it may be able to
+discover the equivalence between the "person" concept as defined by
+DBPedia and the "person" concept as defined by MicroFormats, through
+[SAME-AS-LINKS].
+
+But even then, in order for Bob's application to give Bob the option to
+merge the information from the Turtle+DBPedia document into an existing
+Turtle+MicroFormats document representing the same person, the two
+vocabularies are likely to differ in which attributes they are able to
+express, and same-as links may not exist for all individual attributes.
+
+Also, inference rules will sometimes be needed to for instance compose a
+full telephone number if parts of it are represented as an international
+access code or an area code, or to compose a full name from a family
+name and a given name or list of first name initials.
+
+This means that communicating the intended semantic interpretation of
+a document in a machine-readable way involves three hurdles: first,
+the hinting mechanism which links to a URI for the data format, then
+resolving the equivalence between the many URIs which exist for the same
+concept, but in different vocabularies, and finally converting Alice's
+data format itself to a data format that allows Bob's application to
+offer functionality beyond simply displaying the data from the document.
+
+Sending for instance a photo, a text document, a contact (description of
+a person), a blog post or Activity [ACTIVITY-STREAMS], a comment, a git
+pull request, etc., will only work in rare cases where Bob's application
+is able to handle the hinting mechanism, as well as the data format, as
+well as the semantic vocabulary used.
+
+Our recommendation would be for the receiving application to support
+many data format hint mechanisms, as well as many data formats, as well
+as many vocabularies, giving preference to those often used in practice,
+and to those which have been accepted as W3C recommendations.
+
+11.2 Programmatic conflict resolution
+
+When Alice's application receives multiple proposed changes to one
+single version of the document, and Alice accepts both changes, then
+this constitutes a versioning conflict. After applying the first change,
+it is no longer possible to apply more changes directly, since they
+propose to change a version of the document which is no longer the
+current version. In this situation, Alice's application MAY visualize
+this conflict to Alice, so that she can decide how the conflicting
+change can be transformed into a change to be applied to the current
+version.
+
+But in some cases, Alice's application can also apply inference rules to
+determine this transformation programmatically. To achieve this, Alice's
+application needs to have different inference rules that are specific
+to the data format, as well as to the concept about which the document
+expresses information.
+
+For instance, for a document in Turtle format, representing contact
+information for a person, transforming the addition of a mobile phone
+number past a change in work place could be safe to do programmatically,
+without consulting Alice explicitly. The transformation rule would
+depend on the data format, and be specific to the Turtle data format.
+Attempting to apply transformation rules that work for text files to for
+instance raw image data will almost certainly lead to undesired results.
+
+There will also remain cases where such programmatic conflict resolution
+cannot be achieved at all without leading to incorrect results. For
+instance, when multiple proposed changes propose to change the same
+data field within a Turtle document, they contradict each other even at
+the semantic level (not just at the syntactical level), and Alice and
+Bob will likely want to communicate more with each other to agree which
+proposed change to apply, and which one to discard.
+
 
 12. Security Considerations
 
 13. IANA Considerations
 
-    This document registers the 'remotestorage' link relation, as well
-    as the following WebFinger properties:
-      * "http://remotestorage.io/spec/version"
-      * "http://tools.ietf.org/html/rfc6749#section-4.2"
-      * "http://tools.ietf.org/html/rfc6750#section-2.3"
-      * "http://tools.ietf.org/html/rfc7233"
-      * "http://remotestorage.io/spec/web-authoring"
+This document does not propose any new entries in any IANA naming registry.
 
 14. Acknowledgements
 
-    The authors would like to thank everybody who contributed to the
-    development of this protocol, including the IndieWeb and Social
-    Web communities, the Decentralized Sharing Working Group, the
-    participants in OuiShareLabsCamp 2015, as well as Alice and Bob
-    themselves.
+The authors would like to thank everybody who contributed to the
+development of the ideas discussed in this document, including the
+IndieWeb and Social Web communities, the Decentralized Sharing Working
+Group, the participants in OuiShareLabsCamp 2015, as well as Alice and
+Bob themselves.
 
 15. References
 
