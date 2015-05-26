@@ -490,11 +490,27 @@ to make any changes to the current document version.
  
 9. Real-time collaboration
  
-* A WebRTC session may be negotiated if Bob and Alice are both online.
-For instance, Alice might send Bob a "phone call", Bob's server
-sends a push notification to Bob's phone, and when Bob picks up the
-phone, his server responds to Alice's "phone call" with a WebRTC
-SessionDescriptionProtocol object.
+If Alice and Bob are connected to the internet simultaneously, a
+real-time conversation may be initated, for instance using [WEBRTC].
+For instance, Alice might share a document with Bob which represents
+a "phone call", after which an application on Bob's server may send a
+[PUSH-NOTIFICATION] to Bob's (mobile) device, and when Bob gestures to
+"pick up the phone", his server could react to Alice's "phone call" with
+a document representing a WebRTC SessionDescriptionProtocol object. This
+would allow rapid exchange of information back-and-forth between Alice
+and Bob, for the duration of the real-time collaboration session.
+
+Also, if Bob uses the access page to propose changes to the document,
+and Alice is also connected to the internet at that time, the
+interchange between Alice and Bob may be communicated between Alice's
+server and her client device via [WEBSOCKETS]. This scenario could
+be also be generalized to the situation where more than two people
+are viewing, and possibly editing, the same document. To reduce the
+information traffic that would need to pass through Alice's server,
+these WebSockets could be used to establish WebRTC data channels between
+each device, provided these devices support WebRTC, and that changes are
+still submitted and ultimately committed to the dominant current version
+of the document, on Alice's server.
  
 10. Listing and revoking access
  
