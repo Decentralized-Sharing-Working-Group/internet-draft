@@ -514,19 +514,39 @@ of the document, on Alice's server.
  
 10. Listing and revoking access
  
- * If Alice wants to share several documents with several people, she
-should be able to maintain a list to exaclty know who has access to what
-under which conditions.
- * The sharing history could show both what she shared in the past with
-whom (and whether or not she invited them to send modifications back),
-and whether the recipient has actually access or retrieved the resource.
-It could also give Alice the option to revoke access
- * Alice but also Bob should be able to stop their servers automatically
-applying edits whenever they want, After that, proposed edits from the
-other party may still be displayed in a sort of moderation queue, or the
-server could directy communicate failure/rejection of the edit/comment.
- * They should also be able to completely revoke the access and thus
-cancelling the sharing
+If Alice wants to share several documents with several people, a
+software application on her server SHOULD allow her to view a list of
+who has access to which document.
+
+This list view SHOULD also display whether she configured the
+application to programmatically apply any comments and/or proposed
+changes from these people, and/or whether these people have been sent
+an invitation to comment or propose changes, whether as part as the
+notification they were sent, or through the human-readable access page.
+
+It MAY also display whether the recipient has already accessed or
+retrieved the document or not. It MAY also give Alice the option to
+revoke access entirely, taking into account that the recipient may
+already have made a private copy of the document. It MAY also give
+Alice the option to change, for each recipient, whether their comments
+and/or proposed changes will be displayed and applied programmatically,
+acknowledged and queued for Alice to review, or rejected altogether.
+ 
+If Bob uses an application on his own server to display the document
+shared by Alice, and this application is capable of programmatically
+applies all changes Alice sends as updates after sharing the initial
+version, then Bob SHOULD EITHER have a way to instruct that application
+to stop or start programmatically applying all changes sent by Alice,
+OR provide a way for Bob to view all versions Alice sent. It MAY
+also provide a way to visualize the differences between the versions
+published by Alice, and changes proposed by Bob.
+
+If Alices publishes updates which correspond to changes proposed by
+Bob or other recipients, then these updates SHOULD refer to the URL
+where these people originally proposed such changes. That way, Bob's
+application can display which proposed changes have been accepted by
+Alice into her master version of the document.
+
 
 11. Data domains
  
