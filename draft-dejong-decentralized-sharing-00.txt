@@ -918,10 +918,19 @@ Recommendation, http://www.w3.org/TR/2014/REC-json-ld-20140116/, January
 2014.
 
     [RDF]
+        G. Schreiber (ed.), Y. Raimond (ed.), "RDF 1.1 Primer",
+http://www.w3.org/TR/rdf11-primer/, June 2014.
+
     [TURTLE]
+        E. Prud'hommeaux (ed.), Gavin Carothers (ed.), D. Beckett,
+T. Berners-Lee, "RDF 1.1 Turtle: Terse RDF Triple Language",
+http://www.w3.org/TR/turtle/, February 2014.
+
     [RDFA]
-    [SAME-AS-LINKS]
-    [ACTIVITY-STREAMS]
+        B. Adida, M. Birbeck, S. McCarron, I. Hermans, "RDFa Core 1.1
+- Third Edition: Syntax and processing rules for embedding RDF through
+attributes", http://www.w3.org/TR/rdfa-core/, March 2015.
+
     [IRI]
         Duerst, M., "Internationalized Resource Identifiers (IRIs)",
         RFC 3987, January 2005.
@@ -938,6 +947,17 @@ Recommendation, http://www.w3.org/TR/2014/REC-json-ld-20140116/, January
 15.2. Informative References
 
     [MICROPUB]
+        A.Parecki (ed.), "MicroPub",
+
+
+de Jong                                                        [Page 19]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338, May
+2015.
+
     [WEBMENTION]
     [PINGBACK]
     [REFBACK]
@@ -948,27 +968,42 @@ Recommendation, http://www.w3.org/TR/2014/REC-json-ld-20140116/, January
     [PERSONA]
     [WEBID-TLS]
     [WEBID-RSA] https://github.com/linkeddata/SoLiD#webid-rsa
-
-
-de Jong                                                        [Page 19]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
     [REL-ME]
     [UNATTENDED-INDIEAUTH]
     [SOLID] HTTPS://GITHUB.COM/LINKEDDATA/sOlId
     [COUCHDB]
     [PUBSUBHUBBUB]
+        B. Fitzpatrick, B. Slatkin, M. Atkins, J.
+Genestoux, "PubSubHubbub Core 0.4 -- Working Draft",
+http://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.4.html,
+February 2014.
+
     [MICROPUB-UPDATES]
+        A.Parecki (ed.), "MicroPub: Update",
 http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
+, May 2015.
+
     [OEMBED] http://www.oembed.com/#section7
     [GIT]
     [LINK-SPAM]
     [READ-WRITE-WEB]
     [MARKDOWN]
     [VOCABULARIES] https://www.w3.org/Social/track/issues/15
+
     [DBPEDIA]
+
+    [SAME-AS-LINKS]
+        See http://sameas.org/
+
+    [ACTIVITY-STREAMS]
+        See http://activitystrea.ms/specs/.
+
+
+
+de Jong                                                        [Page 20]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
 
 
 16. Authors' addresses
@@ -1000,4 +1035,19 @@ http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
 
 
 
-de Jong                                                        [Page 20]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+de Jong                                                        [Page 21]
