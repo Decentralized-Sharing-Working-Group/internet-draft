@@ -271,7 +271,7 @@ or the web application may allow Alice to review them before they are
 applied and displayed.
 
 One protocol for notifying recipients is [WEBMENTION]. This is a
-recent successor of the older [PINGBACK], [REFBACK], and [TRACKBACK]
+recent successor of the older [PINGBACK] and [TRACKBACK]
 protocols. WebMention is primarily intended for sending comments
 on existing documents, and not for initially sharing a document in
 the first place, nor for proposing edits. But by "commenting" on a
@@ -826,44 +826,76 @@ http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338, May
 2015.
 
     [WEBMENTION]
+        IndieWebCamp Wiki, "WebMention", http://indiewebcamp.com/wiki/index.php?title=Webmention&oldid=19485, May 2015.
+
     [PINGBACK]
-    [REFBACK]
+        S. Langridge, I. Hickson, "Pingback 1.0", http://www.hixie.ch/specs/pingback/pingback, 2002.
+
     [TRACKBACK]
+        See: https://movabletype.org/documentation/trackback/specification.html
+
     [MICROFORMATS]
+        See: http://microformats.org/
+
     [INDIEAUTH]
+        See: https://indieauth.com/
+
     [INDIECERT]
+        See: https://indiecert.net/
+
     [PERSONA]
+        See: https://developer.mozilla.org/en-US/Persona.
+
     [WEBID-TLS]
-    [WEBID-RSA] https://github.com/linkeddata/SoLiD#webid-rsa
+        See: https://github.com/linkeddata/SoLiD#webid-tls
+
+    [WEBID-RSA]
+        See: https://github.com/linkeddata/SoLiD#webid-rsa
+
     [REL-ME]
+        See: http://microformats.org/wiki/index.php?title=rel-me&oldid=64351
+
     [UNATTENDED-INDIEAUTH]
-    [SOLID] HTTPS://GITHUB.COM/LINKEDDATA/sOlId
+        See: http://indiewebcamp.com/wiki/index.php?title=indieweb-messaging&oldid=19179#Protocol_Flow
+
+    [SOLID]
+        See: https://github.com/linkeddata/SoLiD
+
     [COUCHDB]
+        See: http://docs.couchdb.org/en/1.6.1/intro/api.html
+
     [PUBSUBHUBBUB]
         B. Fitzpatrick, B. Slatkin, M. Atkins, J.
-Genestoux, "PubSubHubbub Core 0.4 -- Working Draft",
-http://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.4.html,
-February 2014.
+        Genestoux, "PubSubHubbub Core 0.4 -- Working Draft",
+        http://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.4.html,
+        February 2014.
 
     [MICROPUB-UPDATES]
         A.Parecki (ed.), "MicroPub: Update",
-http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
-, May 2015.
+        http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update,
+        May 2015.
 
-    [OEMBED] http://www.oembed.com/#section7
+    [OEMBED]
+        See: http://www.oembed.com/#section7
+
     [GIT]
+
     [LINK-SPAM]
+
     [READ-WRITE-WEB]
+
     [MARKDOWN]
-    [VOCABULARIES] https://www.w3.org/Social/track/issues/15
+
+    [VOCABULARIES]
+        See: https://www.w3.org/Social/track/issues/15
 
     [DBPEDIA]
 
     [SAME-AS-LINKS]
-        See http://sameas.org/
+        See: http://sameas.org/
 
     [ACTIVITY-STREAMS]
-        See http://activitystrea.ms/specs/.
+        See: http://activitystrea.ms/specs/
 
 
 16. Authors' addresses
