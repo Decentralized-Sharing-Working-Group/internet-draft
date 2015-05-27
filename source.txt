@@ -69,29 +69,44 @@ Copyright Notice
 
 Table of Contents
 
-   1. Introduction...................................................3
-   2. Initiate sharing process.......................................4
-   3. Recipient selection............................................5
-   4. Recipient notification.........................................5
-   5. Human access...................................................7
-   6. Machine access ................................................8
-   7. Publishing edits...............................................9
-   8. Comments and write access.....................................10
-   9. Real-time collaboration.......................................12
-   10. Listing and revoking access..................................12
-   11. Data domains.................................................13
-   11.1 Discovering the semantics of a document.....................13
-   11.2 Programmatic conflict resolution............................15
-   12. Security Considerations......................................16
-   13. IANA Considerations..........................................16
-   14. Acknowledgements.............................................16
-   15. References...................................................16
-   15.1. Normative References.......................................16
-   15.2. Informative References.....................................17
-   16. Authors' addresses...........................................18
+   1. Terminology....................................................3
+   2. Introduction...................................................3
+   3. Initiate sharing process.......................................4
+   4. Recipient selection............................................5
+   5. Recipient notification.........................................5
+   6. Human access...................................................7
+   7. Machine access ................................................8
+   8. Publishing edits...............................................9
+   9. Comments and write access.....................................10
+   10. Real-time collaboration......................................12
+   11. Listing and revoking access..................................12
+   12. Data domains.................................................13
+   12.1 Discovering the semantics of a document.....................13
+   12.2 Programmatic conflict resolution............................15
+   13. Security Considerations......................................16
+   14. IANA Considerations..........................................16
+   15. Acknowledgements.............................................16
+   16. References...................................................16
+   16.1. Normative References.......................................16
+   16.2. Informative References.....................................17
+   17. Authors' addresses...........................................18
 
 
-1.  Introduction
+1. Terminology
+
+    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+    document are to be interpreted as described in RFC 2119 [WORDS].
+
+    "SHOULD" and "SHOULD NOT" are appropriate when valid exceptions to a
+    general requirement are known to exist or appear to exist, and it is
+    infeasible or impractical to enumerate all of them.  However, they
+    should not be interpreted as permitting implementors to fail to
+    implement the general requirement when such failure would result in
+    interoperability failure.
+
+
+2.  Introduction
 
 When we say a sender 'shares' a document with some recipient(s),
 we primarily mean the sender makes that document available for the
@@ -147,6 +162,16 @@ be more than one recipient, and where each recipient may have access to
 more than one server (but not to the sender's server). But for clarity
 of discussion we will at this point look at a simpler case.
 
+Many of the suggestions given in this Internet-Draft have not yet been
+standardized, and many of them have not yet proven their merit in
+large-scale deployments. In most cases, we try to list all initiatives
+we are aware of to implement a certain requirement or step of the
+process, and references to these proposed approaches are often only
+informative references to specifications which have been published
+independently by their authors, on their personal websites, on forums,
+or on wikis. We try to refer to a specific revision of such publications
+wherever possible.
+
 We introduce Alice, who wants to share one document with Bob. Alice
 and Bob both have a personal server, which they access to over a
 web interface, that's to say, using a web browser that connects to
@@ -166,7 +191,8 @@ for the others. What are the steps through which she can achieve this,
 depending on the capabilities of her (the sender's) server and Bob's
 (the recipient's) server?
 
-2. Initiate sharing process
+
+3. Initiate sharing process
 
 To initiate the process of sharing a document from her server with
 Bob, Alice connects to her server with her web browser, providing some
@@ -179,7 +205,8 @@ way. The software application may have the capacity to act as a
 [MICROPUB] client, in which case at this point Alice would also specify
 the MicroPub endpoint to use.
 
-3. Recipient selection
+
+4. Recipient selection
 
 Alice may have an addressbook on her server where she stores the
 identities and contact methods of people she knows. She may be able
@@ -209,8 +236,9 @@ Finally, Alice may have a contact identifier for Bob which she knows
 will allow her to communicate with him, but not to share the document
 with him. She may for instance contact Bob by telephone or irc to ask
 him for his email address.
-    
-4. Recipient notification
+
+
+5. Recipient notification
 
 Depending on the contact methods for which Alice has discovered Bob's
 identifier in the recipient selection step, she may complete the
@@ -279,7 +307,7 @@ server not to display such a notification publically, as this would
 lead to accidentally publishing a privately shared document publically.
 Alternatively, the authentication step may be delayed until Bob, or
 software running on Bob's server, actually accesses the document.
-    
+
 The software that Alice uses to send the notification to Bob may use
 a concept of roles, which summarize which types of feedback Bob will
 be invited to reply with. For instance, she may select a 'contributor'
@@ -288,7 +316,8 @@ an 'admin' role inviting Bob to propose any kind of change to the
 document, including deletions. We consider such roles mainly a matter of
 interaction between Alice and the software she uses.
 
-5. Human access
+
+6. Human access
 
 Whichever the way of sending the notification, it SHOULD contain a URL
 for Bob to open with a browser to view and/or download the document from
@@ -331,9 +360,10 @@ The access page MAY also give human-readable instructions to Bob, like
 "please don't share this document publically", "please don't share
 outside our Petanque team", or "please discard after reading, or after
 30 days". Whether or not Bob follows such instructions is out of scope.
- 
-6. Machine access 
- 
+
+
+7. Machine access
+
 Some software applications are able to retrieve a document with
 [UNATTENDED-INDIEAUTH] in reaction to a WebMention notification.
 Although the [SoliD](https://github.com/linkeddata/SoLiD) platform does
@@ -350,9 +380,10 @@ If an application or human attempts to access the document without
 sufficient credentials, a 410 http response code can be sent, together
 with a WWW-Authenticate header hinting to a proposed authentication
 method.
- 
-7. Publishing edits
- 
+
+
+8. Publishing edits
+
 After Alice has shared a document with Bob, if she did not send it
 directly as for instance an email attachment, she may still edit its
 contents between the time of sending the notification, and the first
@@ -401,28 +432,29 @@ an [OEMBED](http://www.oembed.com/#section7) data snippet, which Bob
 embeds in another document by reference. This also means Bob will no
 longer to access the document if Alice revokes his access to it, or
 stops publishing the document at its URL.
- 
-8. Comments and write access
- 
+
+
+9. Comments and write access
+
 Regardless of whether or not Alice has invited him to do so in the
 notification or in the access page, Bob may send reactions, like
 comments, answers, additions, or proposed changes to Alice. He may send
 Alice a notification for each reaction, a reference to a change feed,
 for Alice's server application to poll.
- 
+
 It is up to Alice's application to either display all of Bob's comments
 and changes immediately, or for instance to only display additions and
 not deletions. This MAY be signalled in the notification and/or in the
 access page (see above), so that Bob knows whether he effectively has
 "write access" or "read-only access" to the document or not.
-   
+
 Alice's server may immediately apply Bob's changes (depending possibly
 on the type of change) without Alice's intervention. If there were
 multiple recipients, then maybe some recipients have permission to edit
 (i.e., changes they propose will always be applied), and others only to
 view (i.e., when they send a proposed change, it is not applied, or is
 only applied after Alice reviewed and approved it.
-  
+
 This means that Alice can keep modifying the resource after sending it,
 and Bob can also send modifications back to Alice. If Bob's application
 retrieved a copy of the document and becomes aware of changes to it made
@@ -487,9 +519,10 @@ pattern: conflicts are tolerated, but the versions should eventually
 converge and reach consistency. A pessimitic lock pattern would require
 notifying all other actors with access to the document before starting
 to make any changes to the current document version.
- 
-9. Real-time collaboration
- 
+
+
+10. Real-time collaboration
+
 If Alice and Bob are connected to the internet simultaneously, a
 real-time conversation may be initated, for instance using [WEBRTC].
 For instance, Alice might share a document with Bob which represents
@@ -511,9 +544,10 @@ these WebSockets could be used to establish WebRTC data channels between
 each device, provided these devices support WebRTC, and that changes are
 still submitted and ultimately committed to the dominant current version
 of the document, on Alice's server.
- 
-10. Listing and revoking access
- 
+
+
+11. Listing and revoking access
+
 If Alice wants to share several documents with several people, a
 software application on her server SHOULD allow her to view a list of
 who has access to which document.
@@ -531,7 +565,7 @@ already have made a private copy of the document. It MAY also give
 Alice the option to change, for each recipient, whether their comments
 and/or proposed changes will be displayed and applied programmatically,
 acknowledged and queued for Alice to review, or rejected altogether.
- 
+
 If Bob uses an application on his own server to display the document
 shared by Alice, and this application is capable of programmatically
 applies all changes Alice sends as updates after sharing the initial
@@ -548,10 +582,10 @@ application can display which proposed changes have been accepted by
 Alice into her master version of the document.
 
 
-11. Data domains
+12. Data domains
 
-11.1 Discovering the semantics of a document
- 
+12.1 Discovering the semantics of a document
+
 If Bob accesses the access page with his browser, the presentation
 can be tailored to how Bob as a human wants to consume the data. For
 instance, multiple download/export formats may be offered using a web
@@ -622,7 +656,8 @@ many data format hint mechanisms, as well as many data formats, as well
 as many vocabularies, giving preference to those often used in practice,
 and to those which have been accepted as W3C recommendations.
 
-11.2 Programmatic conflict resolution
+
+12.2 Programmatic conflict resolution
 
 When Alice's application receives multiple proposed changes to one
 single version of the document, and Alice accepts both changes, then
@@ -657,7 +692,7 @@ Bob will likely want to communicate more with each other to agree which
 proposed change to apply, and which one to discard.
 
 
-12. Security Considerations
+13. Security Considerations
 
 When Alice's application sends a notification about a document that was
 shared with a limited audience, it SHOULD NOT send this notification in
@@ -674,12 +709,14 @@ Furthermore, Alice's application SHOULD make it clear to Alice that she
 depends on Bob's cooperation and decision to follow these instructions
 or not.
 
-13. IANA Considerations
+
+14. IANA Considerations
 
 This document does not propose any new entries in any IANA naming
 registry.
 
-14. Acknowledgements
+
+15. Acknowledgements
 
 The authors would like to thank everybody who contributed to the
 development of the ideas discussed in this document, including the
@@ -687,56 +724,42 @@ IndieWeb and Social Web communities, the Decentralized Sharing Working
 Group, the participants in OuiShareLabsCamp 2015, as well as Alice and
 Bob themselves.
 
-15. References
 
-15.1. Normative References
-    [IMAP]
-    [HTTPS]
-    [SMTP]
-    [POP]
-    [MICROPUB]
-    [webmention]
-    [pingback]
-    [refback]
-    [trackback]
-    [microformats]
-    [openid]
-    [indieauth]
-    [indiecert]
-    [persona]
-    [webid-tls]
-    [webid-rsa] https://github.com/linkeddata/SoLiD#webid-rsa
-    [rel-me]
-    [well-known]
-    [unattended-indieauth]
-    [solid] https://github.com/linkeddata/SoLiD
-    [capabilities] http://www.w3.org/TR/capability-urls/
-    [rss]
-    [atom]
-    [couchdb]
-    [pubsubhubbub]
-    [micropub-updates] http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
-    [oembed] http://www.oembed.com/#section7
-    [git]
-    [link-spam]
-    [read-write-web]
-    [webrtc]
-    [push-notifications]
-    [websockets]
-    [html]
-    [markdown]
-    [json-ld]
-    [rdf]
-    [turtle]
-    [rdfa]
-    [VOCABULARIES] https://www.w3.org/Social/track/issues/15
-    [dbpedia]
-    [same-as-links]
-    [activity-streams]
+16. References
+
+16.1. Normative References
+
     [WORDS]
         Bradner, S., "Key words for use in RFCs to Indicate Requirement
         Levels", BCP 14, RFC 2119, March 1997.
 
+    [IMAP]
+
+    [HTTPS]
+        Rescorla, E., "HTTP Over TLS", RFC2818, May 2000.
+
+    [SMTP]
+    [POP]
+    [openid]
+    [well-known]
+    [capabilities] http://www.w3.org/TR/capability-urls/
+    [rss]
+    [atom]
+    [webrtc]
+    [push-notifications]
+    [websockets]
+    [html]
+
+    [JSON-LD]
+        M. Sporny, G. Kellogg, M. Lanthaler, "JSON-LD 1.0", W3C
+        Proposed Recommendation,
+        http://www.w3.org/TR/2014/REC-json-ld-20140116/, January 2014.
+
+    [rdf]
+    [turtle]
+    [rdfa]
+    [same-as-links]
+    [activity-streams]
     [IRI]
         Duerst, M., "Internationalized Resource Identifiers (IRIs)",
         RFC 3987, January 2005.
@@ -749,59 +772,35 @@ Bob themselves.
         "Section 4.2: Implicit Grant", in: Hardt, D. (ed), "The OAuth
         2.0 Authorization Framework", RFC6749, October 2012.
 
+
 15.2. Informative References
 
-    [HTTPS]
-        Rescorla, E., "HTTP Over TLS", RFC2818, May 2000.
+    [MICROPUB]
+    [webmention]
+    [pingback]
+    [refback]
+    [trackback]
+    [microformats]
+    [indieauth]
+    [indiecert]
+    [persona]
+    [webid-tls]
+    [webid-rsa] https://github.com/linkeddata/SoLiD#webid-rsa
+    [rel-me]
+    [unattended-indieauth]
+    [solid] https://github.com/linkeddata/SoLiD
+    [couchdb]
+    [pubsubhubbub]
+    [micropub-updates]
+http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
+    [oembed] http://www.oembed.com/#section7
+    [git]
+    [link-spam]
+    [read-write-web]
+    [markdown]
+    [VOCABULARIES] https://www.w3.org/Social/track/issues/15
+    [dbpedia]
 
-    [HTTP]
-        Fielding et al., "Hypertext Transfer Protocol (HTTP/1.1):
-        Semantics and Content", RFC7231, June 2014.
-
-    [COND]
-        Fielding et al., "Hypertext Transfer Protocol (HTTP/1.1):
-        Conditional Requests", RFC7232, June 2014.
-
-    [RANGE]
-        Fielding et al., "Hypertext Transfer Protocol (HTTP/1.1):
-        Conditional Requests", RFC7233, June 2014.
-
-    [SPDY]
-        Mark Belshe, Roberto Peon, "SPDY Protocol - Draft 3.1", http://
-        www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3-1,
-        September 2013.
-
-    [JSON-LD]
-        M. Sporny, G. Kellogg, M. Lanthaler, "JSON-LD 1.0", W3C
-        Proposed Recommendation,
-        http://www.w3.org/TR/2014/REC-json-ld-20140116/, January 2014.
-
-    [CORS]
-        van Kesteren, Anne (ed), "Cross-Origin Resource Sharing --
-        W3C Candidate Recommendation 29 January 2013",
-        http://www.w3.org/TR/cors/, January 2013.
-
-    [MANIFEST]
-        Mozilla Developer Network (ed), "App manifest -- Revision
-        330541", https://developer.mozilla.org/en-
-        US/Apps/Build/Manifest$revision/566677, April 2014.
-
-    [DATASTORE]
-        "WebAPI/DataStore", MozillaWiki, retrieved May 2014.
-        https://wiki.mozilla.org/WebAPI/DataStore#Manifest
-
-    [KERBEROS]
-        C. Neuman et al., "The Kerberos Network Authentication Service
-        (V5)", RFC4120, July 2005.
-
-    [BEARER]
-        M. Jones, D. Hardt, "The OAuth 2.0 Authorization Framework:
-        Bearer Token Usage", RFC6750, October 2012.
-
-    [AUTHORING]
-        "Using remoteStorage for web authoring", reSite wiki, retrieved
-        September 2014. https://github.com/michielbdejong/resite/wiki
-        /Using-remoteStorage-for-web-authoring
 
 16. Authors' addresses
 

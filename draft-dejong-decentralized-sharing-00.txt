@@ -1,5 +1,5 @@
 INTERNET DRAFT                                      Michiel B. de Jong
-Document: draft-dejong-decentralizedsharing-00           (independent)
+Document: draft-dejong-decentralized-sharing-00          (independent)
                                                          Paul Tran-Van
 Intended Status: Informational                            (Cozy Cloud)
 Expires: ** December 2015                                  ** May 2015
@@ -76,27 +76,27 @@ Copyright Notice
 
 Table of Contents
 
-   1. Introduction...................................................3
-   2. Initiate sharing process.......................................4
-   3. Recipient selection............................................5
-   4. Recipient notification.........................................5
-   5. Human access...................................................7
-   6. Machine access ................................................8
-   7. Publishing edits...............................................9
-   8. Comments and write access.....................................10
-   9. Real-time collaboration.......................................12
-   10. Listing and revoking access..................................12
-   11. Data domains.................................................13
-   11.1 Discovering the semantics of a document.....................13
-   11.2 Programmatic conflict resolution............................15
-   12. Security Considerations......................................16
-   13. IANA Considerations..........................................16
-   14. Acknowledgements.............................................16
-   15. References...................................................16
-   15.1. Normative References.......................................16
-   15.2. Informative References.....................................17
-   16. Authors' addresses...........................................18
-
+   1. Terminology....................................................3
+   2. Introduction...................................................3
+   3. Initiate sharing process.......................................4
+   4. Recipient selection............................................5
+   5. Recipient notification.........................................5
+   6. Human access...................................................7
+   7. Machine access ................................................8
+   8. Publishing edits...............................................9
+   9. Comments and write access.....................................10
+   10. Real-time collaboration......................................12
+   11. Listing and revoking access..................................12
+   12. Data domains.................................................13
+   12.1 Discovering the semantics of a document.....................13
+   12.2 Programmatic conflict resolution............................15
+   13. Security Considerations......................................16
+   14. IANA Considerations..........................................16
+   15. Acknowledgements.............................................16
+   16. References...................................................16
+   16.1. Normative References.......................................16
+   16.2. Informative References.....................................17
+   17. Authors' addresses...........................................18
 
 
 
@@ -105,7 +105,22 @@ de Jong                                                         [Page 2]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-1.  Introduction
+
+1. Terminology
+
+    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+    document are to be interpreted as described in RFC 2119 [WORDS].
+
+    "SHOULD" and "SHOULD NOT" are appropriate when valid exceptions to a
+    general requirement are known to exist or appear to exist, and it is
+    infeasible or impractical to enumerate all of them.  However, they
+    should not be interpreted as permitting implementors to fail to
+    implement the general requirement when such failure would result in
+    interoperability failure.
+
+
+2.  Introduction
 
 When we say a sender 'shares' a document with some recipient(s),
 we primarily mean the sender makes that document available for the
@@ -133,6 +148,13 @@ their documents, do not implement the SMTP, IMAP, or POP protocol
 is no commonly supported programmatic way for the sender to update
 documents after they have been sent over SMTP, nor for the recipient(s)
 to reply with proposed changes. Rather than proposing such a versioning
+
+
+de Jong                                                         [Page 3]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 protocol on top of SMTP, we investigate how currently existing software
 applications implement decentralized document sharing in practice, and
 where these common practices could be improved and extended.
@@ -148,13 +170,6 @@ Many software applications do allow sharing documents publically, for
 instance by making them accessible over [HTTPS]. There are many ways to
 restrict access to documents that are published that way, but this does
 not solve the question of how recipient(s) get notified in the first
-
-
-de Jong                                                         [Page 3]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 place that (and how) they have access to such a document.
 
 There is no consensus yet on how to share documents privately over the
@@ -168,11 +183,28 @@ be more than one recipient, and where each recipient may have access to
 more than one server (but not to the sender's server). But for clarity
 of discussion we will at this point look at a simpler case.
 
+Many of the suggestions given in this Internet-Draft have not yet been
+standardized, and many of them have not yet proven their merit in
+large-scale deployments. In most cases, we try to list all initiatives
+we are aware of to implement a certain requirement or step of the
+process, and references to these proposed approaches are often only
+informative references to specifications which have been published
+independently by their authors, on their personal websites, on forums,
+or on wikis. We try to refer to a specific revision of such publications
+wherever possible.
+
 We introduce Alice, who wants to share one document with Bob. Alice
 and Bob both have a personal server, which they access to over a
 web interface, that's to say, using a web browser that connects to
 their server over HTTPS. This interface displays information in a
 human-readable way, and allows humans to easily send commands using for
+
+
+de Jong                                                         [Page 4]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 instance their web browser's point-and-click gestures.
 
 We assume there are multiple documents on Alice's server, and the
@@ -187,7 +219,8 @@ for the others. What are the steps through which she can achieve this,
 depending on the capabilities of her (the sender's) server and Bob's
 (the recipient's) server?
 
-2. Initiate sharing process
+
+3. Initiate sharing process
 
 To initiate the process of sharing a document from her server with
 Bob, Alice connects to her server with her web browser, providing some
@@ -198,16 +231,10 @@ Bob.
 Alice clicks or gestures her 'Share' intent for the document in some
 way. The software application may have the capacity to act as a
 [MICROPUB] client, in which case at this point Alice would also specify
-
-
-de Jong                                                         [Page 4]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 the MicroPub endpoint to use.
 
-3. Recipient selection
+
+4. Recipient selection
 
 Alice may have an addressbook on her server where she stores the
 identities and contact methods of people she knows. She may be able
@@ -221,6 +248,13 @@ possibly also store in her addressbook for future reference.
 
 It is also possible that she remembers or looks up a web page describing
 how to contact Bob, and discovers a usable identifier this way. An
+
+
+de Jong                                                         [Page 5]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 addressbook application may also be able to infer identifiers for
 various contact methods from such a web page programmatically.
 
@@ -237,8 +271,9 @@ Finally, Alice may have a contact identifier for Bob which she knows
 will allow her to communicate with him, but not to share the document
 with him. She may for instance contact Bob by telephone or irc to ask
 him for his email address.
-    
-4. Recipient notification
+
+
+5. Recipient notification
 
 Depending on the contact methods for which Alice has discovered Bob's
 identifier in the recipient selection step, she may complete the
@@ -247,13 +282,6 @@ a notification which contains machine-readable and/or human-readable
 instructions for retrieving the document. For instance, she may send the
 document as an email attachment, or send an email message that contains
 a hyperlink or URL through which Bob may access the document.
-
-
-
-de Jong                                                         [Page 5]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
 
 In the case of sending the entire document directly, it will be helpful
 to include some metadata about the document encoding. In the absence of
@@ -270,6 +298,13 @@ document at the following URL: ..., using the following password: ...'.
 The notification may also contain information about how Bob can comment
 on the document, or propose changes. Sometimes this information may be
 implied by the notification method, or become obvious when Bob access
+
+
+de Jong                                                         [Page 6]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 the document. For instance, Alice may send the URL of a web page which
 contains a 'Comment' or 'Edit' button, inviting Bob to comment or
 propose changes to the document using that web page. These comments
@@ -298,13 +333,6 @@ documents that are shared with him.
 The notification may also include human-readable information about which
 types of feedback are invited from Bob. For instance, Alice may share a
 document which contains a collection of photos, and Bob may be invited
-
-
-de Jong                                                         [Page 6]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 to add photos to this collection, but not delete any of the existing
 ones. The authors intend to research ways of adding such feedback
 invitations in a machine-readable way, for instance to a WebMention
@@ -320,8 +348,15 @@ the resource, in which case it is important for the software on Bob's
 server not to display such a notification publically, as this would
 lead to accidentally publishing a privately shared document publically.
 Alternatively, the authentication step may be delayed until Bob, or
+
+
+de Jong                                                         [Page 7]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 software running on Bob's server, actually accesses the document.
-    
+
 The software that Alice uses to send the notification to Bob may use
 a concept of roles, which summarize which types of feedback Bob will
 be invited to reply with. For instance, she may select a 'contributor'
@@ -330,7 +365,8 @@ an 'admin' role inviting Bob to propose any kind of change to the
 document, including deletions. We consider such roles mainly a matter of
 interaction between Alice and the software she uses.
 
-5. Human access
+
+6. Human access
 
 Whichever the way of sending the notification, it SHOULD contain a URL
 for Bob to open with a browser to view and/or download the document from
@@ -348,13 +384,6 @@ mobile telephone short messaging service (SMS) or email. It MAY also
 allow Bob to authenticate using third-party identity providers like
 social network sites.
 
-
-
-de Jong                                                         [Page 7]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 Some of these methods of authentication rely on Alice to provide the
 correct identifier(s) for Bob in the recipient selection step. These
 identifier(s) are not necessarily equal to the identifier used for
@@ -369,6 +398,13 @@ may in some cases be discovered programmatically, for instance with
 for Bob's personal DNS domain name.
 
 The list of authentication methods Bob is offered will be limited by
+
+
+de Jong                                                         [Page 8]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 the capabilities of the software that displays the access page for
 the document. If this software is integrated with Alice's addressbook
 software, then the addressbook entry for Bob may also be updated with
@@ -380,9 +416,10 @@ The access page MAY also give human-readable instructions to Bob, like
 "please don't share this document publically", "please don't share
 outside our Petanque team", or "please discard after reading, or after
 30 days". Whether or not Bob follows such instructions is out of scope.
- 
-6. Machine access 
- 
+
+
+7. Machine access
+
 Some software applications are able to retrieve a document with
 [UNATTENDED-INDIEAUTH] in reaction to a WebMention notification.
 Although the [SoliD](https://github.com/linkeddata/SoLiD) platform does
@@ -398,17 +435,11 @@ application can also access the document without human intervention.
 If an application or human attempts to access the document without
 sufficient credentials, a 410 http response code can be sent, together
 with a WWW-Authenticate header hinting to a proposed authentication
-
-
-de Jong                                                         [Page 8]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 method.
- 
-7. Publishing edits
- 
+
+
+8. Publishing edits
+
 After Alice has shared a document with Bob, if she did not send it
 directly as for instance an email attachment, she may still edit its
 contents between the time of sending the notification, and the first
@@ -417,6 +448,13 @@ a software application access the document on Bob's behalf.
 
 But even once Bob, or software on his behalf, has accessed the document
 for the first time, Alice may want to change its contents. For instance,
+
+
+de Jong                                                         [Page 9]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 Alice may share her calendar with Bob, and keep editing her calendar
 afterwards.
 
@@ -448,13 +486,6 @@ documents that have already been published
 document could send a MicroPub Update to the application which handles
 the sharing of the document.
 
-
-
-de Jong                                                         [Page 9]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 There are also situations where Bob can be expected not to make any
 copies of the original document version, retrieving it always directly
 from Alice's server when needed, and Bob may be more interested in
@@ -464,28 +495,36 @@ an [OEMBED](http://www.oembed.com/#section7) data snippet, which Bob
 embeds in another document by reference. This also means Bob will no
 longer to access the document if Alice revokes his access to it, or
 stops publishing the document at its URL.
- 
-8. Comments and write access
- 
+
+
+9. Comments and write access
+
+
+de Jong                                                        [Page 10]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+
 Regardless of whether or not Alice has invited him to do so in the
 notification or in the access page, Bob may send reactions, like
 comments, answers, additions, or proposed changes to Alice. He may send
 Alice a notification for each reaction, a reference to a change feed,
 for Alice's server application to poll.
- 
+
 It is up to Alice's application to either display all of Bob's comments
 and changes immediately, or for instance to only display additions and
 not deletions. This MAY be signalled in the notification and/or in the
 access page (see above), so that Bob knows whether he effectively has
 "write access" or "read-only access" to the document or not.
-   
+
 Alice's server may immediately apply Bob's changes (depending possibly
 on the type of change) without Alice's intervention. If there were
 multiple recipients, then maybe some recipients have permission to edit
 (i.e., changes they propose will always be applied), and others only to
 view (i.e., when they send a proposed change, it is not applied, or is
 only applied after Alice reviewed and approved it.
-  
+
 This means that Alice can keep modifying the resource after sending it,
 and Bob can also send modifications back to Alice. If Bob's application
 retrieved a copy of the document and becomes aware of changes to it made
@@ -499,13 +538,6 @@ side-by-side.
 ["The change feed method has to be the same to guarantee the
 synchronization." -> why? -Michiel]
 
-
-de Jong                                                        [Page 10]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
-
 We will now consider the case where Alice sent the message to possibly
 more than one recipient, and the document may at any point contain
 changes proposed by any of these recipients (either accepted immediately
@@ -516,6 +548,13 @@ by the recipient in question. This will allow the application of a
 recipient to programmatically compare the "master" change feed published
 by Alice with the list of changes proposed by that recipient itself.
 This is a common pattern in [GIT] versioning, where branches can be
+
+
+de Jong                                                        [Page 11]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 merged into a master branch, retaining the information about the
 individual changes (commits).
 
@@ -548,13 +587,6 @@ calendar, or adding files in a document which represents a file system
 directory.
 
 Alice's application MAY be able to interpret changes to a document and
-
-
-de Jong                                                        [Page 11]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 resolve the possible conflicts between them in certain cases (see also
 the Data domains section below), or notify Alice and/or Bob that more
 information is needed to resolve the conflict. A conflict occurs when
@@ -564,9 +596,17 @@ pattern: conflicts are tolerated, but the versions should eventually
 converge and reach consistency. A pessimitic lock pattern would require
 notifying all other actors with access to the document before starting
 to make any changes to the current document version.
- 
-9. Real-time collaboration
- 
+
+
+
+
+de Jong                                                        [Page 12]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+10. Real-time collaboration
+
 If Alice and Bob are connected to the internet simultaneously, a
 real-time conversation may be initated, for instance using [WEBRTC].
 For instance, Alice might share a document with Bob which represents
@@ -588,9 +628,10 @@ these WebSockets could be used to establish WebRTC data channels between
 each device, provided these devices support WebRTC, and that changes are
 still submitted and ultimately committed to the dominant current version
 of the document, on Alice's server.
- 
-10. Listing and revoking access
- 
+
+
+11. Listing and revoking access
+
 If Alice wants to share several documents with several people, a
 software application on her server SHOULD allow her to view a list of
 who has access to which document.
@@ -598,13 +639,6 @@ who has access to which document.
 This list view SHOULD also display whether she configured the
 application to programmatically apply any comments and/or proposed
 changes from these people, and/or whether these people have been sent
-
-
-de Jong                                                        [Page 12]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 an invitation to comment or propose changes, whether as part as the
 notification they were sent, or through the human-readable access page.
 
@@ -614,8 +648,15 @@ revoke access entirely, taking into account that the recipient may
 already have made a private copy of the document. It MAY also give
 Alice the option to change, for each recipient, whether their comments
 and/or proposed changes will be displayed and applied programmatically,
+
+
+de Jong                                                        [Page 13]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 acknowledged and queued for Alice to review, or rejected altogether.
- 
+
 If Bob uses an application on his own server to display the document
 shared by Alice, and this application is capable of programmatically
 applies all changes Alice sends as updates after sharing the initial
@@ -632,10 +673,10 @@ application can display which proposed changes have been accepted by
 Alice into her master version of the document.
 
 
-11. Data domains
+12. Data domains
 
-11.1 Discovering the semantics of a document
- 
+12.1 Discovering the semantics of a document
+
 If Bob accesses the access page with his browser, the presentation
 can be tailored to how Bob as a human wants to consume the data. For
 instance, multiple download/export formats may be offered using a web
@@ -648,21 +689,21 @@ Bob to use the document in the way it was intended by Alice. For
 instance, if Bob's application stores hypertext documents as [HTML]
 documents, but Alice's server uses the [MARKDOWN] format for all
 hypertext documents, a conversion process may be necessary to translate
-
-
-de Jong                                                        [Page 13]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 documents shared by Alice to the format for which Bob's application can
 offer domain-specific features. His application may display the markdown
 document as just a string of data, or as if it were a plain text
 document, and not allow Bob to follow the hyperlinks from there.
 
 Data format hints can be provided using Content-Type headers, or some
-linked data notation [MICROFORMATS, JSON-LD, RDF, TURTLE, RDFa]. This
+linked data notation [MICROFORMATS, JSON-LD, RDF, TURTLE, RDFA]. This
 can then point to a unique entry in some vocabulary of data formats.
+
+
+
+de Jong                                                        [Page 14]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
 
 Even if Bob's application can programmatically discover the data format
 in which Alice intended the documented to be interpreted semantically,
@@ -698,13 +739,6 @@ This means that communicating the intended semantic interpretation of
 a document in a machine-readable way involves three hurdles: first,
 the hinting mechanism which links to a URI for the data format, then
 resolving the equivalence between the many URIs which exist for the same
-
-
-de Jong                                                        [Page 14]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 concept, but in different vocabularies, and finally converting Alice's
 data format itself to a data format that allows Bob's application to
 offer functionality beyond simply displaying the data from the document.
@@ -715,12 +749,20 @@ pull request, etc., will only work in rare cases where Bob's application
 is able to handle the hinting mechanism, as well as the data format, as
 well as the semantic vocabulary used.
 
+
+de Jong                                                        [Page 15]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
+
 Our recommendation would be for the receiving application to support
 many data format hint mechanisms, as well as many data formats, as well
 as many vocabularies, giving preference to those often used in practice,
 and to those which have been accepted as W3C recommendations.
 
-11.2 Programmatic conflict resolution
+
+12.2 Programmatic conflict resolution
 
 When Alice's application receives multiple proposed changes to one
 single version of the document, and Alice accepts both changes, then
@@ -748,13 +790,6 @@ instance raw image data will almost certainly lead to undesired results.
 
 There will also remain cases where such programmatic conflict resolution
 cannot be achieved at all without leading to incorrect results. For
-
-
-de Jong                                                        [Page 15]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
 instance, when multiple proposed changes propose to change the same
 data field within a Turtle document, they contradict each other even at
 the semantic level (not just at the syntactical level), and Alice and
@@ -762,7 +797,14 @@ Bob will likely want to communicate more with each other to agree which
 proposed change to apply, and which one to discard.
 
 
-12. Security Considerations
+13. Security Considerations
+
+
+de Jong                                                        [Page 16]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
 
 When Alice's application sends a notification about a document that was
 shared with a limited audience, it SHOULD NOT send this notification in
@@ -779,12 +821,14 @@ Furthermore, Alice's application SHOULD make it clear to Alice that she
 depends on Bob's cooperation and decision to follow these instructions
 or not.
 
-13. IANA Considerations
+
+14. IANA Considerations
 
 This document does not propose any new entries in any IANA naming
 registry.
 
-14. Acknowledgements
+
+15. Acknowledgements
 
 The authors would like to thank everybody who contributed to the
 development of the ideas discussed in this document, including the
@@ -792,21 +836,49 @@ IndieWeb and Social Web communities, the Decentralized Sharing Working
 Group, the participants in OuiShareLabsCamp 2015, as well as Alice and
 Bob themselves.
 
-15. References
 
-15.1. Normative References
+16. References
+
+16.1. Normative References
 
     [WORDS]
         Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", BCP 14, RFC 2119, March 1997.
+
+    [IMAP]
+
+    [HTTPS]
 
 
-de Jong                                                        [Page 16]
+de Jong                                                        [Page 17]
 
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-        Levels", BCP 14, RFC 2119, March 1997.
+        Rescorla, E., "HTTP Over TLS", RFC2818, May 2000.
 
+    [SMTP]
+    [POP]
+    [openid]
+    [well-known]
+    [capabilities] http://www.w3.org/TR/capability-urls/
+    [rss]
+    [atom]
+    [webrtc]
+    [push-notifications]
+    [websockets]
+    [html]
+
+    [JSON-LD]
+        M. Sporny, G. Kellogg, M. Lanthaler, "JSON-LD 1.0", W3C
+        Proposed Recommendation,
+        http://www.w3.org/TR/2014/REC-json-ld-20140116/, January 2014.
+
+    [rdf]
+    [turtle]
+    [rdfa]
+    [same-as-links]
+    [activity-streams]
     [IRI]
         Duerst, M., "Internationalized Resource Identifiers (IRIs)",
         RFC 3987, January 2005.
@@ -819,66 +891,42 @@ Internet-Draft           Decentralized Sharing               May 2015
         "Section 4.2: Implicit Grant", in: Hardt, D. (ed), "The OAuth
         2.0 Authorization Framework", RFC6749, October 2012.
 
+
 15.2. Informative References
 
-    [HTTPS]
-        Rescorla, E., "HTTP Over TLS", RFC2818, May 2000.
-
-    [HTTP]
-        Fielding et al., "Hypertext Transfer Protocol (HTTP/1.1):
-        Semantics and Content", RFC7231, June 2014.
-
-    [COND]
-        Fielding et al., "Hypertext Transfer Protocol (HTTP/1.1):
-        Conditional Requests", RFC7232, June 2014.
-
-    [RANGE]
-        Fielding et al., "Hypertext Transfer Protocol (HTTP/1.1):
-        Conditional Requests", RFC7233, June 2014.
-
-    [SPDY]
-        Mark Belshe, Roberto Peon, "SPDY Protocol - Draft 3.1", http://
-        www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3-1,
-        September 2013.
-
-    [JSON-LD]
-        M. Sporny, G. Kellogg, M. Lanthaler, "JSON-LD 1.0", W3C
-        Proposed Recommendation,
-        http://www.w3.org/TR/2014/REC-json-ld-20140116/, January 2014.
-
-    [CORS]
-        van Kesteren, Anne (ed), "Cross-Origin Resource Sharing --
+    [MICROPUB]
+    [webmention]
+    [pingback]
+    [refback]
 
 
-de Jong                                                        [Page 17]
+de Jong                                                        [Page 18]
 
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-        W3C Candidate Recommendation 29 January 2013",
-        http://www.w3.org/TR/cors/, January 2013.
+    [trackback]
+    [microformats]
+    [indieauth]
+    [indiecert]
+    [persona]
+    [webid-tls]
+    [webid-rsa] https://github.com/linkeddata/SoLiD#webid-rsa
+    [rel-me]
+    [unattended-indieauth]
+    [solid] https://github.com/linkeddata/SoLiD
+    [couchdb]
+    [pubsubhubbub]
+    [micropub-updates]
+http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
+    [oembed] http://www.oembed.com/#section7
+    [git]
+    [link-spam]
+    [read-write-web]
+    [markdown]
+    [VOCABULARIES] https://www.w3.org/Social/track/issues/15
+    [dbpedia]
 
-    [MANIFEST]
-        Mozilla Developer Network (ed), "App manifest -- Revision
-        330541", https://developer.mozilla.org/en-
-        US/Apps/Build/Manifest$revision/566677, April 2014.
-
-    [DATASTORE]
-        "WebAPI/DataStore", MozillaWiki, retrieved May 2014.
-        https://wiki.mozilla.org/WebAPI/DataStore#Manifest
-
-    [KERBEROS]
-        C. Neuman et al., "The Kerberos Network Authentication Service
-        (V5)", RFC4120, July 2005.
-
-    [BEARER]
-        M. Jones, D. Hardt, "The OAuth 2.0 Authorization Framework:
-        Bearer Token Usage", RFC6750, October 2012.
-
-    [AUTHORING]
-        "Using remoteStorage for web authoring", reSite wiki, retrieved
-        September 2014. https://github.com/michielbdejong/resite/wiki
-        /Using-remoteStorage-for-web-authoring
 
 16. Authors' addresses
 
@@ -900,4 +948,6 @@ Internet-Draft           Decentralized Sharing               May 2015
 
 
 
-de Jong                                                        [Page 18]
+
+
+de Jong                                                        [Page 19]
