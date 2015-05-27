@@ -734,32 +734,68 @@ Bob themselves.
         Levels", BCP 14, RFC 2119, March 1997.
 
     [IMAP]
+        M. Crispin, "Internet Message Access Protocol - Version 4rev1",
+RFC 3501, March 2003.
 
     [HTTPS]
-        Rescorla, E., "HTTP Over TLS", RFC2818, May 2000.
+        E. Rescorla, "HTTP Over TLS", RFC2818, May 2000.
 
     [SMTP]
+        J. Postel, "Simple Mail Transfer Protocol", RFC 821, August
+1982.
+
     [POP]
-    [openid]
-    [well-known]
-    [capabilities] http://www.w3.org/TR/capability-urls/
-    [rss]
-    [atom]
-    [webrtc]
-    [push-notifications]
-    [websockets]
-    [html]
+        J. Myers, M. Rose, "Post Office Protocol - Version 3", RFC 1939,
+May 1996.
+
+    [OPENID]
+        OpenID Foundation, "OpenID Authentication 2.0 - Final",
+http://openid.net/specs/openid-authentication-2_0.html, December 2007.
+
+    [WELL-KNOWN]
+        M. Knottingham, E. Hammer-Lahav, "Defining Well-Known Uniform
+Resource Identifiers (URIs)", RFC 5785, April 2010.
+
+    [CAPABILITIES]
+        J. Tennison (ed.), "Good Practices for Capability URLs",
+http://www.w3.org/TR/capability-urls/, February 2014.
+
+    [RSS]
+        D. Winer, "RSS 2.0 Specification",
+http://cyber.law.harvard.edu/rss/rss.html, July 2003.
+
+    [ATOM]
+        M. Nottingham (ed.), R. Sayre (ed.), "The Atom Syndication
+Format", RFC 4287, December 2005.
+
+    [WEBRTC]
+        A. Bergkvist, D. C. Burnett, C. Jennings, A. Narayanan,
+"WebRTC 1.0: Real-time Communication Between Browsers",
+http://www.w3.org/TR/webrtc/, February 2015.
+
+    [PUSH-NOTIFICATIONS]
+        B. Sullivan, E. Fullea, M. van Ouwekerk, "Push API",
+http://www.w3.org/TR/push-api/, April 2015.
+
+    [WEBSOCKETS]
+        I. Hickson, "The WebSocket API",
+http://www.w3.org/TR/websockets/, September 2012.
+
+    [HTML]
+        I. Hickson, R. Berjon, S. Faulkner, T. Leithead, E. Doyle
+Navara, E. O'Connor, S. Pfeiffer, "A vocabulary and associated APIs for
+HTML and XHTML", http://www.w3.org/TR/html5/, October 2014.
 
     [JSON-LD]
-        M. Sporny, G. Kellogg, M. Lanthaler, "JSON-LD 1.0", W3C
-        Proposed Recommendation,
-        http://www.w3.org/TR/2014/REC-json-ld-20140116/, January 2014.
+        M. Sporny, G. Kellogg, M. Lanthaler, "JSON-LD 1.0", W3C Proposed
+Recommendation, http://www.w3.org/TR/2014/REC-json-ld-20140116/, January
+2014.
 
-    [rdf]
-    [turtle]
-    [rdfa]
-    [same-as-links]
-    [activity-streams]
+    [RDF]
+    [TURTLE]
+    [RDFA]
+    [SAME-AS-LINKS]
+    [ACTIVITY-STREAMS]
     [IRI]
         Duerst, M., "Internationalized Resource Identifiers (IRIs)",
         RFC 3987, January 2005.
@@ -776,30 +812,30 @@ Bob themselves.
 15.2. Informative References
 
     [MICROPUB]
-    [webmention]
-    [pingback]
-    [refback]
-    [trackback]
-    [microformats]
-    [indieauth]
-    [indiecert]
-    [persona]
-    [webid-tls]
-    [webid-rsa] https://github.com/linkeddata/SoLiD#webid-rsa
-    [rel-me]
-    [unattended-indieauth]
-    [solid] https://github.com/linkeddata/SoLiD
-    [couchdb]
-    [pubsubhubbub]
-    [micropub-updates]
+    [WEBMENTION]
+    [PINGBACK]
+    [REFBACK]
+    [TRACKBACK]
+    [MICROFORMATS]
+    [INDIEAUTH]
+    [INDIECERT]
+    [PERSONA]
+    [WEBID-TLS]
+    [WEBID-RSA] https://github.com/linkeddata/SoLiD#webid-rsa
+    [REL-ME]
+    [UNATTENDED-INDIEAUTH]
+    [SOLID] HTTPS://GITHUB.COM/LINKEDDATA/sOlId
+    [COUCHDB]
+    [PUBSUBHUBBUB]
+    [MICROPUB-UPDATES]
 http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
-    [oembed] http://www.oembed.com/#section7
-    [git]
-    [link-spam]
-    [read-write-web]
-    [markdown]
+    [OEMBED] http://www.oembed.com/#section7
+    [GIT]
+    [LINK-SPAM]
+    [READ-WRITE-WEB]
+    [MARKDOWN]
     [VOCABULARIES] https://www.w3.org/Social/track/issues/15
-    [dbpedia]
+    [DBPEDIA]
 
 
 16. Authors' addresses
