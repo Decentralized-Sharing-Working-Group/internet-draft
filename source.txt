@@ -1,5 +1,5 @@
 INTERNET DRAFT                                      Michiel B. de Jong
-Document: draft-dejong-decentralizedsharing-00           (independent)
+Document: draft-dejong-decentralized-sharing-00          (independent)
                                                          Paul Tran-Van
 Intended Status: Informational                            (Cozy Cloud)
 Expires: ** December 2015                                  ** May 2015
@@ -570,7 +570,7 @@ document as just a string of data, or as if it were a plain text
 document, and not allow Bob to follow the hyperlinks from there.
 
 Data format hints can be provided using Content-Type headers, or some
-linked data notation [MICROFORMATS, JSON-LD, RDF, TURTLE, RDFa]. This
+linked data notation [MICROFORMATS, JSON-LD, RDF, TURTLE, RDFA]. This
 can then point to a unique entry in some vocabulary of data formats.
 
 Even if Bob's application can programmatically discover the data format
@@ -690,7 +690,49 @@ Bob themselves.
 15. References
 
 15.1. Normative References
-
+    [IMAP]
+    [HTTPS]
+    [SMTP]
+    [POP]
+    [MICROPUB]
+    [webmention]
+    [pingback]
+    [refback]
+    [trackback]
+    [microformats]
+    [openid]
+    [indieauth]
+    [indiecert]
+    [persona]
+    [webid-tls]
+    [webid-rsa] https://github.com/linkeddata/SoLiD#webid-rsa
+    [rel-me]
+    [well-known]
+    [unattended-indieauth]
+    [solid] https://github.com/linkeddata/SoLiD
+    [capabilities] http://www.w3.org/TR/capability-urls/
+    [rss]
+    [atom]
+    [couchdb]
+    [pubsubhubbub]
+    [micropub-updates] http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
+    [oembed] http://www.oembed.com/#section7
+    [git]
+    [link-spam]
+    [read-write-web]
+    [webrtc]
+    [push-notifications]
+    [websockets]
+    [html]
+    [markdown]
+    [json-ld]
+    [rdf]
+    [turtle]
+    [rdfa]
+    [VOCABULARIES] https://www.w3.org/Social/track/issues/15
+    [dbpedia]
+    [same-as-links]
+    [activity-streams]
     [WORDS]
         Bradner, S., "Key words for use in RFCs to Indicate Requirement
         Levels", BCP 14, RFC 2119, March 1997.
