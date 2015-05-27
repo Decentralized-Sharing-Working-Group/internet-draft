@@ -271,7 +271,7 @@ or the web application may allow Alice to review them before they are
 applied and displayed.
 
 One protocol for notifying recipients is [WEBMENTION]. This is a
-recent successor of the older [PINGBACK], [REFBACK], and [TRACKBACK]
+successor of the older [PINGBACK], [REFBACK], and [TRACKBACK]
 protocols. WebMention is primarily intended for sending comments
 on existing documents, and not for initially sharing a document in
 the first place, nor for proposing edits. But by "commenting" on a
@@ -354,12 +354,12 @@ the document. If this software is integrated with Alice's addressbook
 software, then the addressbook entry for Bob may also be updated with
 the authentication methods for which Alice provided the identifier,
 those which were discovered programmatically during the process, and the
-one that Bob uiltimately used to authenticate.
+one that Bob ultimately used to authenticate.
 
 The access page MAY also give human-readable instructions to Bob, like
 "please don't share this document publically", "please don't share
 outside our Petanque team", or "please discard after reading, or after
-30 days". Whether or not Bob follows such instructions is out of scope.
+30 days". How Bob enforces such rules is out of scope.
 
 
 7. Machine access
@@ -377,7 +377,7 @@ If the URL of the access page contains the secret
 application can also access the document without human intervention.
 
 If an application or human attempts to access the document without
-sufficient credentials, a 410 http response code can be sent, together
+sufficient credentials, a 410 HTTP response code can be sent, together
 with a WWW-Authenticate header hinting to a proposed authentication
 method.
 
@@ -405,8 +405,9 @@ Alternatively, the document could contain a reference to a feed of
 its change history, for instance using a hyperlink in case of a HTML
 document. A software application accessing the document on Bob's behalf
 could discover this reference programmatically and keep polling the
-change feed each time Bob views the document, apply Alice's changes, and
-possibly provide a way for Bob to view its change history.
+change feed periodically or each time Bob views the document, apply 
+Alice's changes, and possibly provide a way for Bob to view its change
+history.
 
 The approach where Alice's application sends a new notification to Bob's
 application is more efficient if changes are rare, because it does
@@ -430,7 +431,7 @@ always retrieving the latest version, instead of being notified about
 changes when they happen. An example could be when the document contains
 an [OEMBED](http://www.oembed.com/#section7) data snippet, which Bob
 embeds in another document by reference. This also means Bob will no
-longer to access the document if Alice revokes his access to it, or
+longer have access to the document if Alice revokes his access to it, or
 stops publishing the document at its URL.
 
 
@@ -492,8 +493,8 @@ recipients of that shared document.
 
 Bob MAY also send proposed changes to Alice over http, using a verb
 like PUT or PATCH. This practice is used in [READ-WRITE-WEB] and
-[COUCHDB], among others. Such http requests SHOULD be responded to with
-a http response status that indicates whether the change request was
+[COUCHDB], among others. Such HTTP requests SHOULD be responded to with
+a HTTP response status that indicates whether the change request was
 successful, accepted to be reviewed, or rejected.
 
 A third practice for sending change proposals are git pull requests,
@@ -516,7 +517,7 @@ information is needed to resolve the conflict. A conflict occurs when
 Alice and Bob both make changes in the document and arrive at different
 new versions. In database theory this is called the optimistic lock
 pattern: conflicts are tolerated, but the versions should eventually
-converge and reach consistency. A pessimitic lock pattern would require
+converge and reach consistency. A pessimistic lock pattern would require
 notifying all other actors with access to the document before starting
 to make any changes to the current document version.
 
@@ -525,7 +526,7 @@ to make any changes to the current document version.
 
 If Alice and Bob are connected to the internet simultaneously, a
 real-time conversation may be initated, for instance using [WEBRTC].
-For instance, Alice might share a document with Bob which represents
+For example, Alice might share a document with Bob which represents
 a "phone call", after which an application on Bob's server may send a
 [PUSH-NOTIFICATION] to Bob's (mobile) device, and when Bob gestures to
 "pick up the phone", his server could react to Alice's "phone call" with
@@ -586,7 +587,7 @@ Alice into her master version of the document.
 
 12.1 Discovering the semantics of a document
 
-If Bob accesses the access page with his browser, the presentation
+If Bob reaches the access page with his browser, the presentation
 can be tailored to how Bob as a human wants to consume the data. For
 instance, multiple download/export formats may be offered using a web
 view in a natural language Bob understands.
