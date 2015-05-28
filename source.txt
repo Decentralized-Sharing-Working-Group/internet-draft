@@ -880,17 +880,22 @@ http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338, May
         See: http://www.oembed.com/#section7
 
     [GIT]
+        See: http://www.git-scm.com/
 
     [LINK-SPAM]
+        See: https://en.wikipedia.org/wiki/Spamdexing#Link_spam
 
     [READ-WRITE-WEB]
+        See: https://www.w3.org/community/rww/
 
     [MARKDOWN]
+        See: http://daringfireball.net/projects/markdown/
 
     [VOCABULARIES]
         See: https://www.w3.org/Social/track/issues/15
 
     [DBPEDIA]
+        See: http://wiki.dbpedia.org/
 
     [SAME-AS-LINKS]
         See: http://sameas.org/
