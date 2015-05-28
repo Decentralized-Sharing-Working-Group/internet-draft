@@ -71,25 +71,25 @@ Table of Contents
 
    1. Terminology....................................................3
    2. Introduction...................................................3
-   3. Initiate sharing process.......................................4
+   3. Initiate sharing process.......................................5
    4. Recipient selection............................................5
-   5. Recipient notification.........................................5
-   6. Human access...................................................7
-   7. Machine access ................................................8
+   5. Recipient notification.........................................6
+   6. Human access...................................................8
+   7. Machine access ................................................9
    8. Publishing edits...............................................9
    9. Comments and write access.....................................10
    10. Real-time collaboration......................................12
-   11. Listing and revoking access..................................12
-   12. Data domains.................................................13
-   12.1 Discovering the semantics of a document.....................13
-   12.2 Programmatic conflict resolution............................15
-   13. Security Considerations......................................16
-   14. IANA Considerations..........................................16
-   15. Acknowledgements.............................................16
-   16. References...................................................16
-   16.1. Normative References.......................................16
-   16.2. Informative References.....................................17
-   17. Authors' addresses...........................................18
+   11. Listing and revoking access..................................13
+   12. Data domains.................................................14
+   12.1 Discovering the semantics of a document.....................14
+   12.2 Programmatic conflict resolution............................16
+   13. Security Considerations......................................17
+   14. IANA Considerations..........................................17
+   15. Acknowledgements.............................................17
+   16. References...................................................17
+   16.1. Normative References.......................................17
+   16.2. Informative References.....................................20
+   17. Authors' addresses...........................................22
 
 
 1. Terminology
@@ -820,23 +820,25 @@ attributes", http://www.w3.org/TR/rdfa-core/, March 2015.
         2.0 Authorization Framework", RFC6749, October 2012.
 
 
-15.2. Informative References
+
+
+16.2. Informative References
 
     [MICROPUB]
         A.Parecki (ed.), "MicroPub", http://indiewebcamp.com/wiki/inde \
         x.php?title=Micropub&oldid=19338, May 2015.
 
     [WEBMENTION]
-        IndieWebCamp Wiki, "WebMention", http://indiewebcamp.com/wiki/i \
-        ndex.php?title=Webmention&oldid=19485, May 2015.
+        IndieWebCamp Wiki, "WebMention", http://indiewebcamp.com/wiki/ \
+        index.php?title=Webmention&oldid=19485, May 2015.
 
     [PINGBACK]
         S. Langridge, I. Hickson, "Pingback 1.0",
         http://www.hixie.ch/specs/pingback/pingback, 2002.
 
     [TRACKBACK]
-        See: https://movabletype.org/documentation/trackback/specificatio \
-        n.html
+        See: https://movabletype.org/documentation/trackback/specifica \
+        tion.html
 
     [MICROFORMATS]
         See: http://microformats.org/
@@ -861,8 +863,8 @@ attributes", http://www.w3.org/TR/rdfa-core/, March 2015.
         http://microformats.org/wiki/index.php?title=rel-me&oldid=64351
 
     [UNATTENDED-INDIEAUTH]
-        See: http://indiewebcamp.com/wiki/index.php?title=indieweb-mess \
-        aging&oldid=19179#Protocol_Flow
+        See: http://indiewebcamp.com/wiki/index.php?title=indieweb-mes \
+        saging&oldid=19179#Protocol_Flow
 
     [SOLID]
         See: https://github.com/linkeddata/SoLiD
@@ -877,8 +879,8 @@ attributes", http://www.w3.org/TR/rdfa-core/, March 2015.
         2014.
 
     [MICROPUB-UPDATES]
-        A.Parecki (ed.), "MicroPub: Update", http://indiewebcamp.com/wi \
-        ki/index.php?title=Micropub&oldid=19338#Update, May 2015.
+        A.Parecki (ed.), "MicroPub: Update", http://indiewebcamp.com/w \
+        iki/index.php?title=Micropub&oldid=19338#Update, May 2015.
 
     [OEMBED]
         See: http://www.oembed.com/#section7
@@ -908,7 +910,7 @@ attributes", http://www.w3.org/TR/rdfa-core/, March 2015.
         See: http://activitystrea.ms/specs/
 
 
-16. Authors' addresses
+17. Authors' addresses
 
     Michiel B. de Jong
     (independent)
