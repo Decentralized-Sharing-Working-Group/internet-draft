@@ -313,7 +313,7 @@ or the web application may allow Alice to review them before they are
 applied and displayed.
 
 One protocol for notifying recipients is [WEBMENTION]. This is a
-recent successor of the older [PINGBACK] and [TRACKBACK]
+successor of the older [PINGBACK] and [TRACKBACK]
 protocols. WebMention is primarily intended for sending comments
 on existing documents, and not for initially sharing a document in
 the first place, nor for proposing edits. But by "commenting" on a
@@ -410,7 +410,7 @@ the document. If this software is integrated with Alice's addressbook
 software, then the addressbook entry for Bob may also be updated with
 the authentication methods for which Alice provided the identifier,
 those which were discovered programmatically during the process, and the
-one that Bob uiltimately used to authenticate.
+one that Bob ultimately used to authenticate.
 
 The access page MAY also give human-readable instructions to Bob, like
 "please don't share this document publically", "please don't share
@@ -433,7 +433,7 @@ If the URL of the access page contains the secret
 application can also access the document without human intervention.
 
 If an application or human attempts to access the document without
-sufficient credentials, a 410 http response code can be sent, together
+sufficient credentials, a 410 HTTP response code can be sent, together
 with a WWW-Authenticate header hinting to a proposed authentication
 method.
 
@@ -468,8 +468,9 @@ Alternatively, the document could contain a reference to a feed of
 its change history, for instance using a hyperlink in case of a HTML
 document. A software application accessing the document on Bob's behalf
 could discover this reference programmatically and keep polling the
-change feed each time Bob views the document, apply Alice's changes, and
-possibly provide a way for Bob to view its change history.
+change feed periodically or each time Bob views the document, apply 
+Alice's changes, and possibly provide a way for Bob to view its change
+history.
 
 The approach where Alice's application sends a new notification to Bob's
 application is more efficient if changes are rare, because it does
@@ -493,11 +494,10 @@ always retrieving the latest version, instead of being notified about
 changes when they happen. An example could be when the document contains
 an [OEMBED](http://www.oembed.com/#section7) data snippet, which Bob
 embeds in another document by reference. This also means Bob will no
-longer to access the document if Alice revokes his access to it, or
+longer have access to the document if Alice revokes his access to it, or
 stops publishing the document at its URL.
 
 
-9. Comments and write access
 
 
 de Jong                                                        [Page 10]
@@ -505,6 +505,7 @@ de Jong                                                        [Page 10]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+9. Comments and write access
 
 Regardless of whether or not Alice has invited him to do so in the
 notification or in the access page, Bob may send reactions, like
@@ -547,7 +548,6 @@ SHOULD refer back to the URL where this change was originally proposed
 by the recipient in question. This will allow the application of a
 recipient to programmatically compare the "master" change feed published
 by Alice with the list of changes proposed by that recipient itself.
-This is a common pattern in [GIT] versioning, where branches can be
 
 
 de Jong                                                        [Page 11]
@@ -555,6 +555,7 @@ de Jong                                                        [Page 11]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+This is a common pattern in [GIT] versioning, where branches can be
 merged into a master branch, retaining the information about the
 individual changes (commits).
 
@@ -569,8 +570,8 @@ recipients of that shared document.
 
 Bob MAY also send proposed changes to Alice over http, using a verb
 like PUT or PATCH. This practice is used in [READ-WRITE-WEB] and
-[COUCHDB], among others. Such http requests SHOULD be responded to with
-a http response status that indicates whether the change request was
+[COUCHDB], among others. Such HTTP requests SHOULD be responded to with
+a HTTP response status that indicates whether the change request was
 successful, accepted to be reviewed, or rejected.
 
 A third practice for sending change proposals are git pull requests,
@@ -593,10 +594,9 @@ information is needed to resolve the conflict. A conflict occurs when
 Alice and Bob both make changes in the document and arrive at different
 new versions. In database theory this is called the optimistic lock
 pattern: conflicts are tolerated, but the versions should eventually
-converge and reach consistency. A pessimitic lock pattern would require
+converge and reach consistency. A pessimistic lock pattern would require
 notifying all other actors with access to the document before starting
 to make any changes to the current document version.
-
 
 
 
@@ -605,11 +605,12 @@ de Jong                                                        [Page 12]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+
 10. Real-time collaboration
 
 If Alice and Bob are connected to the internet simultaneously, a
 real-time conversation may be initated, for instance using [WEBRTC].
-For instance, Alice might share a document with Bob which represents
+For example, Alice might share a document with Bob which represents
 a "phone call", after which an application on Bob's server may send a
 [PUSH-NOTIFICATION] to Bob's (mobile) device, and when Bob gestures to
 "pick up the phone", his server could react to Alice's "phone call" with
@@ -647,7 +648,6 @@ retrieved the document or not. It MAY also give Alice the option to
 revoke access entirely, taking into account that the recipient may
 already have made a private copy of the document. It MAY also give
 Alice the option to change, for each recipient, whether their comments
-and/or proposed changes will be displayed and applied programmatically,
 
 
 de Jong                                                        [Page 13]
@@ -655,6 +655,7 @@ de Jong                                                        [Page 13]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+and/or proposed changes will be displayed and applied programmatically,
 acknowledged and queued for Alice to review, or rejected altogether.
 
 If Bob uses an application on his own server to display the document
@@ -677,7 +678,7 @@ Alice into her master version of the document.
 
 12.1 Discovering the semantics of a document
 
-If Bob accesses the access page with his browser, the presentation
+If Bob reaches the access page with his browser, the presentation
 can be tailored to how Bob as a human wants to consume the data. For
 instance, multiple download/export formats may be offered using a web
 view in a natural language Bob understands.
@@ -699,10 +700,10 @@ linked data notation [MICROFORMATS, JSON-LD, RDF, TURTLE, RDFA]. This
 can then point to a unique entry in some vocabulary of data formats.
 
 
-
 de Jong                                                        [Page 14]
 
 Internet-Draft           Decentralized Sharing               May 2015
+
 
 
 Even if Bob's application can programmatically discover the data format
@@ -747,7 +748,6 @@ Sending for instance a photo, a text document, a contact (description of
 a person), a blog post or Activity [ACTIVITY-STREAMS], a comment, a git
 pull request, etc., will only work in rare cases where Bob's application
 is able to handle the hinting mechanism, as well as the data format, as
-well as the semantic vocabulary used.
 
 
 de Jong                                                        [Page 15]
@@ -755,6 +755,7 @@ de Jong                                                        [Page 15]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+well as the semantic vocabulary used.
 
 Our recommendation would be for the receiving application to support
 many data format hint mechanisms, as well as many data formats, as well
@@ -797,7 +798,6 @@ Bob will likely want to communicate more with each other to agree which
 proposed change to apply, and which one to discard.
 
 
-13. Security Considerations
 
 
 de Jong                                                        [Page 16]
@@ -805,6 +805,7 @@ de Jong                                                        [Page 16]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+13. Security Considerations
 
 When Alice's application sends a notification about a document that was
 shared with a limited audience, it SHOULD NOT send this notification in
@@ -846,8 +847,12 @@ Bob themselves.
         Levels", BCP 14, RFC 2119, March 1997.
 
     [IMAP]
+<<<<<<< HEAD
         M. Crispin, "Internet Message Access Protocol - Version 4rev1",
 RFC 3501, March 2003.
+=======
+
+>>>>>>> Gara64-patch-1
 
 
 de Jong                                                        [Page 17]
@@ -855,9 +860,14 @@ de Jong                                                        [Page 17]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+<<<<<<< HEAD
 
     [HTTPS]
         E. Rescorla, "HTTP Over TLS", RFC2818, May 2000.
+=======
+    [HTTPS]
+        Rescorla, E., "HTTP Over TLS", RFC2818, May 2000.
+>>>>>>> Gara64-patch-1
 
     [SMTP]
         J. Postel, "Simple Mail Transfer Protocol", RFC 821, August
@@ -947,7 +957,12 @@ attributes", http://www.w3.org/TR/rdfa-core/, March 2015.
 15.2. Informative References
 
     [MICROPUB]
+<<<<<<< HEAD
         A.Parecki (ed.), "MicroPub",
+=======
+    [webmention]
+    [pingback]
+>>>>>>> Gara64-patch-1
 
 
 de Jong                                                        [Page 19]
@@ -955,8 +970,33 @@ de Jong                                                        [Page 19]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+<<<<<<< HEAD
 http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338, May
 2015.
+=======
+    [refback]
+    [trackback]
+    [microformats]
+    [indieauth]
+    [indiecert]
+    [persona]
+    [webid-tls]
+    [webid-rsa] https://github.com/linkeddata/SoLiD#webid-rsa
+    [rel-me]
+    [unattended-indieauth]
+    [solid] https://github.com/linkeddata/SoLiD
+    [couchdb]
+    [pubsubhubbub]
+    [micropub-updates]
+http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update
+    [oembed] http://www.oembed.com/#section7
+    [git]
+    [link-spam]
+    [read-write-web]
+    [markdown]
+    [VOCABULARIES] https://www.w3.org/Social/track/issues/15
+    [dbpedia]
+>>>>>>> Gara64-patch-1
 
     [WEBMENTION]
         IndieWebCamp Wiki, "WebMention", http://indiewebcamp.com/wiki/index.php?title=Webmention&oldid=19485, May 2015.
@@ -976,6 +1016,7 @@ http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338, May
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -1007,3 +1048,6 @@ de Jong                                                        [Page 20]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+=======
+de Jong                                                        [Page 19]
+>>>>>>> Gara64-patch-1
