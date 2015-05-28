@@ -94,16 +94,16 @@ Table of Contents
 
 1. Terminology
 
-    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-    document are to be interpreted as described in RFC 2119 [WORDS].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in RFC 2119 [WORDS].
 
-    "SHOULD" and "SHOULD NOT" are appropriate when valid exceptions to a
-    general requirement are known to exist or appear to exist, and it is
-    infeasible or impractical to enumerate all of them.  However, they
-    should not be interpreted as permitting implementors to fail to
-    implement the general requirement when such failure would result in
-    interoperability failure.
+"SHOULD" and "SHOULD NOT" are appropriate when valid exceptions to a
+general requirement are known to exist or appear to exist, and it is
+infeasible or impractical to enumerate all of them. However, they should
+not be interpreted as permitting implementors to fail to implement the
+general requirement when such failure would result in interoperability
+failure.
 
 
 2.  Introduction
@@ -271,17 +271,17 @@ or the web application may allow Alice to review them before they are
 applied and displayed.
 
 One protocol for notifying recipients is [WEBMENTION]. This is a
-successor of the older [PINGBACK] and [TRACKBACK]
-protocols. WebMention is primarily intended for sending comments
-on existing documents, and not for initially sharing a document in
-the first place, nor for proposing edits. But by "commenting" on a
-recipient's main identifying URL (home page), it could also be used to
-send a document that is not a comment on any existing document. Also, as
-WebMention comments are often formatted as machine-readable documents
-using [MICROFORMATS], a 'proposed-edit' comment type could be defined,
-by which Bob's server may communicate Bob's proposed edits to Alice's
-server in a machine-readable way. The authors intend to research both
-these possible extensions to the WebMention protocol.
+successor of the older [PINGBACK] and [TRACKBACK] protocols. WebMention
+is primarily intended for sending comments on existing documents,
+and not for initially sharing a document in the first place, nor for
+proposing edits. But by "commenting" on a recipient's main identifying
+URL (home page), it could also be used to send a document that is not
+a comment on any existing document. Also, as WebMention comments are
+often formatted as machine-readable documents using [MICROFORMATS], a
+'proposed-edit' comment type could be defined, by which Bob's server may
+communicate Bob's proposed edits to Alice's server in a machine-readable
+way. The authors intend to research both these possible extensions to
+the WebMention protocol.
 
 The software application may allow Alice to select the method by which
 to notify Bob, or select a reasonable default. Bob may also publish
@@ -301,10 +301,10 @@ that Alice's server will automatically accept, apply, and display such
 feedback. Alice may want to review all proposed changes before applying
 them, and review all comments before displaying them.
 
-The notification may include all necessary credentials for accessing
-the resource, in which case it is important for the software on Bob's
-server not to display such a notification publically, as this would
-lead to accidentally publishing a privately shared document publically.
+The notification may include all necessary credentials for accessing the
+resource, in which case it is important for the software on Bob's server
+not to display such a notification publically, as this would lead to
+accidentally publishing a privately shared document publically.
 Alternatively, the authentication step may be delayed until Bob, or
 software running on Bob's server, actually accesses the document.
 
@@ -329,11 +329,10 @@ located at the URL from the notification MAY also allow Bob to
 authenticate with other methods if Alice can reasonably assume
 Bob will have the ability to use those. Examples of such methods
 are [OPENID], [INDIEAUTH], [INDIECERT], [PERSONA], [WEBID-TLS],
-[WEBID-RSA](https://github.com/linkeddata/SoLiD#webid-rsa). It MAY allow
-Bob to authenticate by proving he can receive a secret sent to him via
-mobile telephone short messaging service (SMS) or email. It MAY also
-allow Bob to authenticate using third-party identity providers like
-social network sites.
+[WEBID-RSA]. It MAY allow Bob to authenticate by proving he can receive
+a secret sent to him via mobile telephone short messaging service (SMS)
+or email. It MAY also allow Bob to authenticate using third-party
+identity providers like social network sites.
 
 Some of these methods of authentication rely on Alice to provide the
 correct identifier(s) for Bob in the recipient selection step. These
@@ -372,8 +371,7 @@ it does describe how an application can use WebID-TLS or WebID-RSA to
 authenticate programmatically to retrieve a document of whose existence
 it is aware.
 
-If the URL of the access page contains the secret
-[capabilities](http://www.w3.org/TR/capability-urls/ ) then an
+If the URL of the access page contains the secret [capabilities] then an
 application can also access the document without human intervention.
 
 If an application or human attempts to access the document without
@@ -405,7 +403,7 @@ Alternatively, the document could contain a reference to a feed of
 its change history, for instance using a hyperlink in case of a HTML
 document. A software application accessing the document on Bob's behalf
 could discover this reference programmatically and keep polling the
-change feed periodically or each time Bob views the document, apply 
+change feed periodically or each time Bob views the document, apply
 Alice's changes, and possibly provide a way for Bob to view its change
 history.
 
@@ -416,13 +414,11 @@ not require Bob's application to retrieve the change feed many times
 avoid unnecessary polling of change feeds.
 
 The change feeds could concern one document, or aggregate changes in all
-changes Alice ever shared with Bob into one feed.
-The MicroPub protocol also supports updating
-documents that have already been published
-[MICROPUB-UPDATES](http://indiewebcamp.com/wiki/index.php?title=Micropub
-&oldid=19338#Update ), so the application Alice uses to update the
-document could send a MicroPub Update to the application which handles
-the sharing of the document.
+changes Alice ever shared with Bob into one feed. The MicroPub protocol
+also supports updating documents that have already been published
+[MICROPUB-UPDATES], so the application Alice uses to update the document
+could send a MicroPub Update to the application which handles the
+sharing of the document.
 
 There are also situations where Bob can be expected not to make any
 copies of the original document version, retrieving it always directly
@@ -523,8 +519,8 @@ to make any changes to the current document version.
 
 If Alice and Bob are connected to the internet simultaneously, a
 real-time conversation may be initated, for instance using [WEBRTC].
-For example, Alice might share a document with Bob which represents
-a "phone call", after which an application on Bob's server may send a
+For example, Alice might share a document with Bob which represents a
+"phone call", after which an application on Bob's server may send a
 [PUSH-NOTIFICATION] to Bob's (mobile) device, and when Bob gestures to
 "pick up the phone", his server could react to Alice's "phone call" with
 a document representing a WebRTC SessionDescriptionProtocol object. This
@@ -584,10 +580,10 @@ Alice into her master version of the document.
 
 12.1 Discovering the semantics of a document
 
-If Bob reaches the access page with his browser, the presentation
-can be tailored to how Bob as a human wants to consume the data. For
-instance, multiple download/export formats may be offered using a web
-view in a natural language Bob understands.
+If Bob reaches the access page with his browser, the presentation can be
+tailored to how Bob as a human wants to consume the data. For instance,
+multiple download/export formats may be offered using a web view in a
+natural language Bob understands.
 
 When Bob's application retrieves the document, it may not be able to
 discover its semantics, and therefore may not be able to add it to
@@ -605,9 +601,9 @@ Data format hints can be provided using Content-Type headers, or some
 linked data notation [MICROFORMATS, JSON-LD, RDF, TURTLE, RDFA]. This
 can then point to a unique entry in some vocabulary of data formats.
 
-Even if Bob's application can programmatically discover the data format
-in which Alice intended the documented to be interpreted semantically,
-there are many vocabularies [VOCABULARIES
+Even if Bob's application can programmatically discover the
+data format in which Alice intended the documented to be
+interpreted semantically, there are many vocabularies [VOCABULARIES
 https://www.w3.org/Social/track/issues/15]. To complicate things
 further, many data formats exist for the most common data domains.
 
@@ -819,18 +815,20 @@ attributes", http://www.w3.org/TR/rdfa-core/, March 2015.
 15.2. Informative References
 
     [MICROPUB]
-        A.Parecki (ed.), "MicroPub",
-http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338, May
-2015.
+        A.Parecki (ed.), "MicroPub", http://indiewebcamp.com/wiki/inde \
+        x.php?title=Micropub&oldid=19338, May 2015.
 
     [WEBMENTION]
-        IndieWebCamp Wiki, "WebMention", http://indiewebcamp.com/wiki/index.php?title=Webmention&oldid=19485, May 2015.
+        IndieWebCamp Wiki, "WebMention", http://indiewebcamp.com/wiki/i \
+        ndex.php?title=Webmention&oldid=19485, May 2015.
 
     [PINGBACK]
-        S. Langridge, I. Hickson, "Pingback 1.0", http://www.hixie.ch/specs/pingback/pingback, 2002.
+        S. Langridge, I. Hickson, "Pingback 1.0",
+        http://www.hixie.ch/specs/pingback/pingback, 2002.
 
     [TRACKBACK]
-        See: https://movabletype.org/documentation/trackback/specification.html
+        See: https://movabletype.org/documentation/trackback/specificatio \
+        n.html
 
     [MICROFORMATS]
         See: http://microformats.org/
@@ -851,10 +849,12 @@ http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338, May
         See: https://github.com/linkeddata/SoLiD#webid-rsa
 
     [REL-ME]
-        See: http://microformats.org/wiki/index.php?title=rel-me&oldid=64351
+        See:
+        http://microformats.org/wiki/index.php?title=rel-me&oldid=64351
 
     [UNATTENDED-INDIEAUTH]
-        See: http://indiewebcamp.com/wiki/index.php?title=indieweb-messaging&oldid=19179#Protocol_Flow
+        See: http://indiewebcamp.com/wiki/index.php?title=indieweb-mess \
+        aging&oldid=19179#Protocol_Flow
 
     [SOLID]
         See: https://github.com/linkeddata/SoLiD
@@ -863,15 +863,14 @@ http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338, May
         See: http://docs.couchdb.org/en/1.6.1/intro/api.html
 
     [PUBSUBHUBBUB]
-        B. Fitzpatrick, B. Slatkin, M. Atkins, J.
-        Genestoux, "PubSubHubbub Core 0.4 -- Working Draft",
-        http://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.4.html,
-        February 2014.
+        B. Fitzpatrick, B. Slatkin, M. Atkins, J.  Genestoux,
+        "PubSubHubbub Core 0.4 -- Working Draft", http://pubsubhubbub. \
+        github.io/PubSubHubbub/pubsubhubbub-core-0.4.html, February
+        2014.
 
     [MICROPUB-UPDATES]
-        A.Parecki (ed.), "MicroPub: Update",
-        http://indiewebcamp.com/wiki/index.php?title=Micropub&oldid=19338#Update,
-        May 2015.
+        A.Parecki (ed.), "MicroPub: Update", http://indiewebcamp.com/wi \
+        ki/index.php?title=Micropub&oldid=19338#Update, May 2015.
 
     [OEMBED]
         See: http://www.oembed.com/#section7
