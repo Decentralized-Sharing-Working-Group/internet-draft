@@ -742,8 +742,8 @@ RFC 3501, March 2003.
         E. Rescorla, "HTTP Over TLS", RFC2818, May 2000.
 
     [SMTP]
-        J. Postel, "Simple Mail Transfer Protocol", RFC 821, August
-1982.
+        J. Klensin (ed.), "Simple Mail Transfer Protocol", RFC 2821,
+        April 2001.
 
     [POP]
         J. Myers, M. Rose, "Post Office Protocol - Version 3", RFC 1939,
