@@ -95,8 +95,8 @@ Table of Contents
    15. Acknowledgements.............................................17
    16. References...................................................17
    16.1. Normative References.......................................17
-   16.2. Informative References.....................................20
-   17. Authors' addresses...........................................22
+   16.2. Informative References.....................................19
+   17. Authors' addresses...........................................21
 
 
 
@@ -421,14 +421,13 @@ outside our Petanque team", or "please discard after reading, or after
 
 Some software applications are able to retrieve a document with
 [UNATTENDED-INDIEAUTH] in reaction to a WebMention notification.
-Although the [SoliD](https://github.com/linkeddata/SoLiD) platform does
-not describe how to send or receive a document sharing notification,
-it does describe how an application can use WebID-TLS or WebID-RSA to
-authenticate programmatically to retrieve a document of whose existence
-it is aware.
+Although the [SOLID] platform does not describe how to send or receive a
+document sharing notification, it does describe how an application can
+use WebID-TLS or WebID-RSA to authenticate programmatically to retrieve
+a document of whose existence it is aware.
 
 If the URL of the access page contains a secret string of characters
-[capabilities], then an application can also access the document without
+[CAPABILITIES], then an application can also access the document without
 human intervention.
 
 If an application or human attempts to access the document without
@@ -448,6 +447,7 @@ or a software application accesses it on Bob's behalf.
 But even once Bob, or software on his behalf, has accessed the document
 for the first time, Alice may want to change its contents. For instance,
 Alice may share her calendar with Bob, and keep adding events to it
+afterwards.
 
 
 de Jong                                                         [Page 9]
@@ -455,7 +455,6 @@ de Jong                                                         [Page 9]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-afterwards.
 
 If she does this, she may send Bob a new notification, inviting him to
 access the document again, to see the changed version. Another way of
@@ -489,15 +488,16 @@ copies of the original document version, retrieving it always directly
 from Alice's server when needed, and Bob may be more interested in
 always retrieving the latest version, instead of being notified about
 changes when they happen. An example could be when the document contains
-an [OEMBED](http://www.oembed.com/#section7) data snippet, which Bob
-embeds in another document by reference. This also means Bob will no
-longer have access to the document if Alice revokes his access to it, or
-stops publishing the document at its URL.
+an [OEMBED] data snippet, which Bob embeds in another document by
+reference. This also means Bob will no longer have access to the
+document if Alice revokes his access to it, or stops publishing the
+document at its URL.
 
 
 9. Comments and write access
 
 Regardless of whether or not Alice has invited him to do so in the
+notification or in the access page, Bob may send reactions, like
 
 
 de Jong                                                        [Page 10]
@@ -505,7 +505,6 @@ de Jong                                                        [Page 10]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-notification or in the access page, Bob may send reactions, like
 comments, answers, additions, or proposed changes to Alice. He may send
 Alice a notification for each reaction, a reference to a change feed,
 for Alice's server application to poll.
@@ -548,6 +547,7 @@ individual changes (commits).
 
 If Bob reacts with a comment or a change proposal, he should somehow
 notify Alice of this. WebMention was intended to do exactly this,
+for comments on a publically published document. It is common for
 
 
 de Jong                                                        [Page 11]
@@ -555,7 +555,6 @@ de Jong                                                        [Page 11]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-for comments on a publically published document. It is common for
 applications to display (links to) all comments on a document on its
 public access page. This practice may lead to [LINK-SPAM] when applied
 to public documents, and when applied to privately shared documents, it
@@ -598,6 +597,7 @@ to make any changes to the current document version.
 If Alice and Bob are connected to the internet simultaneously, a
 real-time conversation may be initated, for instance using [WEBRTC].
 For example, Alice might share a document with Bob which represents a
+"phone call", after which an application on Bob's server may send a
 
 
 de Jong                                                        [Page 12]
@@ -605,7 +605,6 @@ de Jong                                                        [Page 12]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-"phone call", after which an application on Bob's server may send a
 [PUSH-NOTIFICATION] to Bob's (mobile) device, and when Bob gestures to
 "pick up the phone", his server could react to Alice's "phone call" with
 a document representing a WebRTC SessionDescriptionProtocol object. This
@@ -648,6 +647,7 @@ acknowledged and queued for Alice to review, or rejected altogether.
 If Bob uses an application on his own server to display the document
 shared by Alice, and this application is capable of programmatically
 applying all changes Alice sends as updates after sharing the initial
+version, then Bob SHOULD EITHER be given a way to instruct that
 
 
 de Jong                                                        [Page 13]
@@ -655,7 +655,6 @@ de Jong                                                        [Page 13]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-version, then Bob SHOULD EITHER be given a way to instruct that
 application to stop or start programmatically applying all changes sent
 by Alice, OR provide a way for Bob to view all versions Alice sent. It
 MAY also provide a way to visualize the differences between the versions
@@ -698,6 +697,7 @@ self-describing data notation [JSON-LD, RDF, TURTLE, RDFA]. This can
 then point to a unique entry in some vocabulary of data formats.
 
 Even if Bob's application can programmatically discover the
+data format in which Alice intended the documented to be
 
 
 de Jong                                                        [Page 14]
@@ -705,7 +705,6 @@ de Jong                                                        [Page 14]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-data format in which Alice intended the documented to be
 interpreted semantically, there are many incompatible vocabularies
 [VOCABULARIES]. To complicate things further, many competing data
 formats exist for the most common data domains.
@@ -748,6 +747,7 @@ Sending for instance a photo, a text document, a contact (description of
 a person), a blog post or Activity [ACTIVITY-STREAMS], a comment, a git
 pull request, etc., will only work in rare cases where Bob's application
 is able to handle the hinting mechanism, as well as the data format, as
+well as the semantic vocabulary used.
 
 
 de Jong                                                        [Page 15]
@@ -755,7 +755,6 @@ de Jong                                                        [Page 15]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-well as the semantic vocabulary used.
 
 Our recommendation would be for the receiving application to support
 many data format hint mechanisms, as well as many data formats, as well
@@ -800,10 +799,10 @@ proposed change to apply, and which one to discard.
 
 
 
+
 de Jong                                                        [Page 16]
 
 Internet-Draft           Decentralized Sharing               May 2015
-
 
 
 13. Security Considerations
@@ -848,6 +847,7 @@ Bob themselves.
         Levels", BCP 14, RFC 2119, March 1997.
 
     [IMAP]
+        M. Crispin, "Internet Message Access Protocol - Version 4rev1",
 
 
 de Jong                                                        [Page 17]
@@ -855,7 +855,6 @@ de Jong                                                        [Page 17]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-        M. Crispin, "Internet Message Access Protocol - Version 4rev1",
 RFC 3501, March 2003.
 
     [HTTPS]
@@ -894,10 +893,11 @@ Format", RFC 4287, December 2005.
 "WebRTC 1.0: Real-time Communication Between Browsers",
 http://www.w3.org/TR/webrtc/, February 2015.
 
-    [PUSH-NOTIFICATIONS]
+    [PUSH-NOTIFICATION]
         B. Sullivan, E. Fullea, M. van Ouwekerk, "Push API",
 http://www.w3.org/TR/push-api/, April 2015.
 
+    [WEBSOCKETS]
 
 
 de Jong                                                        [Page 18]
@@ -905,7 +905,6 @@ de Jong                                                        [Page 18]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-    [WEBSOCKETS]
         I. Hickson, "The WebSocket API",
 http://www.w3.org/TR/websockets/, September 2012.
 
@@ -933,27 +932,6 @@ http://www.w3.org/TR/turtle/, February 2014.
 - Third Edition: Syntax and processing rules for embedding RDF through
 attributes", http://www.w3.org/TR/rdfa-core/, March 2015.
 
-    [IRI]
-        Duerst, M., "Internationalized Resource Identifiers (IRIs)",
-        RFC 3987, January 2005.
-
-    [WEBFINGER]
-        Jones, P., Salguerio, G., Jones, M, and Smarr, J.,
-        "WebFinger", RFC7033, September 2013.
-
-    [OAUTH]
-        "Section 4.2: Implicit Grant", in: Hardt, D. (ed), "The OAuth
-        2.0 Authorization Framework", RFC6749, October 2012.
-
-
-
-
-
-
-de Jong                                                        [Page 19]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
 
 16.2. Informative References
 
@@ -970,6 +948,13 @@ Internet-Draft           Decentralized Sharing               May 2015
         http://www.hixie.ch/specs/pingback/pingback, 2002.
 
     [TRACKBACK]
+
+
+de Jong                                                        [Page 19]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
         See: https://movabletype.org/documentation/trackback/specifica \
         tion.html
 
@@ -999,13 +984,6 @@ Internet-Draft           Decentralized Sharing               May 2015
         See: http://indiewebcamp.com/wiki/index.php?title=indieweb-mes \
         saging&oldid=19179#Protocol_Flow
 
-
-de Jong                                                        [Page 20]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
-
     [SOLID]
         See: https://github.com/linkeddata/SoLiD
 
@@ -1020,6 +998,13 @@ Internet-Draft           Decentralized Sharing               May 2015
 
     [MICROPUB-UPDATES]
         A.Parecki (ed.), "MicroPub: Update", http://indiewebcamp.com/w \
+
+
+de Jong                                                        [Page 20]
+
+Internet-Draft           Decentralized Sharing               May 2015
+
+
         iki/index.php?title=Micropub&oldid=19338#Update, May 2015.
 
     [OEMBED]
@@ -1050,13 +1035,6 @@ Internet-Draft           Decentralized Sharing               May 2015
         See: http://activitystrea.ms/specs/
 
 
-de Jong                                                        [Page 21]
-
-Internet-Draft           Decentralized Sharing               May 2015
-
-
-
-
 17. Authors' addresses
 
     Michiel B. de Jong
@@ -1072,32 +1050,4 @@ Internet-Draft           Decentralized Sharing               May 2015
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-de Jong                                                        [Page 22]
+de Jong                                                        [Page 21]

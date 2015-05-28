@@ -88,8 +88,8 @@ Table of Contents
    15. Acknowledgements.............................................17
    16. References...................................................17
    16.1. Normative References.......................................17
-   16.2. Informative References.....................................20
-   17. Authors' addresses...........................................22
+   16.2. Informative References.....................................19
+   17. Authors' addresses...........................................21
 
 
 1. Terminology
@@ -365,14 +365,13 @@ outside our Petanque team", or "please discard after reading, or after
 
 Some software applications are able to retrieve a document with
 [UNATTENDED-INDIEAUTH] in reaction to a WebMention notification.
-Although the [SoliD](https://github.com/linkeddata/SoLiD) platform does
-not describe how to send or receive a document sharing notification,
-it does describe how an application can use WebID-TLS or WebID-RSA to
-authenticate programmatically to retrieve a document of whose existence
-it is aware.
+Although the [SOLID] platform does not describe how to send or receive a
+document sharing notification, it does describe how an application can
+use WebID-TLS or WebID-RSA to authenticate programmatically to retrieve
+a document of whose existence it is aware.
 
 If the URL of the access page contains a secret string of characters
-[capabilities], then an application can also access the document without
+[CAPABILITIES], then an application can also access the document without
 human intervention.
 
 If an application or human attempts to access the document without
@@ -426,10 +425,10 @@ copies of the original document version, retrieving it always directly
 from Alice's server when needed, and Bob may be more interested in
 always retrieving the latest version, instead of being notified about
 changes when they happen. An example could be when the document contains
-an [OEMBED](http://www.oembed.com/#section7) data snippet, which Bob
-embeds in another document by reference. This also means Bob will no
-longer have access to the document if Alice revokes his access to it, or
-stops publishing the document at its URL.
+an [OEMBED] data snippet, which Bob embeds in another document by
+reference. This also means Bob will no longer have access to the
+document if Alice revokes his access to it, or stops publishing the
+document at its URL.
 
 
 9. Comments and write access
@@ -775,7 +774,7 @@ Format", RFC 4287, December 2005.
 "WebRTC 1.0: Real-time Communication Between Browsers",
 http://www.w3.org/TR/webrtc/, February 2015.
 
-    [PUSH-NOTIFICATIONS]
+    [PUSH-NOTIFICATION]
         B. Sullivan, E. Fullea, M. van Ouwekerk, "Push API",
 http://www.w3.org/TR/push-api/, April 2015.
 
@@ -806,20 +805,6 @@ http://www.w3.org/TR/turtle/, February 2014.
         B. Adida, M. Birbeck, S. McCarron, I. Hermans, "RDFa Core 1.1
 - Third Edition: Syntax and processing rules for embedding RDF through
 attributes", http://www.w3.org/TR/rdfa-core/, March 2015.
-
-    [IRI]
-        Duerst, M., "Internationalized Resource Identifiers (IRIs)",
-        RFC 3987, January 2005.
-
-    [WEBFINGER]
-        Jones, P., Salguerio, G., Jones, M, and Smarr, J.,
-        "WebFinger", RFC7033, September 2013.
-
-    [OAUTH]
-        "Section 4.2: Implicit Grant", in: Hardt, D. (ed), "The OAuth
-        2.0 Authorization Framework", RFC6749, October 2012.
-
-
 
 
 16.2. Informative References
