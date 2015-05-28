@@ -359,7 +359,7 @@ one that Bob ultimately used to authenticate.
 The access page MAY also give human-readable instructions to Bob, like
 "please don't share this document publically", "please don't share
 outside our Petanque team", or "please discard after reading, or after
-30 days". How Bob enforces such rules is out of scope.
+30 days". Whether or not Bob follows such instructions is out of scope.
 
 
 7. Machine access
