@@ -466,9 +466,6 @@ approved changes (regardless of who proposed those changes), or display
 both the version she shared and the modifications proposed by Bob
 side-by-side.
 
-["The change feed method has to be the same to guarantee the
-synchronization." -> why? -Michiel]
-
 We will now consider the case where Alice sent the message to possibly
 more than one recipient, and the document may at any point contain
 changes proposed by any of these recipients (either accepted immediately
