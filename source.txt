@@ -23,14 +23,14 @@ for the document contents to be transmitted to server(s) to which the
 recipient(s) have access, for the sender to make and announce changes in
 the document after it was initially sent, and for the recipient(s) to
 communicate comments and proposed changes to the document back to the
-sender's server.
+sender.
 
 We also discuss how semantics of the document may be communicated,
 and how versioning conflicts may then in some cases be resolved
 programmatically. Given that users of personal servers don't all run
 the same compatible software on their server, the sending application
 needs to discover which application-level protocols are supported by the
-receiving application.
+receiving application(s).
 
 
 Status of this Memo
@@ -124,9 +124,9 @@ to her server via the [HTTPS] protocol ("webmail"), to instruct her
 server to forward an existing mail message from her server to one or
 more recipients, identified by their email addresses, after which the
 mailserver application running on her server can deliver the document to
-the recipient's server using the [SMTP] protocol. The recipient may then
-access the document from his server over the [POP], [IMAP], or [HTTPS]
-protocol.
+the recipient's server using the [SMTP] protocol. The recipient(s) may
+then access the document from their server over the [POP], [IMAP], or
+[HTTPS] protocol.
 
 However, many software applications which people use nowadays to access
 their documents, do not implement the SMTP, IMAP, or POP protocol
@@ -262,10 +262,10 @@ document at the following URL: ..., using the following password: ...'.
 
 The notification may also contain information about how Bob can comment
 on the document, or propose changes. Sometimes this information may be
-implied by the notification method, or become obvious when Bob access
+implied by the notification method, or become obvious when Bob accesses
 the document. For instance, Alice may send the URL of a web page which
 contains a 'Comment' or 'Edit' button, inviting Bob to comment or
-propose changes to the document using that web page. These comments
+propose changes to the document using that web page. These comments and
 proposed changes may then either be applied and displayed immediately,
 or the web application may allow Alice to review them before they are
 applied and displayed.
@@ -328,7 +328,7 @@ which Bob needs to paste or type into the web page. The web page
 located at the URL from the notification MAY also allow Bob to
 authenticate with other methods if Alice can reasonably assume
 Bob will have the ability to use those. Examples of such methods
-are [OPENID], [INDIEAUTH], [INDIECERT], [PERSONA], [WEBID-TLS],
+are [OPENID], [INDIEAUTH], [INDIECERT], [PERSONA], [WEBID-TLS], and
 [WEBID-RSA]. It MAY allow Bob to authenticate by proving he can receive
 a secret sent to him via mobile telephone short messaging service (SMS)
 or email. It MAY also allow Bob to authenticate using third-party
@@ -344,7 +344,7 @@ via SMS while accessing the document.
 
 The relationship between Bob's identifiers in different identity systems
 may in some cases be discovered programmatically, for instance with
-[REL-ME] links on the main (index) web page, or [WELL-KNOWN] resources,
+[WELL-KNOWN] resources, or [REL-ME] links on the main (index) web page,
 for Bob's personal DNS domain name.
 
 The list of authentication methods Bob is offered will be limited by
@@ -371,8 +371,9 @@ it does describe how an application can use WebID-TLS or WebID-RSA to
 authenticate programmatically to retrieve a document of whose existence
 it is aware.
 
-If the URL of the access page contains the secret [capabilities] then an
-application can also access the document without human intervention.
+If the URL of the access page contains a secret string of characters
+[capabilities], then an application can also access the document without
+human intervention.
 
 If an application or human attempts to access the document without
 sufficient credentials, a 410 HTTP response code can be sent, together
@@ -385,17 +386,17 @@ method.
 After Alice has shared a document with Bob, if she did not send it
 directly as for instance an email attachment, she may still edit its
 contents between the time of sending the notification, and the first
-time Bob access the document through the human-readable access page, or
-a software application access the document on Bob's behalf.
+time Bob accesses the document through the human-readable access page,
+or a software application accesses it on Bob's behalf.
 
 But even once Bob, or software on his behalf, has accessed the document
 for the first time, Alice may want to change its contents. For instance,
-Alice may share her calendar with Bob, and keep editing her calendar
+Alice may share her calendar with Bob, and keep adding events to it
 afterwards.
 
 If she does this, she may send Bob a new notification, inviting him to
 access the document again, to see the changed version. Another way of
-publishing new versions of a same documents would be for Alice might
+publishing new versions of a same documents might be for Alice to
 publish an [RSS] feed, an [ATOM] feed, or a [COUCHDB] changes feed
 instead of the document itself.
 
