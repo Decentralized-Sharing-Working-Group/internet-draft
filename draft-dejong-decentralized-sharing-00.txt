@@ -2,7 +2,7 @@ INTERNET DRAFT                                      Michiel B. de Jong
 Document: draft-dejong-decentralized-sharing-00          (independent)
                                                          Paul Tran-Van
 Intended Status: Informational                            (Cozy Cloud)
-Expires: ** December 2015                                  ** May 2015
+Expires: 30 November 2015                                  29 May 2015
 
 
                          Decentralized Sharing
@@ -55,7 +55,7 @@ de Jong                                                         [Page 1]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
-   This Internet-Draft will expire on ** December 2015.
+   This Internet-Draft will expire on 30 November 2015.
 
 
 Copyright Notice
