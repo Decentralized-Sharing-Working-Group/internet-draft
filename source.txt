@@ -493,11 +493,11 @@ successful, accepted to be reviewed, or rejected.
 
 A third practice for sending change proposals are git pull requests,
 which would traditionally be sent to Alice by pgp-signed email, with the
-patch in an attachment.
+proposed patch in an attachment.
 
 The authors intend to research whether we could define a way to mark up
 change proposals in microformats, for Bob to post an updated version
-and notify this to Alice. For instance, if Alice published a document
+and notify Alice of this. For instance, if Alice published a document
 containing an h-entry of type photo-album, then a reaction to this could
 be of type addition, and refer to a photo which Bob wants to be added to
 that photo album. The same pattern could serve for adding events to a
@@ -550,7 +550,7 @@ who has access to which document.
 This list view SHOULD also display whether she configured the
 application to programmatically apply any comments and/or proposed
 changes from these people, and/or whether these people have been sent
-an invitation to comment or propose changes, whether as part as the
+an invitation to comment or propose changes, whether as part of the
 notification they were sent, or through the human-readable access page.
 
 It MAY also display whether the recipient has already accessed or
@@ -563,28 +563,32 @@ acknowledged and queued for Alice to review, or rejected altogether.
 
 If Bob uses an application on his own server to display the document
 shared by Alice, and this application is capable of programmatically
-applies all changes Alice sends as updates after sharing the initial
-version, then Bob SHOULD EITHER have a way to instruct that application
-to stop or start programmatically applying all changes sent by Alice,
-OR provide a way for Bob to view all versions Alice sent. It MAY
-also provide a way to visualize the differences between the versions
+applying all changes Alice sends as updates after sharing the initial
+version, then Bob SHOULD EITHER be given a way to instruct that
+application to stop or start programmatically applying all changes sent
+by Alice, OR provide a way for Bob to view all versions Alice sent. It
+MAY also provide a way to visualize the differences between the versions
 published by Alice, and changes proposed by Bob.
 
-If Alices publishes updates which correspond to changes proposed by
-Bob or other recipients, then these updates SHOULD refer to the URL
+If Alice publishes updates which correspond to changes proposed by
+Bob or other recipients, then these updates MAY refer to the URL
 where these people originally proposed such changes. That way, Bob's
 application can display which proposed changes have been accepted by
-Alice into her master version of the document.
+Alice into her master version of the document. Alternatively, Bob's
+application could still compare a change made by Alice with each of
+Bob's proposed changes, to find out whether it's identical to one of
+them, and display this change to Bob as 'his' change, accepted by Alice,
+rather than as a change initiated by Alice.
 
 
 12. Data domains
 
 12.1 Discovering the semantics of a document
 
-If Bob reaches the access page with his browser, the presentation can be
-tailored to how Bob as a human wants to consume the data. For instance,
-multiple download/export formats may be offered using a web view in a
-natural language Bob understands.
+If Bob retrieves the access page with his browser, the presentation
+can be tailored to how Bob as a human wants to consume the data. For
+instance, multiple download/export formats may be offered using a web
+view in a natural language Bob understands.
 
 When Bob's application retrieves the document, it may not be able to
 discover its semantics, and therefore may not be able to add it to
@@ -594,19 +598,19 @@ instance, if Bob's application stores hypertext documents as [HTML]
 documents, but Alice's server uses the [MARKDOWN] format for all
 hypertext documents, a conversion process may be necessary to translate
 documents shared by Alice to the format for which Bob's application can
-offer domain-specific features. His application may display the markdown
-document as just a string of data, or as if it were a plain text
-document, and not allow Bob to follow the hyperlinks from there.
+offer domain-specific features. Otherwise, his application may display
+the markdown document as just a string of data, or as if it were a plain
+text document, and not allow Bob to follow the hyperlinks from there.
 
 Data format hints can be provided using Content-Type headers, or some
-linked data notation [MICROFORMATS, JSON-LD, RDF, TURTLE, RDFA]. This
-can then point to a unique entry in some vocabulary of data formats.
+self-describing data notation [JSON-LD, RDF, TURTLE, RDFA]. This can
+then point to a unique entry in some vocabulary of data formats.
 
 Even if Bob's application can programmatically discover the
 data format in which Alice intended the documented to be
-interpreted semantically, there are many vocabularies [VOCABULARIES
-https://www.w3.org/Social/track/issues/15]. To complicate things
-further, many data formats exist for the most common data domains.
+interpreted semantically, there are many incompatible vocabularies
+[VOCABULARIES]. To complicate things further, many competing data
+formats exist for the most common data domains.
 
 For instance, consider the case where Alice wants to share a description
 of a person's contact details with Bob. Let's assume Alice's application
@@ -634,11 +638,13 @@ name and a given name or list of first name initials.
 
 This means that communicating the intended semantic interpretation of
 a document in a machine-readable way involves three hurdles: first,
-the hinting mechanism which links to a URI for the data format, then
-resolving the equivalence between the many URIs which exist for the same
-concept, but in different vocabularies, and finally converting Alice's
-data format itself to a data format that allows Bob's application to
-offer functionality beyond simply displaying the data from the document.
+the hinting mechanism, whether part of the document (self-describing) or
+added as metadata (for instance in a Content-Type header) which links
+to a URI for the data format, then resolving the equivalence between
+the many identifiers which exist for the same concept, but in different
+vocabularies, and finally converting Alice's data format itself to a
+data format that allows Bob's application to offer functionality beyond
+simply displaying the raw data from the document.
 
 Sending for instance a photo, a text document, a contact (description of
 a person), a blog post or Activity [ACTIVITY-STREAMS], a comment, a git
@@ -673,10 +679,11 @@ expresses information.
 For instance, for a document in Turtle format, representing contact
 information for a person, transforming the addition of a mobile phone
 number past a change in work place could be safe to do programmatically,
-without consulting Alice explicitly. The transformation rule would
-depend on the data format, and be specific to the Turtle data format.
-Attempting to apply transformation rules that work for text files to for
-instance raw image data will almost certainly lead to undesired results.
+without consulting Alice explicitly. The transformation rule would be
+specific to the data domain (contact information of a person), and also
+to the data format (Turtle). Attempting to apply transformation rules
+that work for text files to for instance raw image data will lead to
+undesired results.
 
 There will also remain cases where such programmatic conflict resolution
 cannot be achieved at all without leading to incorrect results. For
