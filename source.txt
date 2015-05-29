@@ -143,7 +143,8 @@ have access to the same server (we could call this centralized sharing),
 and some also implement application-specific protocols that allow
 their users to share documents with other users of the same software.
 This leads to a dispersion of efforts between personal server software
-projects.
+projects. The authors hope this document will contribute to more 
+interoperability between such software applications.
 
 Many software applications do allow sharing documents publically, for
 instance by making them accessible over [HTTPS]. There are many ways to
@@ -157,9 +158,7 @@ cannot retrieve the document, nor discover its existence.
 
 This draft does not propose one universal solution, but rather lists
 what puzzle pieces we are aware of, and what options may exist to put
-them together. The authors expect this document could be used as a 
-guideline for an interoperable sharing between decentralized platforms.
-In general, we are interested in the case where there may
+them together. In general, we are interested in the case where there may
 be more than one recipient, and where each recipient may have access to
 more than one server (but not to the sender's server). But for clarity
 of discussion we will at this point look at a simpler case.
