@@ -143,7 +143,8 @@ have access to the same server (we could call this centralized sharing),
 and some also implement application-specific protocols that allow
 their users to share documents with other users of the same software.
 This leads to a dispersion of efforts between personal server software
-projects.
+projects. The authors hope this document will contribute to more 
+interoperability between such software applications.
 
 Many software applications do allow sharing documents publically, for
 instance by making them accessible over [HTTPS]. There are many ways to
