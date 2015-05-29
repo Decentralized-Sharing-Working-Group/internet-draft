@@ -164,7 +164,8 @@ have access to the same server (we could call this centralized sharing),
 and some also implement application-specific protocols that allow
 their users to share documents with other users of the same software.
 This leads to a dispersion of efforts between personal server software
-projects.
+projects. The authors hope this document will contribute to more
+interoperability between such software applications.
 
 Many software applications do allow sharing documents publically, for
 instance by making them accessible over [HTTPS]. There are many ways to
@@ -197,7 +198,6 @@ We introduce Alice, who wants to share one document with Bob. Alice
 and Bob both have a personal server, which they access to over a
 web interface, that's to say, using a web browser that connects to
 their server over HTTPS. This interface displays information in a
-human-readable way, and allows humans to easily send commands using for
 
 
 de Jong                                                         [Page 4]
@@ -205,6 +205,7 @@ de Jong                                                         [Page 4]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+human-readable way, and allows humans to easily send commands using for
 instance their web browser's point-and-click gestures.
 
 We assume there are multiple documents on Alice's server, and the
@@ -247,7 +248,6 @@ by which Bob can be contacted, which she can then use directly, and
 possibly also store in her addressbook for future reference.
 
 It is also possible that she remembers or looks up a web page describing
-how to contact Bob, and discovers a usable identifier this way. An
 
 
 de Jong                                                         [Page 5]
@@ -255,6 +255,7 @@ de Jong                                                         [Page 5]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+how to contact Bob, and discovers a usable identifier this way. An
 addressbook application may also be able to infer identifiers for
 various contact methods from such a web page programmatically.
 
@@ -297,7 +298,6 @@ document at the following URL: ..., using the following password: ...'.
 
 The notification may also contain information about how Bob can comment
 on the document, or propose changes. Sometimes this information may be
-implied by the notification method, or become obvious when Bob accesses
 
 
 de Jong                                                         [Page 6]
@@ -305,6 +305,7 @@ de Jong                                                         [Page 6]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+implied by the notification method, or become obvious when Bob accesses
 the document. For instance, Alice may send the URL of a web page which
 contains a 'Comment' or 'Edit' button, inviting Bob to comment or
 propose changes to the document using that web page. These comments and
@@ -347,7 +348,6 @@ The notification may include all necessary credentials for accessing the
 resource, in which case it is important for the software on Bob's server
 not to display such a notification publically, as this would lead to
 accidentally publishing a privately shared document publically.
-Alternatively, the authentication step may be delayed until Bob, or
 
 
 de Jong                                                         [Page 7]
@@ -355,6 +355,7 @@ de Jong                                                         [Page 7]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+Alternatively, the authentication step may be delayed until Bob, or
 software running on Bob's server, actually accesses the document.
 
 The software that Alice uses to send the notification to Bob may use
@@ -397,7 +398,6 @@ may in some cases be discovered programmatically, for instance with
 for Bob's personal DNS domain name.
 
 The list of authentication methods Bob is offered will be limited by
-the capabilities of the software that displays the access page for
 
 
 de Jong                                                         [Page 8]
@@ -405,6 +405,7 @@ de Jong                                                         [Page 8]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+the capabilities of the software that displays the access page for
 the document. If this software is integrated with Alice's addressbook
 software, then the addressbook entry for Bob may also be updated with
 the authentication methods for which Alice provided the identifier,
@@ -447,7 +448,6 @@ or a software application accesses it on Bob's behalf.
 But even once Bob, or software on his behalf, has accessed the document
 for the first time, Alice may want to change its contents. For instance,
 Alice may share her calendar with Bob, and keep adding events to it
-afterwards.
 
 
 de Jong                                                         [Page 9]
@@ -455,6 +455,7 @@ de Jong                                                         [Page 9]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+afterwards.
 
 If she does this, she may send Bob a new notification, inviting him to
 access the document again, to see the changed version. Another way of
@@ -497,7 +498,6 @@ document at its URL.
 9. Comments and write access
 
 Regardless of whether or not Alice has invited him to do so in the
-notification or in the access page, Bob may send reactions, like
 
 
 de Jong                                                        [Page 10]
@@ -505,6 +505,7 @@ de Jong                                                        [Page 10]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+notification or in the access page, Bob may send reactions, like
 comments, answers, additions, or proposed changes to Alice. He may send
 Alice a notification for each reaction, a reference to a change feed,
 for Alice's server application to poll.
@@ -547,7 +548,6 @@ individual changes (commits).
 
 If Bob reacts with a comment or a change proposal, he should somehow
 notify Alice of this. WebMention was intended to do exactly this,
-for comments on a publically published document. It is common for
 
 
 de Jong                                                        [Page 11]
@@ -555,6 +555,7 @@ de Jong                                                        [Page 11]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+for comments on a publically published document. It is common for
 applications to display (links to) all comments on a document on its
 public access page. This practice may lead to [LINK-SPAM] when applied
 to public documents, and when applied to privately shared documents, it
@@ -597,7 +598,6 @@ to make any changes to the current document version.
 If Alice and Bob are connected to the internet simultaneously, a
 real-time conversation may be initated, for instance using [WEBRTC].
 For example, Alice might share a document with Bob which represents a
-"phone call", after which an application on Bob's server may send a
 
 
 de Jong                                                        [Page 12]
@@ -605,6 +605,7 @@ de Jong                                                        [Page 12]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+"phone call", after which an application on Bob's server may send a
 [PUSH-NOTIFICATION] to Bob's (mobile) device, and when Bob gestures to
 "pick up the phone", his server could react to Alice's "phone call" with
 a document representing a WebRTC SessionDescriptionProtocol object. This
@@ -647,7 +648,6 @@ acknowledged and queued for Alice to review, or rejected altogether.
 If Bob uses an application on his own server to display the document
 shared by Alice, and this application is capable of programmatically
 applying all changes Alice sends as updates after sharing the initial
-version, then Bob SHOULD EITHER be given a way to instruct that
 
 
 de Jong                                                        [Page 13]
@@ -655,6 +655,7 @@ de Jong                                                        [Page 13]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+version, then Bob SHOULD EITHER be given a way to instruct that
 application to stop or start programmatically applying all changes sent
 by Alice, OR provide a way for Bob to view all versions Alice sent. It
 MAY also provide a way to visualize the differences between the versions
@@ -697,7 +698,6 @@ self-describing data notation [JSON-LD, RDF, TURTLE, RDFA]. This can
 then point to a unique entry in some vocabulary of data formats.
 
 Even if Bob's application can programmatically discover the
-data format in which Alice intended the documented to be
 
 
 de Jong                                                        [Page 14]
@@ -705,6 +705,7 @@ de Jong                                                        [Page 14]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+data format in which Alice intended the documented to be
 interpreted semantically, there are many incompatible vocabularies
 [VOCABULARIES]. To complicate things further, many competing data
 formats exist for the most common data domains.
@@ -747,7 +748,6 @@ Sending for instance a photo, a text document, a contact (description of
 a person), a blog post or Activity [ACTIVITY-STREAMS], a comment, a git
 pull request, etc., will only work in rare cases where Bob's application
 is able to handle the hinting mechanism, as well as the data format, as
-well as the semantic vocabulary used.
 
 
 de Jong                                                        [Page 15]
@@ -755,6 +755,7 @@ de Jong                                                        [Page 15]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+well as the semantic vocabulary used.
 
 Our recommendation would be for the receiving application to support
 many data format hint mechanisms, as well as many data formats, as well
@@ -799,10 +800,10 @@ proposed change to apply, and which one to discard.
 
 
 
-
 de Jong                                                        [Page 16]
 
 Internet-Draft           Decentralized Sharing               May 2015
+
 
 
 13. Security Considerations
@@ -847,7 +848,6 @@ Bob themselves.
         Levels", BCP 14, RFC 2119, March 1997.
 
     [IMAP]
-        M. Crispin, "Internet Message Access Protocol - Version 4rev1",
 
 
 de Jong                                                        [Page 17]
@@ -855,6 +855,7 @@ de Jong                                                        [Page 17]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+        M. Crispin, "Internet Message Access Protocol - Version 4rev1",
 RFC 3501, March 2003.
 
     [HTTPS]
@@ -897,7 +898,6 @@ http://www.w3.org/TR/webrtc/, February 2015.
         B. Sullivan, E. Fullea, M. van Ouwekerk, "Push API",
 http://www.w3.org/TR/push-api/, April 2015.
 
-    [WEBSOCKETS]
 
 
 de Jong                                                        [Page 18]
@@ -905,6 +905,7 @@ de Jong                                                        [Page 18]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+    [WEBSOCKETS]
         I. Hickson, "The WebSocket API",
 http://www.w3.org/TR/websockets/, September 2012.
 
@@ -947,7 +948,6 @@ attributes", http://www.w3.org/TR/rdfa-core/, March 2015.
         S. Langridge, I. Hickson, "Pingback 1.0",
         http://www.hixie.ch/specs/pingback/pingback, 2002.
 
-    [TRACKBACK]
 
 
 de Jong                                                        [Page 19]
@@ -955,6 +955,7 @@ de Jong                                                        [Page 19]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+    [TRACKBACK]
         See: https://movabletype.org/documentation/trackback/specifica \
         tion.html
 
@@ -997,7 +998,6 @@ Internet-Draft           Decentralized Sharing               May 2015
         2014.
 
     [MICROPUB-UPDATES]
-        A.Parecki (ed.), "MicroPub: Update", http://indiewebcamp.com/w \
 
 
 de Jong                                                        [Page 20]
@@ -1005,6 +1005,7 @@ de Jong                                                        [Page 20]
 Internet-Draft           Decentralized Sharing               May 2015
 
 
+        A.Parecki (ed.), "MicroPub: Update", http://indiewebcamp.com/w \
         iki/index.php?title=Micropub&oldid=19338#Update, May 2015.
 
     [OEMBED]
@@ -1047,7 +1048,6 @@ Internet-Draft           Decentralized Sharing               May 2015
     (Cozy Cloud)
 
     Email: paul@cozycloud.cc
-
 
 
 de Jong                                                        [Page 21]
