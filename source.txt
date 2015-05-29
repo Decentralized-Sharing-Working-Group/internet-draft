@@ -157,7 +157,9 @@ cannot retrieve the document, nor discover its existence.
 
 This draft does not propose one universal solution, but rather lists
 what puzzle pieces we are aware of, and what options may exist to put
-them together. In general, we are interested in the case where there may
+them together. The authors expect this document could be used as a 
+guideline for an interoperable sharing between decentralized platforms.
+In general, we are interested in the case where there may
 be more than one recipient, and where each recipient may have access to
 more than one server (but not to the sender's server). But for clarity
 of discussion we will at this point look at a simpler case.
